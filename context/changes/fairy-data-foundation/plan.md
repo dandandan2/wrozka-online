@@ -265,6 +265,19 @@ additive-only (no destructive statements), so no rollback plan beyond
 `DROP TABLE` is needed if this foundation needs to be reworked before any
 downstream slice depends on it.
 
+### Addendum: `profiles.updated_at` refresh trigger
+
+**File**: `supabase/migrations/20260825120200_fairy_data_foundation_updated_at.sql`
+(commit `99326f4`, landed after this plan's original epilogue close-out)
+
+**Intent**: `profiles.updated_at` was set at row-creation time by the
+trigger in Phase 1 but never refreshed on subsequent `UPDATE`s. A code
+review on a downstream change caught this. This adds a `before update`
+trigger (`public.set_updated_at()`, plain `plpgsql`, not `security
+definer` — it only needs invoker privileges) that sets `new.updated_at =
+now()` on every `profiles` update, so `updated_at` stays accurate for
+S-01/S-02 when they start editing profiles.
+
 ## References
 
 - Roadmap: `context/foundation/roadmap.md` (Foundation F-01)
