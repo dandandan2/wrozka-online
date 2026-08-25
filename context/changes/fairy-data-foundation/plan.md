@@ -280,25 +280,25 @@ downstream slice depends on it.
 
 #### Automated
 
-- [x] 1.1 Migration file exists
-- [x] 1.2 SQL defines both tables
-- [x] 1.3 Trigger function is security definer
+- [x] 1.1 Migration file exists — 2c350a1
+- [x] 1.2 SQL defines both tables — 2c350a1
+- [x] 1.3 Trigger function is security definer — 2c350a1
 
 #### Manual
 
-- [x] 1.4 SQL reviewed for correctness
+- [x] 1.4 SQL reviewed for correctness — 2c350a1
 
 ### Phase 2: Row Level Security policies
 
 #### Automated
 
-- [ ] 2.1 Migration file exists
-- [ ] 2.2 RLS enabled on both tables
-- [ ] 2.3 Policies scoped to auth.uid()
+- [x] 2.1 Migration file exists
+- [x] 2.2 RLS enabled on both tables
+- [x] 2.3 Policies scoped to auth.uid()
 
 #### Manual
 
-- [ ] 2.4 SQL reviewed for policy completeness
+- [x] 2.4 SQL reviewed for policy completeness
 
 ### Phase 3: Apply and verify against the real project
 
