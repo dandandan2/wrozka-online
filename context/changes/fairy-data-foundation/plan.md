@@ -304,7 +304,7 @@ downstream slice depends on it.
 
 #### Manual
 
-- [x] 3.1 Dashboard shows both tables with expected columns
-- [x] 3.2 Test signup auto-creates a profiles row
-- [x] 3.3 Dashboard shows RLS enabled with expected policies
-- [x] 3.4 Cross-user access confirmed blocked
+- [x] 3.1 Dashboard shows both tables with expected columns — f480987
+- [x] 3.2 Test signup auto-creates a profiles row — f480987
+- [x] 3.3 Dashboard shows RLS enabled with expected policies — f480987
+- [x] 3.4 Cross-user access confirmed blocked — f480987
