@@ -58,7 +58,7 @@ uczenie się stylu, historia) nabiera sensu dopiero, gdy ten przepływ istnieje.
 | ID   | Change ID                        | Outcome (user can …)                                                  | Prerequisites | PRD refs                  | Status   |
 | ---- | --------------------------------- | ----------------------------------------------------------------------- | -------------- | -------------------------- | -------- |
 | F-01 | fairy-data-foundation             | (foundation) minimalny schemat danych (profil + odpowiedzi wróżki) z RLS | —              | NFR (prywatność)            | in-progress |
-| F-02 | passwordless-magic-link-auth      | (foundation) logowanie magic-link/kod zastępuje logowanie hasłowe        | —              | FR-001                     | ready    |
+| F-02 | passwordless-magic-link-auth      | (foundation) logowanie magic-link/kod zastępuje logowanie hasłowe        | —              | FR-001                     | in-progress |
 | S-01 | ask-fairy-personalized-answer     | wypełnić profil, zadać pytanie wróżce i dostać spersonalizowaną odpowiedź | F-01, F-02      | US-01, FR-002, FR-004, FR-005 | proposed |
 | S-02 | edit-profile                      | edytować wcześniej wypełniony profil                                    | S-01            | FR-003                     | proposed |
 | S-03 | like-response-style-learning      | polubić odpowiedź, a kolejne odpowiedzi odzwierciedlają styl polubień   | S-01            | FR-006, FR-007             | proposed |
@@ -137,7 +137,7 @@ odtwarzają tego od nowa.
   `signin.ts`, `signout.ts`) i dwa komponenty formularzy auth zbudowane pod
   hasło — umiarkowany zakres prac, ale niskie ryzyko, bo Supabase natywnie
   wspiera logowanie OTP/magic-link.
-- **Status:** ready
+- **Status:** in-progress
 
 ## Slices
 
