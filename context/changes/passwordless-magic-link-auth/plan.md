@@ -375,23 +375,23 @@ code paths entirely rather than keep them dormant.
 
 #### Automated
 
-- [x] 2.1 New components exist
-- [x] 2.2 Old password-era files removed
-- [x] 2.3 No password field remnants
-- [x] 2.4 Type checking passes
-- [x] 2.5 Linting passes
+- [x] 2.1 New components exist — f47b92d
+- [x] 2.2 Old password-era files removed — f47b92d
+- [x] 2.3 No password field remnants — f47b92d
+- [x] 2.4 Type checking passes — f47b92d
+- [x] 2.5 Linting passes — f47b92d
 
 #### Manual
 
-- [x] 2.6 Pages render correctly in the browser
+- [x] 2.6 Pages render correctly in the browser — f47b92d
 
 ### Phase 3: Apply and verify against the real project
 
 #### Manual
 
-- [ ] 3.1 Link/code request lands on confirm-email screen and email arrives
-- [ ] 3.2 Clicking the link completes login
-- [ ] 3.3 Entering the code completes login
-- [ ] 3.4 Expired/invalid link shows an error banner
-- [ ] 3.5 Throttled resend surfaces an error
-- [ ] 3.6 Already-logged-in visit to /auth/signin redirects to /dashboard
+- [x] 3.1 Link/code request lands on confirm-email screen and email arrives
+- [x] 3.2 Clicking the link completes login
+- [x] 3.3 Entering the code completes login
+- [x] 3.4 Expired/invalid link shows an error banner
+- [x] 3.5 Throttled resend surfaces an error
+- [x] 3.6 Already-logged-in visit to /auth/signin redirects to /dashboard
