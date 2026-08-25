@@ -72,9 +72,12 @@ First production deploy of `wrozbita-online` (Astro 6 + React 19 islands, `@astr
 npx wrangler deployments list
 npx wrangler rollback [<version-id>]
 ```
-Current known-good version: `71142974-987e-4b9f-b4cc-1a52eeee5663`.
+Current known-good version: `8f5db89a-61fb-44c0-b5e1-aa0fb19e5175` (preview-URLs-disabled redeploy; supersedes `71142974-987e-4b9f-b4cc-1a52eeee5663`).
+
+## Post-deploy fixes
+
+- **2026-08-25**: `.github/workflows/ci.yml` was scoped to `branches: [master]`, but the repo's default branch is `main` — CI had never actually run on any push to date. Fixed to trigger on `main`. First real CI run (commit `36010db`) passed lint + build, confirming `SUPABASE_URL`/`SUPABASE_KEY` are correctly set as GitHub Actions repository secrets.
 
 ## Open items for next session
 
-1. Confirm whether `SUPABASE_URL`/`SUPABASE_KEY` are set as GitHub Actions secrets (CI build step depends on them but this was not verified end-to-end via an actual CI run during this deploy).
-2. Phase 6 (CI auto-deploy on merge to `master`) remains a deliberate future task, not started.
+1. Phase 6 (CI auto-deploy on merge to `main`) remains a deliberate future task, not started.
