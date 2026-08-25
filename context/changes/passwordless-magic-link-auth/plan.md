@@ -345,6 +345,17 @@ password routes is a breaking change to any bookmarked `/auth/signup`
 link, which is accepted per the approved design decision to remove password
 code paths entirely rather than keep them dormant.
 
+### Addendum: dead `/auth/signup` links in Topbar and Welcome
+
+**Files**: `src/components/Topbar.astro`, `src/components/Welcome.astro`
+(commit `3fa7464`, landed after this plan's original epilogue close-out)
+
+**Intent**: Phase 2 deleted `/auth/signup` but missed that
+`Topbar.astro` (signed-out nav) and `Welcome.astro` (homepage) both still
+linked to it, producing 404s for signed-out visitors. A code review caught
+this. Both links were removed and `Welcome.astro`'s "sign in, sign up"
+copy was updated to "passwordless sign-in" to match the new flow.
+
 ## References
 
 - Roadmap: `context/foundation/roadmap.md` (Foundation F-02)

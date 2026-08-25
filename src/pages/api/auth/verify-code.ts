@@ -1,10 +1,18 @@
 import type { APIRoute } from "astro";
 import { createClient } from "@/lib/supabase";
+import { toAuthErrorMessage } from "@/lib/auth-errors";
 
 export const POST: APIRoute = async (context) => {
   const form = await context.request.formData();
-  const email = form.get("email") as string;
-  const code = form.get("code") as string;
+  const email = form.get("email");
+  const code = form.get("code");
+  if (typeof email !== "string" || !email || typeof code !== "string" || !code) {
+    return context.redirect(
+      `/auth/confirm-email?email=${encodeURIComponent(
+        typeof email === "string" ? email : "",
+      )}&error=${encodeURIComponent("Enter the code from your email.")}`,
+    );
+  }
 
   const supabase = createClient(context.request.headers, context.cookies);
   if (!supabase) {
@@ -17,7 +25,7 @@ export const POST: APIRoute = async (context) => {
 
   if (error) {
     return context.redirect(
-      `/auth/confirm-email?email=${encodeURIComponent(email)}&error=${encodeURIComponent(error.message)}`,
+      `/auth/confirm-email?email=${encodeURIComponent(email)}&error=${encodeURIComponent(toAuthErrorMessage(error))}`,
     );
   }
 
