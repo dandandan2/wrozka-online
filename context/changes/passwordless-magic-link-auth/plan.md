@@ -389,9 +389,9 @@ code paths entirely rather than keep them dormant.
 
 #### Manual
 
-- [x] 3.1 Link/code request lands on confirm-email screen and email arrives
-- [x] 3.2 Clicking the link completes login
-- [x] 3.3 Entering the code completes login
-- [x] 3.4 Expired/invalid link shows an error banner
-- [x] 3.5 Throttled resend surfaces an error
-- [x] 3.6 Already-logged-in visit to /auth/signin redirects to /dashboard
+- [x] 3.1 Link/code request lands on confirm-email screen and email arrives — 2c66a05
+- [x] 3.2 Clicking the link completes login — 2c66a05
+- [x] 3.3 Entering the code completes login — 2c66a05
+- [x] 3.4 Expired/invalid link shows an error banner — 2c66a05
+- [x] 3.5 Throttled resend surfaces an error — 2c66a05
+- [x] 3.6 Already-logged-in visit to /auth/signin redirects to /dashboard — 2c66a05
