@@ -361,29 +361,29 @@ code paths entirely rather than keep them dormant.
 
 #### Automated
 
-- [x] 1.1 New routes exist and call the right Supabase methods
-- [x] 1.2 Old password routes removed
-- [x] 1.3 Middleware guard present
-- [x] 1.4 Type checking passes
-- [x] 1.5 Linting passes
+- [x] 1.1 New routes exist and call the right Supabase methods — 259e328
+- [x] 1.2 Old password routes removed — 259e328
+- [x] 1.3 Middleware guard present — 259e328
+- [x] 1.4 Type checking passes — 259e328
+- [x] 1.5 Linting passes — 259e328
 
 #### Manual
 
-- [x] 1.6 Code reviewed for correctness
+- [x] 1.6 Code reviewed for correctness — 259e328
 
 ### Phase 2: Frontend forms & pages
 
 #### Automated
 
-- [ ] 2.1 New components exist
-- [ ] 2.2 Old password-era files removed
-- [ ] 2.3 No password field remnants
-- [ ] 2.4 Type checking passes
-- [ ] 2.5 Linting passes
+- [x] 2.1 New components exist
+- [x] 2.2 Old password-era files removed
+- [x] 2.3 No password field remnants
+- [x] 2.4 Type checking passes
+- [x] 2.5 Linting passes
 
 #### Manual
 
-- [ ] 2.6 Pages render correctly in the browser
+- [x] 2.6 Pages render correctly in the browser
 
 ### Phase 3: Apply and verify against the real project
 
