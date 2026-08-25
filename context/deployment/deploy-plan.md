@@ -47,7 +47,7 @@ First production deploy of `wrozbita-online` (Astro 6 + React 19 islands, `@astr
 - `/auth/signin` (Supabase-backed route) → HTTP 200, no secret/500 errors.
 - `wrangler tail` during a live request → `GET /auth/signin - Ok`, no runtime exceptions.
 - `wrangler deployments list` → current version confirmed as rollback reference point.
-- **Open follow-up flagged, not actioned**: `wrangler deploy` warned that Preview URLs are enabled by default for this Worker (workers.dev route active, `preview_urls` unset in `wrangler.jsonc`). Per the risk register in `infrastructure.md` (public preview URLs may expose Supabase-backed profile/session data), the human should decide whether to set `preview_urls: false` or configure Cloudflare Access. **Not yet resolved.**
+- `wrangler deploy` warned that Preview URLs were enabled by default for this Worker (workers.dev route active, `preview_urls` unset in `wrangler.jsonc`). Per the risk register in `infrastructure.md` (public preview URLs may expose Supabase-backed profile/session data), resolved on 2026-08-25 by setting `"preview_urls": false` in `wrangler.jsonc` and redeploying (version `8f5db89a-61fb-44c0-b5e1-aa0fb19e5175`, no preview-URL warning on redeploy). Main production URL unaffected.
 
 ### Phase 6 — CI auto-deploy — deferred
 - Decision: keep deploys manual for now. `.github/workflows/ci.yml` remains lint+build only, no deploy step, no `CLOUDFLARE_API_TOKEN` GitHub secret created.
@@ -76,6 +76,5 @@ Current known-good version: `71142974-987e-4b9f-b4cc-1a52eeee5663`.
 
 ## Open items for next session
 
-1. Decide on Preview URL exposure (`preview_urls: false` vs Cloudflare Access) — flagged in Phase 5, not resolved.
-2. Confirm whether `SUPABASE_URL`/`SUPABASE_KEY` are set as GitHub Actions secrets (CI build step depends on them but this was not verified end-to-end via an actual CI run during this deploy).
-3. Phase 6 (CI auto-deploy on merge to `master`) remains a deliberate future task, not started.
+1. Confirm whether `SUPABASE_URL`/`SUPABASE_KEY` are set as GitHub Actions secrets (CI build step depends on them but this was not verified end-to-end via an actual CI run during this deploy).
+2. Phase 6 (CI auto-deploy on merge to `master`) remains a deliberate future task, not started.
