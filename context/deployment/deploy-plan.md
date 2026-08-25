@@ -78,6 +78,12 @@ Current known-good version: `8f5db89a-61fb-44c0-b5e1-aa0fb19e5175` (preview-URLs
 
 - **2026-08-25**: `.github/workflows/ci.yml` was scoped to `branches: [master]`, but the repo's default branch is `main` — CI had never actually run on any push to date. Fixed to trigger on `main`. First real CI run (commit `36010db`) passed lint + build, confirming `SUPABASE_URL`/`SUPABASE_KEY` are correctly set as GitHub Actions repository secrets.
 
+### Phase 6 — CI auto-deploy — completed (2026-08-25)
+
+- Added a `deploy` job to `.github/workflows/ci.yml` (`needs: ci`, gated on `push` to `main`), using `cloudflare/wrangler-action@v3` with a Workers-scoped `CLOUDFLARE_API_TOKEN` GitHub Actions secret (human created the token via Cloudflare's "Edit Cloudflare Workers" template and added the secret).
+- First automatic deploy (commit `b7ef0be`) ran green in GitHub Actions, produced version `832d0241-4d45-40a4-85b5-99f743516df7`, confirmed live via `curl` (200) and `wrangler deployments list`.
+- Every push to `main` now auto-deploys to production after lint+build passes — manual `wrangler deploy` is no longer required for normal changes.
+
 ## Open items for next session
 
-1. Phase 6 (CI auto-deploy on merge to `main`) remains a deliberate future task, not started.
+None outstanding — all phases (0–7) complete.
