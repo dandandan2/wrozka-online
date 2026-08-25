@@ -292,19 +292,19 @@ downstream slice depends on it.
 
 #### Automated
 
-- [x] 2.1 Migration file exists
-- [x] 2.2 RLS enabled on both tables
-- [x] 2.3 Policies scoped to auth.uid()
+- [x] 2.1 Migration file exists — d748985
+- [x] 2.2 RLS enabled on both tables — d748985
+- [x] 2.3 Policies scoped to auth.uid() — d748985
 
 #### Manual
 
-- [x] 2.4 SQL reviewed for policy completeness
+- [x] 2.4 SQL reviewed for policy completeness — d748985
 
 ### Phase 3: Apply and verify against the real project
 
 #### Manual
 
-- [ ] 3.1 Dashboard shows both tables with expected columns
-- [ ] 3.2 Test signup auto-creates a profiles row
-- [ ] 3.3 Dashboard shows RLS enabled with expected policies
-- [ ] 3.4 Cross-user access confirmed blocked
+- [x] 3.1 Dashboard shows both tables with expected columns
+- [x] 3.2 Test signup auto-creates a profiles row
+- [x] 3.3 Dashboard shows RLS enabled with expected policies
+- [x] 3.4 Cross-user access confirmed blocked
