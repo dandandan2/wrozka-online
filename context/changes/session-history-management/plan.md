@@ -298,17 +298,17 @@ None — reuses the existing `fairy_responses` schema unchanged.
 
 #### Automated
 
-- [x] 2.1 Files exist
-- [x] 2.2 History page queries the right table
-- [x] 2.3 Nav link present
-- [x] 2.4 Type checking passes
-- [x] 2.5 Linting passes
+- [x] 2.1 Files exist — 5f67d22
+- [x] 2.2 History page queries the right table — 5f67d22
+- [x] 2.3 Nav link present — 5f67d22
+- [x] 2.4 Type checking passes — 5f67d22
+- [x] 2.5 Linting passes — 5f67d22
 
 #### Manual
 
-- [ ] 2.6 Empty state shows message and working link
-- [ ] 2.7 History lists all entries, most recent first, correct liked state
-- [ ] 2.8 Like/unlike from history stays on history page
-- [ ] 2.9 Delete confirmation cancel/confirm both work correctly
-- [ ] 2.10 Deleted liked entry no longer influences style pool
-- [ ] 2.11 Historia nav link works
+- [x] 2.6 Empty state shows message and working link — 5f67d22
+- [x] 2.7 History lists all entries, most recent first, correct liked state — 5f67d22
+- [x] 2.8 Like/unlike from history stays on history page — 5f67d22
+- [x] 2.9 Delete confirmation cancel/confirm both work correctly — 5f67d22
+- [x] 2.10 Deleted liked entry no longer influences style pool — 5f67d22
+- [x] 2.11 Historia nav link works — 5f67d22
