@@ -19,6 +19,16 @@ export const POST: APIRoute = async (context) => {
   const birthDate = form.get("birth_date");
   const aboutMe = form.get("about_me");
 
+  if (typeof name !== "string" || !name.trim()) {
+    return context.redirect(`/dashboard/profile?error=${encodeURIComponent("Imię jest wymagane.")}`);
+  }
+
+  if (typeof birthDate !== "string" || !birthDate || new Date(birthDate) > new Date()) {
+    return context.redirect(
+      `/dashboard/profile?error=${encodeURIComponent("Data urodzenia jest wymagana i nie może być w przyszłości.")}`,
+    );
+  }
+
   if (typeof aboutMe === "string" && aboutMe.length > ABOUT_ME_MAX_LENGTH) {
     return context.redirect(
       `/dashboard/profile?error=${encodeURIComponent(`"O sobie" może mieć maksymalnie ${ABOUT_ME_MAX_LENGTH} znaków.`)}`,
