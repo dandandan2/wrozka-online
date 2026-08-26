@@ -84,6 +84,24 @@ Current known-good version: `8f5db89a-61fb-44c0-b5e1-aa0fb19e5175` (preview-URLs
 - First automatic deploy (commit `b7ef0be`) ran green in GitHub Actions, produced version `832d0241-4d45-40a4-85b5-99f743516df7`, confirmed live via `curl` (200) and `wrangler deployments list`.
 - Every push to `main` now auto-deploys to production after lint+build passes — manual `wrangler deploy` is no longer required for normal changes.
 
+## Post-deploy fixes
+
+- **2026-08-26**: First real magic-link test after deploy sent an email
+  whose link pointed at `http://localhost:3000` instead of the production
+  origin. Root cause: `request-link.ts` correctly builds `emailRedirectTo`
+  from the request's own origin, but Supabase silently falls back to its
+  configured **Site URL** (default: `http://localhost:3000`) whenever the
+  requested redirect isn't present in the **Redirect URLs** allow-list —
+  this Supabase-side config step was never done for the production domain
+  (F-02's plan only described it generically, and it wasn't carried
+  through to this deploy). Fixed by setting, in Supabase Dashboard →
+  Authentication → URL Configuration:
+  - **Site URL** → `https://wrozbita-online.dwachnicki.workers.dev`
+  - **Redirect URLs** → added
+    `https://wrozbita-online.dwachnicki.workers.dev/api/auth/callback`
+  Verified: a fresh magic-link request now emails a link pointing at the
+  production origin and completes login.
+
 ## Open items for next session
 
 None outstanding — all phases (0–7) complete.
