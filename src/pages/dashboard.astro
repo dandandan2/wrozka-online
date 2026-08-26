@@ -30,8 +30,15 @@ const profile: ProfileRow | null =
 const hasCompleteProfile = Boolean(profile?.name && profile.birth_date);
 
 const latestResponse: FairyResponseRow | null =
-  supabase && responseId
-    ? (await supabase.from("fairy_responses").select("id, question, answer, liked").eq("id", responseId).single()).data
+  supabase && responseId && user
+    ? (
+        await supabase
+          .from("fairy_responses")
+          .select("id, question, answer, liked")
+          .eq("id", responseId)
+          .eq("user_id", user.id)
+          .single()
+      ).data
     : null;
 ---
 

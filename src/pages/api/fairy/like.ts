@@ -19,14 +19,29 @@ export const POST: APIRoute = async (context) => {
     return context.redirect("/dashboard");
   }
 
-  const { data: current } = await supabase
+  const { data: current, error: selectError } = await supabase
     .from("fairy_responses")
     .select("liked")
     .eq("id", id)
+    .eq("user_id", user.id)
     .single<{ liked: boolean }>();
 
-  if (current) {
-    await supabase.from("fairy_responses").update({ liked: !current.liked }).eq("id", id);
+  if (selectError) {
+    return context.redirect(
+      `/dashboard?response=${id}&error=${encodeURIComponent("Nie udało się zaktualizować polubienia.")}`,
+    );
+  }
+
+  const { error: updateError } = await supabase
+    .from("fairy_responses")
+    .update({ liked: !current.liked })
+    .eq("id", id)
+    .eq("user_id", user.id);
+
+  if (updateError) {
+    return context.redirect(
+      `/dashboard?response=${id}&error=${encodeURIComponent("Nie udało się zaktualizować polubienia.")}`,
+    );
   }
 
   return context.redirect(`/dashboard?response=${id}`);

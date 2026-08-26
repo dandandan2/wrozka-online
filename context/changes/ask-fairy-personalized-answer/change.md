@@ -1,7 +1,7 @@
 ---
 change_id: ask-fairy-personalized-answer
 title: Profile + question + AI-generated personalized fairy answer
-status: implemented
+status: impl_reviewed
 created: 2026-08-26
 updated: 2026-08-26
 archived_at: null
