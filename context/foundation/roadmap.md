@@ -62,7 +62,7 @@ uczenie się stylu, historia) nabiera sensu dopiero, gdy ten przepływ istnieje.
 | S-01 | ask-fairy-personalized-answer     | wypełnić profil, zadać pytanie wróżce i dostać spersonalizowaną odpowiedź | F-01, F-02      | US-01, FR-002, FR-004, FR-005 | done |
 | S-02 | edit-profile                      | edytować wcześniej wypełniony profil                                    | S-01            | FR-003                     | done |
 | S-03 | like-response-style-learning      | polubić odpowiedź, a kolejne odpowiedzi odzwierciedlają styl polubień   | S-01            | FR-006, FR-007             | done |
-| S-04 | session-history-management        | zobaczyć historię sesji, usunąć wpis, polubić/odlubić z poziomu historii | S-01, S-03      | FR-008, FR-009, FR-010     | proposed |
+| S-04 | session-history-management        | zobaczyć historię sesji, usunąć wpis, polubić/odlubić z poziomu historii | S-01, S-03      | FR-008, FR-009, FR-010     | done |
 
 ## Streams
 
@@ -210,7 +210,7 @@ odtwarzają tego od nowa.
 - **Risk:** Zależy od S-03 (pula wzorców stylu), bo usunięcie wpisu z
   historii musi też usuwać go z tej puli (FR-009) — sekwencjonowany jako
   ostatni, żeby ta reguła miała co usuwać.
-- **Status:** proposed
+- **Status:** done
 
 ## Backlog Handoff
 
@@ -258,3 +258,4 @@ odtwarzają tego od nowa.
 - **S-01: wypełnić profil, zadać pytanie wróżce i dostać spersonalizowaną odpowiedź** — Archived 2026-08-26 → `context/archive/2026-08-26-ask-fairy-personalized-answer/`. Lesson: —.
 - **S-02: edytować wcześniej wypełniony profil** — Archived 2026-08-26 → `context/archive/2026-08-26-edit-profile/`. Lesson: —.
 - **S-03: polubić odpowiedź, a kolejne odpowiedzi odzwierciedlają styl polubień** — Archived 2026-08-26 → `context/archive/2026-08-26-like-response-style-learning/`. Lesson: —.
+- **S-04: zobaczyć historię sesji, usunąć wpis, polubić/odlubić z poziomu historii** — Archived 2026-08-26 → `context/archive/2026-08-26-session-history-management/`. Lesson: —.
