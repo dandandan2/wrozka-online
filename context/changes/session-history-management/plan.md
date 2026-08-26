@@ -284,25 +284,25 @@ None — reuses the existing `fairy_responses` schema unchanged.
 
 #### Automated
 
-- [x] 1.1 Delete route exists and scopes to the user
-- [x] 1.2 Delete route touches the right table
-- [x] 1.3 Like route reads redirect_to
-- [x] 1.4 Type checking passes
-- [x] 1.5 Linting passes
+- [x] 1.1 Delete route exists and scopes to the user — c307595
+- [x] 1.2 Delete route touches the right table — c307595
+- [x] 1.3 Like route reads redirect_to — c307595
+- [x] 1.4 Type checking passes — c307595
+- [x] 1.5 Linting passes — c307595
 
 #### Manual
 
-- [ ] 1.6 redirect_to allow-list reviewed
+- [x] 1.6 redirect_to allow-list reviewed — c307595
 
 ### Phase 2: Frontend — history page and navigation
 
 #### Automated
 
-- [ ] 2.1 Files exist
-- [ ] 2.2 History page queries the right table
-- [ ] 2.3 Nav link present
-- [ ] 2.4 Type checking passes
-- [ ] 2.5 Linting passes
+- [x] 2.1 Files exist
+- [x] 2.2 History page queries the right table
+- [x] 2.3 Nav link present
+- [x] 2.4 Type checking passes
+- [x] 2.5 Linting passes
 
 #### Manual
 
