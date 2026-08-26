@@ -234,13 +234,13 @@ None — no schema change.
 
 #### Automated
 
-- [x] 2.1 Success redirect target updated
-- [x] 2.2 Success prop wired
-- [x] 2.3 Type checking passes
-- [x] 2.4 Linting passes
+- [x] 2.1 Success redirect target updated — 7463776
+- [x] 2.2 Success prop wired — 7463776
+- [x] 2.3 Type checking passes — 7463776
+- [x] 2.4 Linting passes — 7463776
 
 #### Manual
 
-- [ ] 2.5 Save shows confirmation banner
-- [ ] 2.6 No banner on direct visit without success param
-- [ ] 2.7 Confirmation and error are mutually exclusive
+- [x] 2.5 Save shows confirmation banner — 7463776
+- [x] 2.6 No banner on direct visit without success param — 7463776
+- [x] 2.7 Confirmation and error are mutually exclusive — 7463776

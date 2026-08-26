@@ -1,7 +1,7 @@
 ---
 change_id: edit-profile
 title: Edit profile — server-side validation and save feedback
-status: implementing
+status: implemented
 created: 2026-08-26
 updated: 2026-08-26
 archived_at: null
