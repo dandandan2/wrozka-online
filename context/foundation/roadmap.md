@@ -60,7 +60,7 @@ uczenie się stylu, historia) nabiera sensu dopiero, gdy ten przepływ istnieje.
 | F-01 | fairy-data-foundation             | (foundation) minimalny schemat danych (profil + odpowiedzi wróżki) z RLS | —              | NFR (prywatność)            | done |
 | F-02 | passwordless-magic-link-auth      | (foundation) logowanie magic-link/kod zastępuje logowanie hasłowe        | —              | FR-001                     | done |
 | S-01 | ask-fairy-personalized-answer     | wypełnić profil, zadać pytanie wróżce i dostać spersonalizowaną odpowiedź | F-01, F-02      | US-01, FR-002, FR-004, FR-005 | done |
-| S-02 | edit-profile                      | edytować wcześniej wypełniony profil                                    | S-01            | FR-003                     | proposed |
+| S-02 | edit-profile                      | edytować wcześniej wypełniony profil                                    | S-01            | FR-003                     | done |
 | S-03 | like-response-style-learning      | polubić odpowiedź, a kolejne odpowiedzi odzwierciedlają styl polubień   | S-01            | FR-006, FR-007             | proposed |
 | S-04 | session-history-management        | zobaczyć historię sesji, usunąć wpis, polubić/odlubić z poziomu historii | S-01, S-03      | FR-008, FR-009, FR-010     | proposed |
 
@@ -175,7 +175,7 @@ odtwarzają tego od nowa.
 - **Unknowns:** —
 - **Risk:** Niska złożoność — rozszerza istniejący formularz profilu z S-01;
   jedyne ryzyko to spójność z limitem długości "o sobie" ustalonym w S-01.
-- **Status:** proposed
+- **Status:** done
 
 ### S-03: Polubienie odpowiedzi i uczenie się stylu
 
@@ -256,3 +256,4 @@ odtwarzają tego od nowa.
 - **F-01: (foundation) minimalny schemat danych (profil + odpowiedzi wróżki) z RLS** — Archived 2026-08-26 → `context/archive/2026-08-25-fairy-data-foundation/`. Lesson: —.
 - **F-02: (foundation) logowanie magic-link/kod zastępuje logowanie hasłowe** — Archived 2026-08-26 → `context/archive/2026-08-25-passwordless-magic-link-auth/`. Lesson: `context/foundation/lessons.md` — Post-epilogue fixes must update plan.md.
 - **S-01: wypełnić profil, zadać pytanie wróżce i dostać spersonalizowaną odpowiedź** — Archived 2026-08-26 → `context/archive/2026-08-26-ask-fairy-personalized-answer/`. Lesson: —.
+- **S-02: edytować wcześniej wypełniony profil** — Archived 2026-08-26 → `context/archive/2026-08-26-edit-profile/`. Lesson: —.
