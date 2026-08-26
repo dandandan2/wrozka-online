@@ -229,13 +229,13 @@ unchanged.
 
 #### Automated
 
-- [x] 2.1 Query present
-- [x] 2.2 Liked answers passed through
-- [x] 2.3 Type checking passes
-- [x] 2.4 Linting passes
+- [x] 2.1 Query present — ef99053
+- [x] 2.2 Liked answers passed through — ef99053
+- [x] 2.3 Type checking passes — ef99053
+- [x] 2.4 Linting passes — ef99053
 
 #### Manual
 
-- [ ] 2.5 Zero-likes user gets normal generation
-- [ ] 2.6 Liked-tone echo observed in new generation
-- [ ] 2.7 Un-liking removes influence from next generation
+- [x] 2.5 Zero-likes user gets normal generation — ef99053
+- [x] 2.6 Liked-tone echo observed in new generation — ef99053
+- [x] 2.7 Un-liking removes influence from next generation — ef99053
