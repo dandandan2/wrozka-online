@@ -3,7 +3,7 @@ project: "Wróżbita Online"
 version: 1
 status: draft
 created: 2026-08-25
-updated: 2026-08-25
+updated: 2026-08-26
 prd_version: 1
 main_goal: market-feedback
 top_blocker: decisions
@@ -57,7 +57,7 @@ uczenie się stylu, historia) nabiera sensu dopiero, gdy ten przepływ istnieje.
 
 | ID   | Change ID                        | Outcome (user can …)                                                  | Prerequisites | PRD refs                  | Status   |
 | ---- | --------------------------------- | ----------------------------------------------------------------------- | -------------- | -------------------------- | -------- |
-| F-01 | fairy-data-foundation             | (foundation) minimalny schemat danych (profil + odpowiedzi wróżki) z RLS | —              | NFR (prywatność)            | in-progress |
+| F-01 | fairy-data-foundation             | (foundation) minimalny schemat danych (profil + odpowiedzi wróżki) z RLS | —              | NFR (prywatność)            | done |
 | F-02 | passwordless-magic-link-auth      | (foundation) logowanie magic-link/kod zastępuje logowanie hasłowe        | —              | FR-001                     | in-progress |
 | S-01 | ask-fairy-personalized-answer     | wypełnić profil, zadać pytanie wróżce i dostać spersonalizowaną odpowiedź | F-01, F-02      | US-01, FR-002, FR-004, FR-005 | proposed |
 | S-02 | edit-profile                      | edytować wcześniej wypełniony profil                                    | S-01            | FR-003                     | proposed |
@@ -117,7 +117,7 @@ odtwarzają tego od nowa.
 - **Risk:** Baza danych jest dziś całkowicie pusta — to jedyny fundament
   wymagany przed jakąkolwiek trwałością danych; trzymamy go minimalnym
   (2 tabele), żeby nie zamienić się w "cały model danych z góry".
-- **Status:** in-progress
+- **Status:** done
 
 ### F-02: Logowanie magic-link zamiast hasła
 
@@ -253,4 +253,4 @@ odtwarzają tego od nowa.
 
 ## Done
 
-(brak — `/10x-archive` uzupełni tę sekcję po zarchiwizowaniu pierwszej zmiany)
+- **F-01: (foundation) minimalny schemat danych (profil + odpowiedzi wróżki) z RLS** — Archived 2026-08-26 → `context/archive/2026-08-25-fairy-data-foundation/`. Lesson: —.
