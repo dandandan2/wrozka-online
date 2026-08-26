@@ -489,27 +489,27 @@ unchanged; no new migration file.
 
 #### Automated
 
-- [x] 2.1 Files exist
-- [x] 2.2 Save route touches the right table
-- [x] 2.3 Server-side length guard present
-- [x] 2.4 Type checking passes
-- [x] 2.5 Linting passes
+- [x] 2.1 Files exist — 0332a76
+- [x] 2.2 Save route touches the right table — 0332a76
+- [x] 2.3 Server-side length guard present — 0332a76
+- [x] 2.4 Type checking passes — 0332a76
+- [x] 2.5 Linting passes — 0332a76
 
 #### Manual
 
-- [ ] 2.6 Profile form renders empty then pre-filled, saves and persists
-- [ ] 2.7 about_me over 500 chars rejected with visible error
+- [x] 2.6 Profile form renders empty then pre-filled, saves and persists — 0332a76
+- [x] 2.7 about_me over 500 chars rejected with visible error — 0332a76
 
 ### Phase 3: Ask, answer, and like — with profile-completeness gating
 
 #### Automated
 
-- [ ] 3.1 Files exist
-- [ ] 3.2 Ask route calls the AI module
-- [ ] 3.3 Ask route persists to the right table
-- [ ] 3.4 Dashboard gates on profile fields
-- [ ] 3.5 Type checking passes
-- [ ] 3.6 Linting passes
+- [x] 3.1 Files exist
+- [x] 3.2 Ask route calls the AI module
+- [x] 3.3 Ask route persists to the right table
+- [x] 3.4 Dashboard gates on profile fields
+- [x] 3.5 Type checking passes
+- [x] 3.6 Linting passes
 
 #### Manual
 
