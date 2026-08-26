@@ -1,6 +1,6 @@
 import { OPENROUTER_API_KEY } from "astro:env/server";
 
-const OPENROUTER_MODEL = "openai/gpt-4o-mini";
+const OPENROUTER_MODEL = "google/gemma-4-26b-a4b-it:free";
 const MAX_TOKENS = 400;
 const REQUEST_TIMEOUT_MS = 15_000;
 
