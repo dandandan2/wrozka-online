@@ -1,10 +1,10 @@
 ---
 change_id: like-response-style-learning
 title: Feed liked answers back into generation as a style pattern
-status: impl_reviewed
+status: archived
 created: 2026-08-26
 updated: 2026-08-26
-archived_at: null
+archived_at: 2026-08-26T17:19:11Z
 ---
 
 ## Notes
