@@ -1,10 +1,10 @@
 ---
 change_id: edit-profile
 title: Edit profile — server-side validation and save feedback
-status: impl_reviewed
+status: archived
 created: 2026-08-26
 updated: 2026-08-26
-archived_at: null
+archived_at: 2026-08-26T17:03:19Z
 ---
 
 ## Notes
