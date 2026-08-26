@@ -514,14 +514,14 @@ unchanged; no new migration file.
 #### Manual
 
 - [x] 3.7 Incomplete profile shows the completion prompt — 45bc8fc
-- [x] 3.8 Complete profile: pending state then generated answer with disclaimer
-- [x] 3.9 Like toggles and persists across reload
+- [x] 3.8 Complete profile: pending state then generated answer with disclaimer — db644d7
+- [x] 3.9 Like toggles and persists across reload — db644d7
 - [x] 3.10 AI failure shows inline error banner — 45bc8fc
 
 ### Phase 4: Apply and verify against the real project
 
 #### Manual
 
-- [x] 4.1 Full walkthrough succeeds end to end
-- [x] 4.2 Over-length question rejected
-- [x] 4.3 Broken API key shows error banner, not a crash
+- [x] 4.1 Full walkthrough succeeds end to end — db644d7
+- [x] 4.2 Over-length question rejected — db644d7
+- [x] 4.3 Broken API key shows error banner, not a crash — db644d7
