@@ -14,10 +14,17 @@ export const POST: APIRoute = async (context) => {
 
   const form = await context.request.formData();
   const id = form.get("id");
+  const redirectTo = form.get("redirect_to");
+  const fromHistory = redirectTo === "/dashboard/history";
 
   if (typeof id !== "string" || !id) {
-    return context.redirect("/dashboard");
+    return context.redirect(fromHistory ? "/dashboard/history" : "/dashboard");
   }
+
+  const errorTarget = fromHistory
+    ? `/dashboard/history?error=${encodeURIComponent("Nie udało się zaktualizować polubienia.")}`
+    : `/dashboard?response=${id}&error=${encodeURIComponent("Nie udało się zaktualizować polubienia.")}`;
+  const successTarget = fromHistory ? "/dashboard/history" : `/dashboard?response=${id}`;
 
   const { data: current, error: selectError } = await supabase
     .from("fairy_responses")
@@ -27,9 +34,7 @@ export const POST: APIRoute = async (context) => {
     .single<{ liked: boolean }>();
 
   if (selectError) {
-    return context.redirect(
-      `/dashboard?response=${id}&error=${encodeURIComponent("Nie udało się zaktualizować polubienia.")}`,
-    );
+    return context.redirect(errorTarget);
   }
 
   const { error: updateError } = await supabase
@@ -39,10 +44,8 @@ export const POST: APIRoute = async (context) => {
     .eq("user_id", user.id);
 
   if (updateError) {
-    return context.redirect(
-      `/dashboard?response=${id}&error=${encodeURIComponent("Nie udało się zaktualizować polubienia.")}`,
-    );
+    return context.redirect(errorTarget);
   }
 
-  return context.redirect(`/dashboard?response=${id}`);
+  return context.redirect(successTarget);
 };
