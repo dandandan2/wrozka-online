@@ -220,24 +220,24 @@ None — no schema change.
 
 #### Automated
 
-- [x] 1.1 Guards present
-- [x] 1.2 Type checking passes
-- [x] 1.3 Linting passes
+- [x] 1.1 Guards present — 5d51cf5
+- [x] 1.2 Type checking passes — 5d51cf5
+- [x] 1.3 Linting passes — 5d51cf5
 
 #### Manual
 
-- [ ] 1.4 Normal valid submission still saves successfully
-- [ ] 1.5 Empty name rejected server-side
-- [ ] 1.6 Future birth_date rejected server-side
+- [x] 1.4 Normal valid submission still saves successfully — 5d51cf5
+- [x] 1.5 Empty name rejected server-side — 5d51cf5
+- [x] 1.6 Future birth_date rejected server-side — 5d51cf5
 
 ### Phase 2: Save-success feedback
 
 #### Automated
 
-- [ ] 2.1 Success redirect target updated
-- [ ] 2.2 Success prop wired
-- [ ] 2.3 Type checking passes
-- [ ] 2.4 Linting passes
+- [x] 2.1 Success redirect target updated
+- [x] 2.2 Success prop wired
+- [x] 2.3 Type checking passes
+- [x] 2.4 Linting passes
 
 #### Manual
 

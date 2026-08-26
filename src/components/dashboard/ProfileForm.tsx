@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { User, Calendar, ScrollText } from "lucide-react";
+import { User, Calendar, ScrollText, CircleCheck } from "lucide-react";
 import { FormField } from "@/components/auth/FormField";
 import { TextareaField } from "@/components/forms/TextareaField";
 import { ServerError } from "@/components/auth/ServerError";
@@ -10,11 +10,18 @@ interface Props {
   initialBirthDate: string | null;
   initialAboutMe: string | null;
   serverError?: string | null;
+  successMessage?: string | null;
 }
 
 const ABOUT_ME_MAX_LENGTH = 500;
 
-export default function ProfileForm({ initialName, initialBirthDate, initialAboutMe, serverError }: Props) {
+export default function ProfileForm({
+  initialName,
+  initialBirthDate,
+  initialAboutMe,
+  serverError,
+  successMessage,
+}: Props) {
   const [name, setName] = useState(initialName ?? "");
   const [birthDate, setBirthDate] = useState(initialBirthDate ?? "");
   const [aboutMe, setAboutMe] = useState(initialAboutMe ?? "");
@@ -81,6 +88,13 @@ export default function ProfileForm({ initialName, initialBirthDate, initialAbou
         maxLength={ABOUT_ME_MAX_LENGTH}
         icon={<ScrollText className="size-4" />}
       />
+
+      {successMessage ? (
+        <p className="flex items-center gap-2 rounded-lg border border-green-500/30 bg-green-900/30 px-3 py-2 text-sm text-green-300">
+          <CircleCheck className="size-4 shrink-0" />
+          {successMessage}
+        </p>
+      ) : null}
 
       <ServerError message={serverError} />
 

@@ -11,6 +11,7 @@ interface ProfileRow {
 
 const { user } = Astro.locals;
 const error = Astro.url.searchParams.get("error");
+const successMessage = Astro.url.searchParams.get("success") ? "Zapisano zmiany." : null;
 
 // This page is under the `/dashboard` prefix, which middleware.ts already
 // guards — a request only reaches here with a configured Supabase client
@@ -36,6 +37,7 @@ const profile: ProfileRow | null =
         initialBirthDate={profile?.birth_date ?? null}
         initialAboutMe={profile?.about_me ?? null}
         serverError={error}
+        successMessage={successMessage}
         client:load
       />
       <a href="/dashboard" class="mt-4 block text-center text-sm text-blue-100/60 hover:underline">Back to dashboard</a>
