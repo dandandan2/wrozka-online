@@ -59,7 +59,8 @@ export const POST: APIRoute = async (context) => {
       question,
       likedAnswers,
     );
-  } catch {
+  } catch (err) {
+    console.error("generateFairyAnswer failed:", err);
     return context.redirect(
       `/dashboard?error=${encodeURIComponent("Wróżka nie mogła odpowiedzieć. Spróbuj ponownie.")}`,
     );

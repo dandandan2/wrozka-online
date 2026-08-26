@@ -1,6 +1,6 @@
 import { OPENROUTER_API_KEY } from "astro:env/server";
 
-const OPENROUTER_MODEL = "google/gemma-4-26b-a4b-it:free";
+const OPENROUTER_MODEL = "minimax/minimax-m3:free";
 const MAX_TOKENS = 400;
 const REQUEST_TIMEOUT_MS = 15_000;
 
@@ -55,6 +55,8 @@ export async function generateFairyAnswer(
   });
 
   if (!response.ok) {
+    const errorBody = await response.text().catch(() => "");
+    console.error(`OpenRouter request failed with status ${response.status}: ${errorBody}`);
     throw new Error(`OpenRouter request failed with status ${response.status}`);
   }
 
@@ -64,6 +66,7 @@ export async function generateFairyAnswer(
   const content = data.choices?.[0]?.message?.content;
 
   if (!content) {
+    console.error("OpenRouter response missing answer content:", JSON.stringify(data));
     throw new Error("OpenRouter response missing answer content");
   }
 

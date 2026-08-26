@@ -102,6 +102,17 @@ Current known-good version: `8f5db89a-61fb-44c0-b5e1-aa0fb19e5175` (preview-URLs
   Verified: a fresh magic-link request now emails a link pointing at the
   production origin and completes login.
 
+- **2026-08-26**: Magic-link emails contained the link but never the
+  6-digit fallback code, even though `verify-code.ts` (F-02) correctly
+  calls `verifyOtp` and expects one. Root cause: Supabase's default
+  "Magic Link" email template doesn't include the `{{ .Token }}`
+  variable — the code is generated and valid, it's just never rendered
+  into the email body unless the template explicitly references it.
+  Fix: edit, in Supabase Dashboard → Authentication → Emails → Magic
+  Link, the template to include `{{ .Token }}` alongside the existing
+  `{{ .ConfirmationURL }}`. **Status: identified, not yet applied/verified**
+  — pending a dashboard edit and a fresh test email.
+
 ## Open items for next session
 
 None outstanding — all phases (0–7) complete.
