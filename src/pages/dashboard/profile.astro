@@ -1,0 +1,44 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProfileForm from "@/components/dashboard/ProfileForm";
+import { createClient } from "@/lib/supabase";
+
+interface ProfileRow {
+  name: string | null;
+  birth_date: string | null;
+  about_me: string | null;
+}
+
+const { user } = Astro.locals;
+const error = Astro.url.searchParams.get("error");
+
+// This page is under the `/dashboard` prefix, which middleware.ts already
+// guards — a request only reaches here with a configured Supabase client
+// and an authenticated user, but the types don't know that, so this stays
+// a narrowed expression rather than a non-null assertion.
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+const profile: ProfileRow | null =
+  supabase && user
+    ? (await supabase.from("profiles").select("name, birth_date, about_me").eq("id", user.id).single()).data
+    : null;
+---
+
+<Layout title="Your profile">
+  <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
+      <h1
+        class="mb-6 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-2xl font-bold text-transparent"
+      >
+        Your profile
+      </h1>
+      <ProfileForm
+        initialName={profile?.name ?? null}
+        initialBirthDate={profile?.birth_date ?? null}
+        initialAboutMe={profile?.about_me ?? null}
+        serverError={error}
+        client:load
+      />
+      <a href="/dashboard" class="mt-4 block text-center text-sm text-blue-100/60 hover:underline">Back to dashboard</a>
+    </div>
+  </div>
+</Layout>

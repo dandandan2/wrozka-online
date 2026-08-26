@@ -475,25 +475,25 @@ unchanged; no new migration file.
 
 #### Automated
 
-- [x] 1.1 Module exists and exports the function
-- [x] 1.2 Calls the correct endpoint
-- [x] 1.3 Env var declared
-- [x] 1.4 Type checking passes
-- [x] 1.5 Linting passes
+- [x] 1.1 Module exists and exports the function — 51bbf92
+- [x] 1.2 Calls the correct endpoint — 51bbf92
+- [x] 1.3 Env var declared — 51bbf92
+- [x] 1.4 Type checking passes — 51bbf92
+- [x] 1.5 Linting passes — 51bbf92
 
 #### Manual
 
-- [ ] 1.6 Code reviewed for correctness
+- [x] 1.6 Code reviewed for correctness — 51bbf92
 
 ### Phase 2: Profile fill flow
 
 #### Automated
 
-- [ ] 2.1 Files exist
-- [ ] 2.2 Save route touches the right table
-- [ ] 2.3 Server-side length guard present
-- [ ] 2.4 Type checking passes
-- [ ] 2.5 Linting passes
+- [x] 2.1 Files exist
+- [x] 2.2 Save route touches the right table
+- [x] 2.3 Server-side length guard present
+- [x] 2.4 Type checking passes
+- [x] 2.5 Linting passes
 
 #### Manual
 
