@@ -504,24 +504,24 @@ unchanged; no new migration file.
 
 #### Automated
 
-- [x] 3.1 Files exist
-- [x] 3.2 Ask route calls the AI module
-- [x] 3.3 Ask route persists to the right table
-- [x] 3.4 Dashboard gates on profile fields
-- [x] 3.5 Type checking passes
-- [x] 3.6 Linting passes
+- [x] 3.1 Files exist — 45bc8fc
+- [x] 3.2 Ask route calls the AI module — 45bc8fc
+- [x] 3.3 Ask route persists to the right table — 45bc8fc
+- [x] 3.4 Dashboard gates on profile fields — 45bc8fc
+- [x] 3.5 Type checking passes — 45bc8fc
+- [x] 3.6 Linting passes — 45bc8fc
 
 #### Manual
 
-- [ ] 3.7 Incomplete profile shows the completion prompt
-- [ ] 3.8 Complete profile: pending state then generated answer with disclaimer
-- [ ] 3.9 Like toggles and persists across reload
-- [ ] 3.10 AI failure shows inline error banner
+- [x] 3.7 Incomplete profile shows the completion prompt — 45bc8fc
+- [x] 3.8 Complete profile: pending state then generated answer with disclaimer
+- [x] 3.9 Like toggles and persists across reload
+- [x] 3.10 AI failure shows inline error banner — 45bc8fc
 
 ### Phase 4: Apply and verify against the real project
 
 #### Manual
 
-- [ ] 4.1 Full walkthrough succeeds end to end
-- [ ] 4.2 Over-length question rejected
-- [ ] 4.3 Broken API key shows error banner, not a crash
+- [x] 4.1 Full walkthrough succeeds end to end
+- [x] 4.2 Over-length question rejected
+- [x] 4.3 Broken API key shows error banner, not a crash
