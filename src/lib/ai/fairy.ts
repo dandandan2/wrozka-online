@@ -23,7 +23,17 @@ function describeProfile(profile: FairyProfile): string {
   return `Imię: ${name}\nData urodzenia: ${birthDate}\nO sobie: ${aboutMe}`;
 }
 
-export async function generateFairyAnswer(profile: FairyProfile, question: string): Promise<string> {
+function describeStyleReference(likedAnswers: string[]): string {
+  if (likedAnswers.length === 0) return "";
+  const examples = likedAnswers.map((answer, i) => `${i + 1}. ${answer}`).join("\n");
+  return `\n\nPoniższe to przykłady odpowiedzi, które użytkownik wcześniej polubił — potraktuj je jako luźną inspirację dla tonu Twojej odpowiedzi, nie kopiuj ich dosłownie i nie powtarzaj tych samych fraz:\n${examples}`;
+}
+
+export async function generateFairyAnswer(
+  profile: FairyProfile,
+  question: string,
+  likedAnswers: string[] = [],
+): Promise<string> {
   const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -37,7 +47,7 @@ export async function generateFairyAnswer(profile: FairyProfile, question: strin
         { role: "system", content: SYSTEM_PROMPT },
         {
           role: "user",
-          content: `Profil użytkownika:\n${describeProfile(profile)}\n\nPytanie użytkownika:\n${question}`,
+          content: `Profil użytkownika:\n${describeProfile(profile)}${describeStyleReference(likedAnswers)}\n\nPytanie użytkownika:\n${question}`,
         },
       ],
     }),
