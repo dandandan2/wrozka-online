@@ -43,11 +43,21 @@ export const POST: APIRoute = async (context) => {
     return context.redirect("/dashboard/profile");
   }
 
+  const { data: likedRows } = await supabase
+    .from("fairy_responses")
+    .select("answer")
+    .eq("user_id", user.id)
+    .eq("liked", true)
+    .order("created_at", { ascending: false })
+    .limit(10);
+  const likedAnswers = ((likedRows ?? []) as { answer: string }[]).map((row) => row.answer);
+
   let answer: string;
   try {
     answer = await generateFairyAnswer(
       { name: profile.name, birthDate: profile.birth_date, aboutMe: profile.about_me },
       question,
+      likedAnswers,
     );
   } catch {
     return context.redirect(

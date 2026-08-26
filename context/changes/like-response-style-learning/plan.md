@@ -217,22 +217,22 @@ unchanged.
 
 #### Automated
 
-- [x] 1.1 New parameter present
-- [x] 1.2 Type checking passes
-- [x] 1.3 Linting passes
+- [x] 1.1 New parameter present — 37f42b7
+- [x] 1.2 Type checking passes — 37f42b7
+- [x] 1.3 Linting passes — 37f42b7
 
 #### Manual
 
-- [ ] 1.4 Prompt instruction and empty-array behavior reviewed
+- [x] 1.4 Prompt instruction and empty-array behavior reviewed — 37f42b7
 
 ### Phase 2: Fetch and pass the liked-answers pool in the ask flow
 
 #### Automated
 
-- [ ] 2.1 Query present
-- [ ] 2.2 Liked answers passed through
-- [ ] 2.3 Type checking passes
-- [ ] 2.4 Linting passes
+- [x] 2.1 Query present
+- [x] 2.2 Liked answers passed through
+- [x] 2.3 Type checking passes
+- [x] 2.4 Linting passes
 
 #### Manual
 
