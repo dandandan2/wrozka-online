@@ -9,7 +9,7 @@ main_goal: market-feedback
 top_blocker: decisions
 milestone_id: first-personalized-fairy-loop
 milestone_seq: 1
-milestone_status: open
+milestone_status: done
 ---
 
 # Roadmap: Wróżbita Online
@@ -20,7 +20,7 @@ milestone_status: open
 
 ## Milestone
 
-**M-1: Pierwsza spersonalizowana pętla wróżby** — Status: open
+**M-1: Pierwsza spersonalizowana pętla wróżby** — Status: done
 
 - **Intent:** Doprowadzić do stanu, w którym zalogowany użytkownik może
   wypełnić profil, zadać wróżce pytanie, dostać spersonalizowaną odpowiedź,
@@ -249,7 +249,7 @@ odtwarzają tego od nowa.
 
 ## Milestone History
 
-(brak — to pierwszy milestone)
+- **M-1: Pierwsza spersonalizowana pętla wróżby** (`first-personalized-fairy-loop`) — closed 2026-08-26. Zalogowany użytkownik wypełnia profil, zadaje pytanie wróżce, dostaje spersonalizowaną odpowiedź uwzględniającą do 10 ostatnio polubionych odpowiedzi jako wzorzec stylu, może polubić/odlubić odpowiedź i zarządzać historią sesji (podgląd, usuwanie). Wszystkie 6 pozycji (F-01, F-02, S-01, S-02, S-03, S-04) zamknięte.
 
 ## Done
 
