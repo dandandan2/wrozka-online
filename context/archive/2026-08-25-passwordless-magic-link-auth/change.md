@@ -1,10 +1,10 @@
 ---
 change_id: passwordless-magic-link-auth
 title: Passwordless magic-link and code sign-in
-status: impl_reviewed
+status: archived
 created: 2026-08-25
-updated: 2026-08-25
-archived_at: null
+updated: 2026-08-26
+archived_at: 2026-08-26T15:31:56Z
 ---
 
 ## Notes
