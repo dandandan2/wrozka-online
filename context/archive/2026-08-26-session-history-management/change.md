@@ -1,10 +1,10 @@
 ---
 change_id: session-history-management
 title: Session history — view, delete, like/unlike
-status: impl_reviewed
+status: archived
 created: 2026-08-26
 updated: 2026-08-26
-archived_at: null
+archived_at: 2026-08-26T17:40:09Z
 ---
 
 ## Notes
