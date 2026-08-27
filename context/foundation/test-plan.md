@@ -48,6 +48,16 @@ research's job, see §1 principle #3).
 | 6 | Brak throttlingu na endpoint magic-link pozwala zalać cudzy e-mail linkami/kodami (resource abuse) | Medium | Medium | abuse lens (resource abuse), PRD FR-001, hot-spot dir `src/pages/api/auth/` (13 commits/30d) |
 | 7 | Pole "o sobie" nie ma wymuszonego serwerowo limitu długości (tylko UI), rozdymając kontekst przekazywany do AI | Medium | Medium | PRD FR-002 Socratic resolution (explicit NFR), roadmap S-01 Unknown |
 
+**Correction (Phase 2 research, 2026-08-27):** Risks #4, #5, and #7 as
+worded above describe scenarios that `context/changes/testing-fairy-loop-business-rules/research.md`
+found were already mitigated in code before Phase 2 started — delete
+already excludes the style pool, the AI-provider ordering already prevents
+a corrupt row, and `about_me` already has a server-side length check plus a
+DB `CHECK` constraint. Phase 2 closed a test-coverage gap proving each
+mitigation holds, not a functional bug. Per §1 principle #3, research is
+the ground truth here — do not read "risk covered" on these three rows as
+"a bug was found and fixed."
+
 ### Risk Response Guidance
 
 | Risk | What would prove protection | Must challenge | Context `/10x-research` must ground | Likely cheapest layer | Anti-pattern to avoid |
@@ -69,7 +79,7 @@ orchestrator updates Status as artifacts appear on disk.
 | # | Phase name | Goal (one line) | Risks covered | Test types | Status | Change folder |
 |---|---|---|---|---|---|---|
 | 1 | Critical-path security & auth | Prove data isolation and auth-flow correctness hold; bootstrap Vitest | #1, #2, #6 | unit + integration | complete | `context/changes/testing-critical-path-security-auth/` |
-| 2 | Fairy-loop business-rule integrity | Prove delete/style-pool consistency and AI-failure handling don't silently corrupt state | #4, #5, #7 | integration + unit | not started | — |
+| 2 | Fairy-loop business-rule integrity | Prove delete/style-pool consistency and AI-failure handling don't silently corrupt state | #4, #5, #7 | integration + unit | complete | `context/changes/testing-fairy-loop-business-rules/` |
 | 3 | AI-native safety review | Prove disclaimer/safety framing holds under adversarial-shaped questions | #3 | AI-native (LLM-judge) | not started | — |
 | 4 | Quality-gates wiring | Lock unit+integration into CI as a required gate alongside existing lint/build | cross-cutting | gates | not started | — |
 
@@ -137,7 +147,14 @@ with `tests/unit/auth-request-link.test.ts` as the canonical example. For a
 JWT-role/environment-assumption check (e.g. verifying `SUPABASE_KEY` decodes
 to `role: "anon"`), see `tests/unit/supabase-key-role.test.ts`. For
 pure-function error-mapping tests, see `tests/unit/auth-errors.test.ts`.
-See §3 Phase 2 for AI-failure-handling patterns once that phase lands.
+For AI-provider failure/timeout handling, mock the external HTTP boundary
+rather than the internal `src/lib/ai/` module — stub `global.fetch` via
+`vi.stubGlobal("fetch", ...)` (call `vi.unstubAllGlobals()` in an
+`afterEach`) instead of `vi.mock`-ing the module that calls it, so the real
+error-handling code path still runs. See `tests/helpers/mock-openrouter-fetch.ts`
+for the reusable stub (scenarios: `ok`, `nonOk`, `missingContent`,
+`networkFailure`) and `tests/unit/api-ask-provider-failure.test.ts` as the
+canonical example.
 
 ### 6.2 Adding an integration test
 
@@ -180,7 +197,15 @@ every `.eq(...)` call filtering `profiles`/`fairy_responses` uses
 
 ### 6.6 Per-rollout-phase notes
 
-(Filled in as each phase lands.)
+**Phase 2 (Fairy-loop business-rule integrity, 2026-08-27):** research found
+Risks #4, #5, #7 already mitigated in code (see the §2 correction note
+above) — this phase's work was proving each mitigation with a hermetic
+test, not fixing a bug. New test files: `tests/unit/api-ask-provider-failure.test.ts`
+(#5), `tests/unit/api-fairy-delete-style-pool.test.ts` (#4, uses a
+sentinel-exclusion technique rather than a live delete→ask sequence — see
+`context/changes/testing-fairy-loop-business-rules/plan.md` Phase 2 for
+why), `tests/unit/api-profile-about-me-length.test.ts` (#7, boundary-tests
+exactly 500 vs. 501 characters). New helper: `tests/helpers/mock-openrouter-fetch.ts`.
 
 ## 7. What We Deliberately Don't Test
 

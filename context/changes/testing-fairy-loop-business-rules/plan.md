@@ -280,23 +280,23 @@ Not applicable — no schema or data changes in this phase.
 
 #### Automated
 
-- [x] 3.1 New test file passes: `npx vitest run tests/unit/api-profile-about-me-length.test.ts`
-- [x] 3.2 Full suite passes: `npm test`
-- [x] 3.3 Type checking passes: `npm run astro check`
-- [x] 3.4 Linting passes: `npm run lint`
+- [x] 3.1 New test file passes: `npx vitest run tests/unit/api-profile-about-me-length.test.ts` — b1a5827
+- [x] 3.2 Full suite passes: `npm test` — b1a5827
+- [x] 3.3 Type checking passes: `npm run astro check` — b1a5827
+- [x] 3.4 Linting passes: `npm run lint` — b1a5827
 
 #### Manual
 
-- [x] 3.5 Confirm the boundary case would fail on an off-by-one regression
+- [x] 3.5 Confirm the boundary case would fail on an off-by-one regression — b1a5827
 
 ### Phase 4: Cookbook Update & Wrap-Up
 
 #### Automated
 
-- [ ] 4.1 Full suite passes: `npm test`
-- [ ] 4.2 Linting passes: `npm run lint`
-- [ ] 4.3 Type/Astro checking passes: `npm run astro check`
+- [x] 4.1 Full suite passes: `npm test`
+- [x] 4.2 Linting passes: `npm run lint`
+- [x] 4.3 Type/Astro checking passes: `npm run astro check`
 
 #### Manual
 
-- [ ] 4.4 A reader unfamiliar with this phase can follow §6.1 and the risk-description correction without additional context
+- [x] 4.4 A reader unfamiliar with this phase can follow §6.1 and the risk-description correction without additional context
