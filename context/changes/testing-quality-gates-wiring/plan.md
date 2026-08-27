@@ -149,24 +149,24 @@ Not applicable — no schema or data changes; no existing CI behavior is removed
 
 #### Automated
 
-- [x] 1.1 Local dry-run of what CI will do: `npm test` exits 0
-- [x] 1.2 Local dry-run: `npm run astro check` exits 0
-- [x] 1.3 Local dry-run: `npm run lint` exits 0
-- [x] 1.4 YAML is syntactically valid / indentation matches existing steps
+- [x] 1.1 Local dry-run of what CI will do: `npm test` exits 0 — 2dc24f1
+- [x] 1.2 Local dry-run: `npm run astro check` exits 0 — 2dc24f1
+- [x] 1.3 Local dry-run: `npm run lint` exits 0 — 2dc24f1
+- [x] 1.4 YAML is syntactically valid / indentation matches existing steps — 2dc24f1
 
 #### Manual
 
-- [x] 1.5 Confirm in GitHub Actions UI that `ci` job shows `test` and `astro check` as passing steps
-- [x] 1.6 Confirm `deploy` job trigger and `needs: ci` are unchanged
+- [x] 1.5 Confirm in GitHub Actions UI that `ci` job shows `test` and `astro check` as passing steps — 2dc24f1
+- [x] 1.6 Confirm `deploy` job trigger and `needs: ci` are unchanged — 2dc24f1
 
 ### Phase 2: Docs Wrap-Up
 
 #### Automated
 
-- [ ] 2.1 Full suite still passes: `npm test`
-- [ ] 2.2 Linting passes: `npm run lint`
-- [ ] 2.3 Typechecking passes: `npm run astro check`
+- [x] 2.1 Full suite still passes: `npm test`
+- [x] 2.2 Linting passes: `npm run lint`
+- [x] 2.3 Typechecking passes: `npm run astro check`
 
 #### Manual
 
-- [ ] 2.4 A reader can see all four rollout phases marked `complete` in test-plan.md §3, and §5 accurately describes the CI gates in effect
+- [x] 2.4 A reader can see all four rollout phases marked `complete` in test-plan.md §3, and §5 accurately describes the CI gates in effect

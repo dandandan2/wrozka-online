@@ -81,7 +81,7 @@ orchestrator updates Status as artifacts appear on disk.
 | 1 | Critical-path security & auth | Prove data isolation and auth-flow correctness hold; bootstrap Vitest | #1, #2, #6 | unit + integration | complete | `context/changes/testing-critical-path-security-auth/` |
 | 2 | Fairy-loop business-rule integrity | Prove delete/style-pool consistency and AI-failure handling don't silently corrupt state | #4, #5, #7 | integration + unit | complete | `context/changes/testing-fairy-loop-business-rules/` |
 | 3 | AI-native safety review | Prove disclaimer/safety framing holds under adversarial-shaped questions | #3 | pattern-based (hermetic) | complete | `context/changes/testing-ai-native-safety-review/` |
-| 4 | Quality-gates wiring | Lock unit+integration into CI as a required gate alongside existing lint/build | cross-cutting | gates | not started | — |
+| 4 | Quality-gates wiring | Lock unit+integration into CI as a required gate alongside existing lint/build | cross-cutting | gates | complete | `context/changes/testing-quality-gates-wiring/` |
 
 **Status vocabulary** (fixed): `not started` → `change opened` → `researched` → `planned` → `implementing` → `complete`.
 
@@ -123,8 +123,8 @@ phase lands; before that, the gate is `planned`.
 
 | Gate | Where | Required? | Catches |
 |---|---|---|---|
-| lint + typecheck | local + CI | required (already wired) | syntactic / type drift |
-| unit + integration | local + CI | required after §3 Phase 1 | logic and data-isolation regressions |
+| lint + typecheck | local + CI | required — lint already wired; typecheck (`astro check`) added in §3 Phase 4 (2026-08-27) | syntactic / type drift |
+| unit + integration | local + CI | required and enforced in CI as of §3 Phase 4 (2026-08-27) — was documentation-only since Phase 1 | logic and data-isolation regressions |
 | e2e on critical flows | CI on PR | required after §3 Phase 1 (auth flow only) | broken login/session path |
 | AI-native safety review | local + CI (part of the normal unit+integration gate) | required after §3 Phase 3 | concrete medical/financial/legal recommendations reaching the user in a generated fairy answer |
 | post-edit hook | local (agent loop) | out of scope this lesson | configured in Module 3 Lesson 3 |
@@ -234,6 +234,19 @@ replaced with a hermetic approach by explicit decision during planning.
 Known limitation, accepted by design: keyword/pattern matching has false
 negatives (a cleverly-phrased recommendation it misses) — this is
 defense-in-depth alongside the system prompt, not a complete guarantee.
+
+**Phase 4 (Quality-gates wiring, 2026-08-27):** closed the entire rollout.
+Research found CI (`.github/workflows/ci.yml`) ran lint + build only —
+"unit + integration" had been documentation-only "required" since Phase 1,
+and "lint + typecheck" was only half-true (`astro sync` generates types but
+never checked them). Added two steps to the `ci` job, right after `lint`
+and before `build`: `npm test` (the same hermetic Vitest suite Phases 1-3
+built — verified to pass with zero environment variables, so no new CI
+secrets were needed) and `npm run astro check` (a real typecheck). No
+application or test code changed — this phase is CI configuration only.
+Follow-up (not part of this phase): `context/changes/testing-critical-path-security-auth/`
+(Phase 1) is marked `complete` above but was never archived — archive it
+via `/10x-archive` when convenient.
 
 ## 7. What We Deliberately Don't Test
 
