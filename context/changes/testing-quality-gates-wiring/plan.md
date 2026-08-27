@@ -163,10 +163,10 @@ Not applicable — no schema or data changes; no existing CI behavior is removed
 
 #### Automated
 
-- [x] 2.1 Full suite still passes: `npm test`
-- [x] 2.2 Linting passes: `npm run lint`
-- [x] 2.3 Typechecking passes: `npm run astro check`
+- [x] 2.1 Full suite still passes: `npm test` — c4faa0c
+- [x] 2.2 Linting passes: `npm run lint` — c4faa0c
+- [x] 2.3 Typechecking passes: `npm run astro check` — c4faa0c
 
 #### Manual
 
-- [x] 2.4 A reader can see all four rollout phases marked `complete` in test-plan.md §3, and §5 accurately describes the CI gates in effect
+- [x] 2.4 A reader can see all four rollout phases marked `complete` in test-plan.md §3, and §5 accurately describes the CI gates in effect — c4faa0c
