@@ -267,27 +267,27 @@ Not applicable — no schema or data changes in this phase.
 
 #### Automated
 
-- [x] 2.1 New test file passes: `npx vitest run tests/unit/api-fairy-delete-style-pool.test.ts`
-- [x] 2.2 Full suite passes: `npm test`
-- [x] 2.3 Type checking passes: `npm run astro check`
-- [x] 2.4 Linting passes: `npm run lint`
+- [x] 2.1 New test file passes: `npx vitest run tests/unit/api-fairy-delete-style-pool.test.ts` — c7e2e8b
+- [x] 2.2 Full suite passes: `npm test` — c7e2e8b
+- [x] 2.3 Type checking passes: `npm run astro check` — c7e2e8b
+- [x] 2.4 Linting passes: `npm run lint` — c7e2e8b
 
 #### Manual
 
-- [x] 2.5 Confirm the test would fail if the `liked` filter or sentinel-exclusion were broken
+- [x] 2.5 Confirm the test would fail if the `liked` filter or sentinel-exclusion were broken — c7e2e8b
 
 ### Phase 3: Risk #7 — `about_me` Length Boundary Test
 
 #### Automated
 
-- [ ] 3.1 New test file passes: `npx vitest run tests/unit/api-profile-about-me-length.test.ts`
-- [ ] 3.2 Full suite passes: `npm test`
-- [ ] 3.3 Type checking passes: `npm run astro check`
-- [ ] 3.4 Linting passes: `npm run lint`
+- [x] 3.1 New test file passes: `npx vitest run tests/unit/api-profile-about-me-length.test.ts`
+- [x] 3.2 Full suite passes: `npm test`
+- [x] 3.3 Type checking passes: `npm run astro check`
+- [x] 3.4 Linting passes: `npm run lint`
 
 #### Manual
 
-- [ ] 3.5 Confirm the boundary case would fail on an off-by-one regression
+- [x] 3.5 Confirm the boundary case would fail on an off-by-one regression
 
 ### Phase 4: Cookbook Update & Wrap-Up
 
