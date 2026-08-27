@@ -27,74 +27,19 @@ import Topbar from "@/components/Topbar.astro";
   <div class="relative z-10 p-4 sm:p-8">
     <Topbar />
 
-    <!-- Hero section -->
-    <div class="mx-auto flex max-w-4xl flex-col items-center justify-center px-4 py-24 text-center sm:py-32 lg:py-40">
-      <h1
-        class="mb-6 bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 bg-clip-text text-5xl leading-tight font-bold text-transparent sm:text-6xl lg:text-7xl"
-      >
-        Wróżbita Online
-      </h1>
-      <p class="mb-10 max-w-2xl text-lg text-blue-100/70 sm:text-xl">
-        Zadaj pytanie swojej wróżce i otrzymaj odpowiedź uszytą na miarę — im więcej jej ufasz, tym lepiej Cię poznaje.
-      </p>
-
-      <!-- Mystical trio -->
-      <div class="mb-10 flex items-end justify-center gap-6 sm:gap-10">
-        <div class="flex -rotate-6 flex-col items-center gap-2">
-          <div
-            class="flex size-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_30px_-8px] shadow-purple-400/40 backdrop-blur-xl sm:size-20"
-          >
-            <svg viewBox="0 0 24 24" fill="none" class="size-8 text-purple-300 sm:size-10">
-              <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.5"></rect>
-              <path d="M12 7l1.2 2.6L16 11l-2.8 1.4L12 15l-1.2-2.6L8 11l2.8-1.4L12 7z" fill="currentColor" opacity="0.9"
-              ></path>
-            </svg>
-          </div>
-          <span class="text-xs text-blue-100/50">Karta</span>
-        </div>
-
-        <div class="flex flex-col items-center gap-2">
-          <div
-            class="flex size-20 items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-[0_0_40px_-6px] shadow-blue-400/50 backdrop-blur-xl sm:size-24"
-          >
-            <svg viewBox="0 0 24 24" fill="none" class="size-10 sm:size-12">
-              <defs>
-                <radialGradient id="orb" cx="35%" cy="30%" r="70%">
-                  <stop offset="0%" stop-color="#e9d5ff" stop-opacity="0.9"></stop>
-                  <stop offset="55%" stop-color="#a78bfa" stop-opacity="0.55"></stop>
-                  <stop offset="100%" stop-color="#4c1d95" stop-opacity="0.35"></stop>
-                </radialGradient>
-              </defs>
-              <circle
-                cx="12"
-                cy="10"
-                r="8"
-                fill="url(#orb)"
-                stroke="currentColor"
-                stroke-width="0.75"
-                class="text-purple-200"></circle>
-              <ellipse cx="12" cy="20" rx="6" ry="1.5" fill="currentColor" class="text-purple-300" opacity="0.4"
-              ></ellipse>
-            </svg>
-          </div>
-          <span class="text-xs text-blue-100/50">Kula</span>
-        </div>
-
-        <div class="flex rotate-6 flex-col items-center gap-2">
-          <div
-            class="flex size-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_30px_-8px] shadow-indigo-400/40 backdrop-blur-xl sm:size-20"
-          >
-            <svg viewBox="0 0 24 24" fill="none" class="size-8 text-indigo-200 sm:size-10">
-              <path d="M15.5 4a8 8 0 1 0 4.5 14.6A8 8 0 0 1 15.5 4z" fill="currentColor" opacity="0.9"></path>
-              <path d="M19 3l.6 1.4L21 5l-1.4.6L19 7l-.6-1.4L17 5l1.4-.6L19 3z" fill="currentColor"></path>
-              <path d="M6 14l.5 1.2L7.7 15.7l-1.2.5L6 17.4l-.5-1.2L4.3 15.7l1.2-.5L6 14z" fill="currentColor"></path>
-            </svg>
-          </div>
-          <span class="text-xs text-blue-100/50">Gwiazdy</span>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-4 sm:flex-row">
+    <!-- Hero section: asymmetric split -->
+    <div
+      class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 py-20 sm:py-28 lg:grid-cols-[3fr_2fr] lg:py-32"
+    >
+      <div class="animate-rise text-center lg:text-left">
+        <h1
+          class="font-display mb-5 bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 bg-clip-text text-5xl leading-[1.05] font-bold text-transparent sm:text-6xl lg:text-7xl"
+        >
+          Wróżbita Online
+        </h1>
+        <p class="mx-auto mb-8 max-w-md text-lg text-blue-100/70 sm:text-xl lg:mx-0">
+          Zadaj pytanie swojej wróżce i otrzymaj odpowiedź uszytą na miarę. Im więcej jej ufasz, tym lepiej Cię poznaje.
+        </p>
         <a
           href="/auth/signin"
           class="inline-flex items-center justify-center rounded-lg bg-purple-600 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-purple-500"
@@ -102,35 +47,134 @@ import Topbar from "@/components/Topbar.astro";
           Zapytaj wróżkę
         </a>
       </div>
+
+      <!-- Mystical centerpiece -->
+      <div class="animate-rise relative mx-auto hidden h-72 w-72 [animation-delay:150ms] sm:block lg:h-80 lg:w-80">
+        <div
+          class="absolute top-1/2 left-1/2 flex size-56 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-[0_0_70px_-8px] shadow-blue-400/50 backdrop-blur-xl lg:size-64"
+        >
+          <svg viewBox="0 0 24 24" fill="none" class="size-32 lg:size-36">
+            <defs>
+              <radialGradient id="heroOrbCore" cx="32%" cy="26%" r="75%">
+                <stop offset="0%" stop-color="#f5f0ff" stop-opacity="0.95"></stop>
+                <stop offset="30%" stop-color="#e9d5ff" stop-opacity="0.85"></stop>
+                <stop offset="62%" stop-color="#a78bfa" stop-opacity="0.55"></stop>
+                <stop offset="100%" stop-color="#3b1a78" stop-opacity="0.4"></stop>
+              </radialGradient>
+              <radialGradient id="heroOrbRim" cx="50%" cy="50%" r="50%">
+                <stop offset="82%" stop-color="#c4b5fd" stop-opacity="0"></stop>
+                <stop offset="100%" stop-color="#e9d5ff" stop-opacity="0.6"></stop>
+              </radialGradient>
+              <linearGradient id="heroOrbBase" x1="4" y1="19" x2="20" y2="21" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#a78bfa" stop-opacity="0"></stop>
+                <stop offset="50%" stop-color="#c4b5fd" stop-opacity="0.55"></stop>
+                <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+            <circle cx="12" cy="10" r="8" fill="url(#heroOrbCore)"></circle>
+            <circle cx="12" cy="10" r="8" fill="url(#heroOrbRim)"></circle>
+            <circle cx="12" cy="10" r="8" fill="none" stroke="#f5f0ff" stroke-width="0.4" opacity="0.5"></circle>
+            <ellipse cx="9.3" cy="6.8" rx="2.1" ry="1.3" fill="#ffffff" opacity="0.55"></ellipse>
+            <ellipse cx="12" cy="20" rx="7" ry="1.4" fill="url(#heroOrbBase)"></ellipse>
+          </svg>
+        </div>
+
+        <div
+          class="absolute top-2 -left-4 flex size-16 -rotate-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_30px_-8px] shadow-purple-400/40 backdrop-blur-xl"
+        >
+          <svg viewBox="0 0 24 24" fill="none" class="size-9">
+            <defs>
+              <linearGradient id="heroCard" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#f5f0ff" stop-opacity="0.12"></stop>
+                <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.06"></stop>
+              </linearGradient>
+            </defs>
+            <rect
+              x="4"
+              y="2"
+              width="16"
+              height="20"
+              rx="2.5"
+              fill="url(#heroCard)"
+              stroke="currentColor"
+              stroke-width="1.25"
+              class="text-purple-200"></rect>
+            <rect
+              x="5.5"
+              y="3.5"
+              width="13"
+              height="17"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="0.5"
+              class="text-purple-300/70"></rect>
+            <path
+              d="M12 6.8l1.35 2.85L16.2 11l-2.85 1.35L12 15.2l-1.35-2.85L7.8 11l2.85-1.35L12 6.8z"
+              fill="currentColor"
+              class="text-purple-200"></path>
+          </svg>
+        </div>
+
+        <div
+          class="absolute right-0 bottom-4 flex size-14 rotate-6 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_30px_-8px] shadow-indigo-400/40 backdrop-blur-xl"
+        >
+          <svg viewBox="0 0 24 24" fill="none" class="size-8">
+            <path
+              d="M15.5 4a8 8 0 1 0 4.5 14.6A9 9 0 0 1 15.5 4z"
+              fill="currentColor"
+              class="text-indigo-200"
+              opacity="0.9"></path>
+            <path
+              d="M19 3l.65 1.5L21.15 5.15l-1.5.65L19 7.3l-.65-1.5L16.85 5.15l1.5-.65L19 3z"
+              fill="currentColor"
+              class="text-indigo-100"></path>
+            <path
+              d="M6.5 14.2l.4 .95 .95 .4-.95 .4-.4 .95-.4-.95-.95-.4 .95-.4z"
+              fill="currentColor"
+              class="text-indigo-200"
+              opacity="0.8"></path>
+          </svg>
+        </div>
+      </div>
     </div>
 
-    <!-- Feature cards -->
-    <div class="mx-auto grid max-w-4xl grid-cols-1 gap-6 px-4 pb-24 sm:grid-cols-3">
-      <div class="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+    <!-- Feature bento -->
+    <div
+      class="animate-rise mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 pb-24 [animation-delay:250ms] sm:grid-cols-2 sm:grid-rows-2"
+    >
+      <div
+        class="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-7 backdrop-blur-xl sm:col-start-1 sm:row-span-2 sm:row-start-1"
+      >
+        <div class="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full bg-purple-500/25 blur-3xl">
+        </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="28"
+          height="28"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="mb-4 text-purple-300"
+          class="relative mb-5 text-purple-300"
         >
           <circle cx="12" cy="12" r="4"></circle>
           <path
             d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
           ></path>
         </svg>
-        <h3 class="mb-2 text-lg font-semibold text-white">Spersonalizowana wróżba</h3>
-        <p class="text-sm leading-relaxed text-blue-100/60">
-          Wróżka bierze pod uwagę Twój profil — imię, datę urodzenia i to, co o sobie opowiesz.
+        <h3 class="relative mb-2 text-xl font-semibold text-white">Spersonalizowana wróżba</h3>
+        <p class="relative text-sm leading-relaxed text-blue-100/60">
+          Wróżka bierze pod uwagę Twój profil: imię, datę urodzenia i to, co o sobie opowiesz. Każda odpowiedź jest
+          uszyta pod Ciebie, nie pod przypadkowego gościa.
         </p>
       </div>
 
-      <div class="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+      <div
+        class="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:col-start-2 sm:row-start-1"
+      >
+        <div class="pointer-events-none absolute -top-8 -right-8 h-28 w-28 rounded-full bg-blue-500/20 blur-2xl"></div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -141,19 +185,22 @@ import Topbar from "@/components/Topbar.astro";
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="mb-4 text-purple-300"
+          class="relative mb-4 text-blue-300"
         >
           <path
             d="M11 2a1 1 0 0 1 1 1v1.06a7.94 7.94 0 0 1 4.87 2.02l.75-.75a1 1 0 1 1 1.42 1.42l-.75.75A7.94 7.94 0 0 1 20.94 11H22a1 1 0 1 1 0 2h-1.06a7.94 7.94 0 0 1-2.02 4.87l.75.75a1 1 0 1 1-1.42 1.42l-.75-.75A7.94 7.94 0 0 1 13 20.94V22a1 1 0 1 1-2 0v-1.06a7.94 7.94 0 0 1-4.87-2.02l-.75.75a1 1 0 0 1-1.42-1.42l.75-.75A7.94 7.94 0 0 1 3.06 13H2a1 1 0 1 1 0-2h1.06a7.94 7.94 0 0 1 2.02-4.87l-.75-.75a1 1 0 0 1 1.42-1.42l.75.75A7.94 7.94 0 0 1 11 3.06V2z"
           ></path>
         </svg>
-        <h3 class="mb-2 text-lg font-semibold text-white">Uczy się Twojego stylu</h3>
-        <p class="text-sm leading-relaxed text-blue-100/60">
-          Polubione odpowiedzi kształtują kolejne wróżby — im więcej lajkujesz, tym trafniej Cię czuje.
+        <h3 class="relative mb-2 text-lg font-semibold text-white">Uczy się Twojego stylu</h3>
+        <p class="relative text-sm leading-relaxed text-blue-100/60">
+          Polubione odpowiedzi kształtują kolejne wróżby. Im więcej lajkujesz, tym trafniej Cię czuje.
         </p>
       </div>
 
-      <div class="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+      <div
+        class="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:col-start-2 sm:row-start-2"
+        style="background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px); background-size: 22px 22px;"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -164,13 +211,13 @@ import Topbar from "@/components/Topbar.astro";
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="mb-4 text-purple-300"
+          class="relative mb-4 text-indigo-200"
         >
           <path d="M3 3v18h18"></path>
           <path d="M7 16l4-6 4 3 5-7"></path>
         </svg>
-        <h3 class="mb-2 text-lg font-semibold text-white">Historia sesji</h3>
-        <p class="text-sm leading-relaxed text-blue-100/60">
+        <h3 class="relative mb-2 text-lg font-semibold text-white">Historia sesji</h3>
+        <p class="relative text-sm leading-relaxed text-blue-100/60">
           Wracaj do wcześniejszych wróżb, przeglądaj polubione odpowiedzi i porządkuj swoją historię.
         </p>
       </div>

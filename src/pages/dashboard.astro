@@ -44,22 +44,33 @@ const latestResponse: FairyResponseRow | null =
 ---
 
 <Layout title="Panel">
-  <div class="bg-cosmic flex min-h-screen flex-col p-4">
-    <Topbar />
-    <div class="mx-auto flex w-full max-w-lg flex-1 items-center justify-center">
-      <div class="w-full rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
-        <h1
-          class="mb-4 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-3xl font-bold text-transparent"
-        >
-          Panel
-        </h1>
-        <p class="text-center text-blue-100/80">
-          Witaj, <span class="font-semibold text-white">{user?.email}</span>
-        </p>
+  <div class="bg-cosmic relative min-h-screen w-full overflow-hidden">
+    <div
+      class="pointer-events-none absolute top-0 -right-24 h-[300px] w-[300px] rounded-full bg-purple-500/15 blur-[120px]"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute bottom-0 -left-24 h-[260px] w-[260px] rounded-full bg-blue-500/10 blur-[110px]"
+    >
+    </div>
+
+    <div class="relative z-10 flex min-h-screen flex-col p-4">
+      <Topbar />
+      <div class="mx-auto w-full max-w-lg flex-1 py-10">
+        <div class="mb-8 text-center sm:text-left">
+          <h1
+            class="font-display bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-3xl font-bold text-transparent"
+          >
+            Panel
+          </h1>
+          <p class="mt-1 text-blue-100/70">
+            Witaj, <span class="font-semibold text-white">{user?.email}</span>
+          </p>
+        </div>
 
         {
           !hasCompleteProfile ? (
-            <div class="mt-6 rounded-xl border border-white/10 bg-white/5 p-6 text-center">
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-8 text-center backdrop-blur-xl">
               <p class="text-blue-100/80">Zanim zapytasz wróżkę, uzupełnij swój profil.</p>
               <a
                 href="/dashboard/profile"
@@ -69,7 +80,7 @@ const latestResponse: FairyResponseRow | null =
               </a>
             </div>
           ) : (
-            <div class="mt-6">
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-8 backdrop-blur-xl">
               <AskForm serverError={error} client:load />
               {latestResponse && (
                 <AnswerCard

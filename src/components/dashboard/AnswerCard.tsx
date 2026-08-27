@@ -22,7 +22,7 @@ export default function AnswerCard({ id, question, answer, liked }: Props) {
 
       <p className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-blue-100/60">
         <CircleAlert className="size-3 shrink-0" />
-        To rozrywka, nie porada — nie zastępuje profesjonalnej pomocy medycznej, finansowej ani prawnej.
+        To rozrywka, nie porada. Nie zastępuje profesjonalnej pomocy medycznej, finansowej ani prawnej.
       </p>
 
       <form method="POST" action="/api/fairy/like">
