@@ -1,8 +1,10 @@
 import type { APIRoute } from "astro";
 import { createClient } from "@/lib/supabase";
 import { generateFairyAnswer } from "@/lib/ai/fairy";
+import { checkFairyAnswerSafety } from "@/lib/ai/safety-checker";
 
 const QUESTION_MAX_LENGTH = 500;
+const FAIRY_FAILURE_MESSAGE = "Wróżka nie mogła odpowiedzieć. Spróbuj ponownie.";
 
 interface ProfileRow {
   name: string | null;
@@ -61,9 +63,13 @@ export const POST: APIRoute = async (context) => {
     );
   } catch (err) {
     console.error("generateFairyAnswer failed:", err);
-    return context.redirect(
-      `/dashboard?error=${encodeURIComponent("Wróżka nie mogła odpowiedzieć. Spróbuj ponownie.")}`,
-    );
+    return context.redirect(`/dashboard?error=${encodeURIComponent(FAIRY_FAILURE_MESSAGE)}`);
+  }
+
+  const safety = checkFairyAnswerSafety(answer);
+  if (!safety.safe) {
+    console.error(`generateFairyAnswer flagged unsafe (${safety.category}), discarding answer`);
+    return context.redirect(`/dashboard?error=${encodeURIComponent(FAIRY_FAILURE_MESSAGE)}`);
   }
 
   const { data: inserted, error: insertError } = await supabase
@@ -73,9 +79,7 @@ export const POST: APIRoute = async (context) => {
     .single();
 
   if (insertError) {
-    return context.redirect(
-      `/dashboard?error=${encodeURIComponent("Wróżka nie mogła odpowiedzieć. Spróbuj ponownie.")}`,
-    );
+    return context.redirect(`/dashboard?error=${encodeURIComponent(FAIRY_FAILURE_MESSAGE)}`);
   }
 
   return context.redirect(`/dashboard?response=${inserted.id}`);

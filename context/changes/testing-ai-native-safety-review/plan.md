@@ -223,24 +223,24 @@ Not applicable — no schema or data changes in this phase.
 
 #### Automated
 
-- [x] 1.1 Type checking passes: `npm run astro check`
-- [x] 1.2 Linting passes: `npm run lint`
+- [x] 1.1 Type checking passes: `npm run astro check` — a36e784
+- [x] 1.2 Linting passes: `npm run lint` — a36e784
 
 #### Manual
 
-- [x] 1.3 Confirm the three category patterns trace directly back to the system prompt's own three named categories
+- [x] 1.3 Confirm the three category patterns trace directly back to the system prompt's own three named categories — a36e784
 
 ### Phase 2: Wire the Checker into ask.ts
 
 #### Automated
 
-- [ ] 2.1 Full suite passes: `npm test`
-- [ ] 2.2 Type checking passes: `npm run astro check`
-- [ ] 2.3 Linting passes: `npm run lint`
+- [x] 2.1 Full suite passes: `npm test`
+- [x] 2.2 Type checking passes: `npm run astro check`
+- [x] 2.3 Linting passes: `npm run lint`
 
 #### Manual
 
-- [ ] 2.4 Confirm a flagged answer cannot reach the insert call under any code path
+- [x] 2.4 Confirm a flagged answer cannot reach the insert call under any code path
 
 ### Phase 3: Safety-Checker Unit Tests
 
