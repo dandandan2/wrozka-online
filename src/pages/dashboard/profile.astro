@@ -29,26 +29,28 @@ const profile: ProfileRow | null =
   <div class="bg-cosmic flex min-h-screen flex-col p-4">
     <Topbar />
     <div class="flex flex-1 items-center justify-center">
-      <div class="w-full max-w-sm rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
-        <h1
-          class="font-display mb-6 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-2xl font-bold text-transparent"
+      <div
+        class="w-full max-w-sm rounded-[2rem] border border-[#d9b877]/15 bg-white/[0.03] p-2 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-2xl"
+      >
+        <div
+          class="rounded-[calc(2rem-0.5rem)] bg-gradient-to-b from-white/[0.03] to-transparent px-6 py-8 text-[#f0e4c8] shadow-[inset_0_1px_1px_rgba(244,232,204,0.06)]"
         >
-          Twój profil
-        </h1>
-        <ProfileForm
-          initialName={profile?.name ?? null}
-          initialBirthDate={profile?.birth_date ?? null}
-          initialAboutMe={profile?.about_me ?? null}
-          serverError={error}
-          successMessage={successMessage}
-          client:load
-        />
-        <a
-          href="/dashboard"
-          class="mt-4 block rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-center text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-        >
-          Wróć do panelu
-        </a>
+          <h1 class="font-display text-gilded mb-6 text-center text-3xl font-medium">Twój profil</h1>
+          <ProfileForm
+            initialName={profile?.name ?? null}
+            initialBirthDate={profile?.birth_date ?? null}
+            initialAboutMe={profile?.about_me ?? null}
+            serverError={error}
+            successMessage={successMessage}
+            client:load
+          />
+          <a
+            href="/dashboard"
+            class="mt-4 block rounded-full border border-[#d9b877]/15 bg-white/[0.02] px-3 py-1.5 text-center text-sm text-[#e9ddc4]/75 transition-colors hover:border-[#d9b877]/30 hover:text-[#f4e8cc]"
+          >
+            Wróć do panelu
+          </a>
+        </div>
       </div>
     </div>
   </div>

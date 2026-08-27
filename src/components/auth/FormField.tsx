@@ -3,7 +3,7 @@ import { CircleAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const inputBase =
-  "w-full rounded-lg bg-white/10 border px-3 py-2 pl-10 text-white placeholder-white/40 focus:outline-none focus:ring-2 transition-colors";
+  "w-full rounded-xl bg-white/[0.04] border px-3 py-2.5 pl-10 text-[#f4e8cc] placeholder-[#e9ddc4]/30 focus:outline-none focus:ring-1 transition-colors";
 
 interface FormFieldProps {
   id: string;
@@ -38,11 +38,11 @@ export function FormField({
 }: FormFieldProps) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1 block text-sm text-blue-100/80">
+      <label htmlFor={id} className="mb-1 block text-sm text-[#e9ddc4]/70">
         {label}
       </label>
       <div className="relative">
-        <span className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40">{icon}</span>
+        <span className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-[#dcb877]/50">{icon}</span>
         <input
           id={id}
           name={name ?? id}
@@ -56,7 +56,7 @@ export function FormField({
           inputMode={inputMode}
           className={cn(
             inputBase,
-            error ? "border-red-400/60 focus:ring-red-400" : "border-white/20 focus:ring-purple-400",
+            error ? "border-red-400/60 focus:ring-red-400" : "border-[#d9b877]/15 focus:ring-[#c9a668]/50",
           )}
         />
         {endContent}

@@ -3,61 +3,61 @@ const { user } = Astro.locals;
 ---
 
 <div
-  class="mx-auto mb-4 w-full max-w-6xl rounded-xl border border-white/10 bg-white/5 text-sm text-white/80 backdrop-blur-xl"
+  class="mx-auto mb-4 w-full max-w-6xl rounded-full border border-[#d9b877]/15 bg-white/[0.03] text-sm text-[#e9ddc4]/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-2xl"
 >
-  <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-4 py-3">
-    <a href="/" class="group flex min-w-0 items-center gap-2 sm:gap-2.5">
+  <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-3 py-2 sm:px-5">
+    <a href="/" class="group flex min-w-0 items-center gap-2.5 sm:gap-3">
       <span
-        class="flex size-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors group-hover:border-white/20 sm:size-8"
+        class="relative flex size-8 shrink-0 items-center justify-center rounded-full border border-[#d9b877]/25 bg-gradient-to-br from-[#1a140c] to-[#0d0a06] shadow-[inset_0_1px_1px_rgba(244,232,204,0.15)] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105 sm:size-9"
       >
         <svg viewBox="0 0 24 24" fill="none" class="size-4 sm:size-4.5">
           <defs>
             <linearGradient id="logomark" x1="2" y1="4" x2="20" y2="20" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#c4b5fd"></stop>
-              <stop offset="100%" stop-color="#93c5fd"></stop>
+              <stop offset="0%" stop-color="#f4e8cc"></stop>
+              <stop offset="100%" stop-color="#b8925a"></stop>
             </linearGradient>
           </defs>
           <path
             d="M14.5 3a7.5 7.5 0 1 0 6.5 11.2A9 9 0 0 1 14.5 3z"
             fill="url(#logomark)"
             stroke="url(#logomark)"
-            stroke-width="0.5"
+            stroke-width="0.4"
             stroke-linejoin="round"></path>
-          <path d="M18 3.4l.55 1.3L19.85 5.25l-1.3.55L18 7.1l-.55-1.3-1.3-.55 1.3-.55L18 3.4z" fill="#e9d5ff"></path>
+          <path d="M18 3.4l.55 1.3L19.85 5.25l-1.3.55L18 7.1l-.55-1.3-1.3-.55 1.3-.55L18 3.4z" fill="#f4e8cc"></path>
         </svg>
       </span>
       <span
-        class="font-display truncate text-lg leading-none font-semibold tracking-wide text-purple-100 transition-colors group-hover:text-white sm:text-xl lg:text-2xl"
+        class="font-display truncate text-lg leading-none font-medium tracking-[0.02em] text-[#f0e4c8] transition-colors group-hover:text-[#f4e8cc] sm:text-xl lg:text-[1.4rem]"
       >
-        Wróżbita Online
+        Wróżbita <span class="text-gilded italic">Online</span>
       </span>
     </a>
     {
       user ? (
         <>
-          <nav class="hidden items-center gap-2 sm:flex">
+          <nav class="hidden items-center gap-1.5 sm:flex">
             <a
               href="/dashboard"
-              class="rounded-lg bg-purple-600 px-3 py-1.5 font-medium text-white transition-colors hover:bg-purple-500"
+              class="rounded-full bg-gradient-to-b from-[#e8cf9c] to-[#c9a668] px-4 py-1.5 font-medium text-[#1c1408] shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_6px_16px_-6px_rgba(201,166,104,0.5)] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:brightness-105 active:scale-[0.98]"
             >
               Zapytaj wróżkę
             </a>
             <a
               href="/dashboard/profile"
-              class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              class="rounded-full border border-[#d9b877]/15 bg-white/[0.02] px-3.5 py-1.5 text-[#e9ddc4]/75 transition-colors duration-300 hover:border-[#d9b877]/30 hover:text-[#f4e8cc]"
             >
               Twój profil
             </a>
             <a
               href="/dashboard/history"
-              class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              class="rounded-full border border-[#d9b877]/15 bg-white/[0.02] px-3.5 py-1.5 text-[#e9ddc4]/75 transition-colors duration-300 hover:border-[#d9b877]/30 hover:text-[#f4e8cc]"
             >
               Historia
             </a>
             <form method="POST" action="/api/auth/signout">
               <button
                 type="submit"
-                class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                class="rounded-full border border-[#d9b877]/15 bg-white/[0.02] px-3.5 py-1.5 text-[#e9ddc4]/75 transition-colors duration-300 hover:border-[#d9b877]/30 hover:text-[#f4e8cc]"
               >
                 Wyloguj
               </button>
@@ -69,25 +69,25 @@ const { user } = Astro.locals;
             id="topbar-menu-button"
             aria-expanded="false"
             aria-controls="topbar-menu"
-            class="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/80 transition-colors hover:bg-white/10 sm:hidden"
+            class="flex size-9 items-center justify-center rounded-full border border-[#d9b877]/15 bg-white/[0.03] text-[#e9ddc4]/80 transition-colors hover:border-[#d9b877]/30 sm:hidden"
           >
             <svg
               id="topbar-menu-icon-open"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="1.25"
               stroke-linecap="round"
               class="size-5"
             >
-              <path d="M4 6h16M4 12h16M4 18h16" />
+              <path d="M4 7h16M4 12h16M4 17h16" />
             </svg>
             <svg
               id="topbar-menu-icon-close"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="1.25"
               stroke-linecap="round"
               class="hidden size-5"
             >
@@ -97,7 +97,10 @@ const { user } = Astro.locals;
           </button>
         </>
       ) : (
-        <a href="/auth/signin" class="text-purple-300 transition-colors hover:text-purple-100 hover:underline">
+        <a
+          href="/auth/signin"
+          class="rounded-full bg-gradient-to-b from-[#e8cf9c] to-[#c9a668] px-4 py-1.5 font-medium text-[#1c1408] shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_6px_16px_-6px_rgba(201,166,104,0.5)] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:brightness-105 active:scale-[0.98]"
+        >
           Zaloguj się
         </a>
       )
@@ -106,29 +109,29 @@ const { user } = Astro.locals;
 
   {
     user && (
-      <nav id="topbar-menu" class="hidden flex-col gap-2 border-t border-white/10 px-4 py-3 sm:hidden">
+      <nav id="topbar-menu" class="hidden flex-col gap-2 border-t border-[#d9b877]/10 px-4 py-3 sm:hidden">
         <a
           href="/dashboard"
-          class="rounded-lg bg-purple-600 px-3 py-2 text-center font-medium text-white transition-colors hover:bg-purple-500"
+          class="rounded-full bg-gradient-to-b from-[#e8cf9c] to-[#c9a668] px-3 py-2 text-center font-medium text-[#1c1408] transition-transform active:scale-[0.98]"
         >
           Zapytaj wróżkę
         </a>
         <a
           href="/dashboard/profile"
-          class="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-center text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          class="rounded-full border border-[#d9b877]/15 bg-white/[0.02] px-3 py-2 text-center text-[#e9ddc4]/75 transition-colors hover:border-[#d9b877]/30 hover:text-[#f4e8cc]"
         >
           Twój profil
         </a>
         <a
           href="/dashboard/history"
-          class="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-center text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          class="rounded-full border border-[#d9b877]/15 bg-white/[0.02] px-3 py-2 text-center text-[#e9ddc4]/75 transition-colors hover:border-[#d9b877]/30 hover:text-[#f4e8cc]"
         >
           Historia
         </a>
         <form method="POST" action="/api/auth/signout">
           <button
             type="submit"
-            class="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            class="w-full rounded-full border border-[#d9b877]/15 bg-white/[0.02] px-3 py-2 text-[#e9ddc4]/75 transition-colors hover:border-[#d9b877]/30 hover:text-[#f4e8cc]"
           >
             Wyloguj
           </button>

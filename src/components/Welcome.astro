@@ -3,24 +3,24 @@ import Topbar from "@/components/Topbar.astro";
 ---
 
 <div class="bg-cosmic relative min-h-screen w-full overflow-hidden">
-  <!-- Cosmic orbs -->
+  <!-- Ambient glow -->
   <div
-    class="pointer-events-none absolute top-1/4 -left-24 h-[350px] w-[350px] rounded-full bg-purple-500/20 blur-[120px]"
+    class="pointer-events-none absolute top-1/3 -left-32 h-[420px] w-[420px] rounded-full bg-[#c9a668]/10 blur-[130px]"
   >
   </div>
   <div
-    class="pointer-events-none absolute top-2/3 -right-16 h-[250px] w-[250px] rounded-full bg-blue-500/15 blur-[100px]"
+    class="pointer-events-none absolute top-2/3 -right-24 h-[300px] w-[300px] rounded-full bg-[#8b3a3a]/10 blur-[120px]"
   >
   </div>
   <div
-    class="pointer-events-none absolute top-0 left-1/2 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-indigo-400/10 blur-[140px]"
+    class="pointer-events-none absolute top-0 left-1/2 h-[340px] w-[340px] -translate-x-1/2 rounded-full bg-[#f4e8cc]/[0.05] blur-[150px]"
   >
   </div>
 
   <!-- Star field -->
   <div
     class="pointer-events-none absolute inset-0"
-    style="background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 200px 200px, 150px 150px, 100px 100px; background-position: 0 0, 40px 60px, 80px 30px;"
+    style="background-image: radial-gradient(circle, rgba(244,232,204,0.14) 1px, transparent 1px), radial-gradient(circle, rgba(244,232,204,0.09) 1px, transparent 1px), radial-gradient(circle, rgba(244,232,204,0.06) 1px, transparent 1px); background-size: 220px 220px, 160px 160px, 110px 110px; background-position: 0 0, 40px 60px, 80px 30px;"
   >
   </div>
 
@@ -29,64 +29,74 @@ import Topbar from "@/components/Topbar.astro";
 
     <!-- Hero section: asymmetric split -->
     <div
-      class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 py-20 sm:py-28 lg:grid-cols-[3fr_2fr] lg:py-32"
+      class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 py-20 sm:py-28 lg:grid-cols-[3fr_2fr] lg:py-36"
     >
       <div class="animate-rise text-center lg:text-left">
-        <h1
-          class="font-display mb-5 bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 bg-clip-text text-5xl leading-[1.05] font-bold text-transparent sm:text-6xl lg:text-7xl"
+        <span
+          class="mb-6 inline-flex items-center gap-2 rounded-full border border-[#d9b877]/20 bg-white/[0.03] px-3 py-1 text-[10px] font-medium tracking-[0.22em] text-[#dcb877] uppercase"
         >
+          Prywatna wróżba, na Twoje wyłączne konto
+        </span>
+        <h1 class="font-display text-gilded mb-6 text-5xl leading-[1.05] font-medium sm:text-6xl lg:text-7xl">
           Wróżbita Online
         </h1>
-        <p class="mx-auto mb-8 max-w-md text-lg text-blue-100/70 sm:text-xl lg:mx-0">
+        <p class="mx-auto mb-10 max-w-md text-lg leading-relaxed text-[#e9ddc4]/60 sm:text-xl lg:mx-0">
           Zadaj pytanie swojej wróżce i otrzymaj odpowiedź uszytą na miarę. Im więcej jej ufasz, tym lepiej Cię poznaje.
         </p>
         <a
           href="/auth/signin"
-          class="inline-flex items-center justify-center rounded-lg bg-purple-600 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-purple-500"
+          class="group inline-flex items-center gap-1 rounded-full bg-gradient-to-b from-[#e8cf9c] to-[#c9a668] py-1.5 pr-1.5 pl-6 text-base font-medium text-[#1c1408] shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_10px_30px_-10px_rgba(201,166,104,0.6)] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:brightness-105 active:scale-[0.98]"
         >
           Zapytaj wróżkę
+          <span
+            class="flex size-9 items-center justify-center rounded-full bg-[#1c1408]/10 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-4">
+              <path d="M7 17L17 7M17 7H9M17 7v8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
         </a>
       </div>
 
       <!-- Mystical centerpiece -->
       <div class="animate-rise relative mx-auto hidden h-72 w-72 [animation-delay:150ms] sm:block lg:h-80 lg:w-80">
         <div
-          class="absolute top-1/2 left-1/2 flex size-56 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-[0_0_70px_-8px] shadow-blue-400/50 backdrop-blur-xl lg:size-64"
+          class="absolute top-1/2 left-1/2 flex size-56 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#d9b877]/15 bg-white/[0.02] shadow-[0_0_80px_-10px] shadow-[#d9b877]/30 backdrop-blur-xl lg:size-64"
         >
           <svg viewBox="0 0 24 24" fill="none" class="size-32 lg:size-36">
             <defs>
               <radialGradient id="heroOrbCore" cx="32%" cy="26%" r="75%">
-                <stop offset="0%" stop-color="#f5f0ff" stop-opacity="0.95"></stop>
-                <stop offset="30%" stop-color="#e9d5ff" stop-opacity="0.85"></stop>
-                <stop offset="62%" stop-color="#a78bfa" stop-opacity="0.55"></stop>
-                <stop offset="100%" stop-color="#3b1a78" stop-opacity="0.4"></stop>
+                <stop offset="0%" stop-color="#faf3e0" stop-opacity="0.95"></stop>
+                <stop offset="30%" stop-color="#f0dfb4" stop-opacity="0.85"></stop>
+                <stop offset="62%" stop-color="#c9a668" stop-opacity="0.55"></stop>
+                <stop offset="100%" stop-color="#4a3315" stop-opacity="0.4"></stop>
               </radialGradient>
               <radialGradient id="heroOrbRim" cx="50%" cy="50%" r="50%">
-                <stop offset="82%" stop-color="#c4b5fd" stop-opacity="0"></stop>
-                <stop offset="100%" stop-color="#e9d5ff" stop-opacity="0.6"></stop>
+                <stop offset="82%" stop-color="#dcb877" stop-opacity="0"></stop>
+                <stop offset="100%" stop-color="#f0dfb4" stop-opacity="0.6"></stop>
               </radialGradient>
               <linearGradient id="heroOrbBase" x1="4" y1="19" x2="20" y2="21" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#a78bfa" stop-opacity="0"></stop>
-                <stop offset="50%" stop-color="#c4b5fd" stop-opacity="0.55"></stop>
-                <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"></stop>
+                <stop offset="0%" stop-color="#c9a668" stop-opacity="0"></stop>
+                <stop offset="50%" stop-color="#dcb877" stop-opacity="0.55"></stop>
+                <stop offset="100%" stop-color="#c9a668" stop-opacity="0"></stop>
               </linearGradient>
             </defs>
             <circle cx="12" cy="10" r="8" fill="url(#heroOrbCore)"></circle>
             <circle cx="12" cy="10" r="8" fill="url(#heroOrbRim)"></circle>
-            <circle cx="12" cy="10" r="8" fill="none" stroke="#f5f0ff" stroke-width="0.4" opacity="0.5"></circle>
+            <circle cx="12" cy="10" r="8" fill="none" stroke="#faf3e0" stroke-width="0.4" opacity="0.5"></circle>
             <ellipse cx="9.3" cy="6.8" rx="2.1" ry="1.3" fill="#ffffff" opacity="0.55"></ellipse>
             <ellipse cx="12" cy="20" rx="7" ry="1.4" fill="url(#heroOrbBase)"></ellipse>
           </svg>
         </div>
 
         <div
-          class="absolute top-2 -left-4 flex size-16 -rotate-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_30px_-8px] shadow-purple-400/40 backdrop-blur-xl"
+          class="absolute top-2 -left-4 flex size-16 -rotate-12 items-center justify-center rounded-2xl border border-[#d9b877]/15 bg-white/[0.02] shadow-[0_0_30px_-8px] shadow-[#c9a668]/40 backdrop-blur-xl"
         >
           <svg viewBox="0 0 24 24" fill="none" class="size-9">
             <defs>
               <linearGradient id="heroCard" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#f5f0ff" stop-opacity="0.12"></stop>
-                <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.06"></stop>
+                <stop offset="0%" stop-color="#f4e8cc" stop-opacity="0.14"></stop>
+                <stop offset="100%" stop-color="#c9a668" stop-opacity="0.06"></stop>
               </linearGradient>
             </defs>
             <rect
@@ -97,8 +107,8 @@ import Topbar from "@/components/Topbar.astro";
               rx="2.5"
               fill="url(#heroCard)"
               stroke="currentColor"
-              stroke-width="1.25"
-              class="text-purple-200"></rect>
+              stroke-width="1"
+              class="text-[#dcb877]"></rect>
             <rect
               x="5.5"
               y="3.5"
@@ -106,33 +116,33 @@ import Topbar from "@/components/Topbar.astro";
               height="17"
               rx="1.5"
               stroke="currentColor"
-              stroke-width="0.5"
-              class="text-purple-300/70"></rect>
+              stroke-width="0.4"
+              class="text-[#dcb877]/60"></rect>
             <path
               d="M12 6.8l1.35 2.85L16.2 11l-2.85 1.35L12 15.2l-1.35-2.85L7.8 11l2.85-1.35L12 6.8z"
               fill="currentColor"
-              class="text-purple-200"></path>
+              class="text-[#f0dfb4]"></path>
           </svg>
         </div>
 
         <div
-          class="absolute right-0 bottom-4 flex size-14 rotate-6 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_30px_-8px] shadow-indigo-400/40 backdrop-blur-xl"
+          class="absolute right-0 bottom-4 flex size-14 rotate-6 items-center justify-center rounded-2xl border border-[#d9b877]/15 bg-white/[0.02] shadow-[0_0_30px_-8px] shadow-[#8b3a3a]/30 backdrop-blur-xl"
         >
           <svg viewBox="0 0 24 24" fill="none" class="size-8">
             <path
               d="M15.5 4a8 8 0 1 0 4.5 14.6A9 9 0 0 1 15.5 4z"
               fill="currentColor"
-              class="text-indigo-200"
-              opacity="0.9"></path>
+              class="text-[#dcb877]"
+              opacity="0.85"></path>
             <path
               d="M19 3l.65 1.5L21.15 5.15l-1.5.65L19 7.3l-.65-1.5L16.85 5.15l1.5-.65L19 3z"
               fill="currentColor"
-              class="text-indigo-100"></path>
+              class="text-[#f4e8cc]"></path>
             <path
               d="M6.5 14.2l.4 .95 .95 .4-.95 .4-.4 .95-.4-.95-.95-.4 .95-.4z"
               fill="currentColor"
-              class="text-indigo-200"
-              opacity="0.8"></path>
+              class="text-[#dcb877]"
+              opacity="0.75"></path>
           </svg>
         </div>
       </div>
@@ -143,83 +153,87 @@ import Topbar from "@/components/Topbar.astro";
       class="animate-rise mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 pb-24 [animation-delay:250ms] sm:grid-cols-2 sm:grid-rows-2"
     >
       <div
-        class="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-7 backdrop-blur-xl sm:col-start-1 sm:row-span-2 sm:row-start-1"
+        class="group relative overflow-hidden rounded-[2rem] border border-[#d9b877]/10 bg-white/[0.015] p-2 backdrop-blur-xl transition-colors duration-500 hover:border-[#d9b877]/25 sm:col-start-1 sm:row-span-2 sm:row-start-1"
       >
-        <div class="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full bg-purple-500/25 blur-3xl">
+        <div
+          class="relative h-full overflow-hidden rounded-[calc(2rem-0.5rem)] bg-gradient-to-b from-white/[0.03] to-transparent p-7 shadow-[inset_0_1px_1px_rgba(244,232,204,0.06)]"
+        >
+          <div class="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full bg-[#c9a668]/15 blur-3xl">
+          </div>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="relative mb-5 size-7 text-[#dcb877]"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+            ></path>
+          </svg>
+          <h3 class="font-display relative mb-2 text-2xl font-medium text-[#f4e8cc]">Spersonalizowana wróżba</h3>
+          <p class="relative text-[15px] leading-relaxed text-[#e9ddc4]/55">
+            Wróżka bierze pod uwagę Twój profil: imię, datę urodzenia i to, co o sobie opowiesz. Każda odpowiedź jest
+            uszyta pod Ciebie, nie pod przypadkowego gościa.
+          </p>
         </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="relative mb-5 text-purple-300"
-        >
-          <circle cx="12" cy="12" r="4"></circle>
-          <path
-            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
-          ></path>
-        </svg>
-        <h3 class="relative mb-2 text-xl font-semibold text-white">Spersonalizowana wróżba</h3>
-        <p class="relative text-sm leading-relaxed text-blue-100/60">
-          Wróżka bierze pod uwagę Twój profil: imię, datę urodzenia i to, co o sobie opowiesz. Każda odpowiedź jest
-          uszyta pod Ciebie, nie pod przypadkowego gościa.
-        </p>
       </div>
 
       <div
-        class="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:col-start-2 sm:row-start-1"
+        class="group relative overflow-hidden rounded-[2rem] border border-[#d9b877]/10 bg-white/[0.015] p-2 backdrop-blur-xl transition-colors duration-500 hover:border-[#d9b877]/25 sm:col-start-2 sm:row-start-1"
       >
-        <div class="pointer-events-none absolute -top-8 -right-8 h-28 w-28 rounded-full bg-blue-500/20 blur-2xl"></div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="relative mb-4 text-blue-300"
+        <div
+          class="relative h-full overflow-hidden rounded-[calc(2rem-0.5rem)] bg-gradient-to-b from-white/[0.03] to-transparent p-6 shadow-[inset_0_1px_1px_rgba(244,232,204,0.06)]"
         >
-          <path
-            d="M11 2a1 1 0 0 1 1 1v1.06a7.94 7.94 0 0 1 4.87 2.02l.75-.75a1 1 0 1 1 1.42 1.42l-.75.75A7.94 7.94 0 0 1 20.94 11H22a1 1 0 1 1 0 2h-1.06a7.94 7.94 0 0 1-2.02 4.87l.75.75a1 1 0 1 1-1.42 1.42l-.75-.75A7.94 7.94 0 0 1 13 20.94V22a1 1 0 1 1-2 0v-1.06a7.94 7.94 0 0 1-4.87-2.02l-.75.75a1 1 0 0 1-1.42-1.42l.75-.75A7.94 7.94 0 0 1 3.06 13H2a1 1 0 1 1 0-2h1.06a7.94 7.94 0 0 1 2.02-4.87l-.75-.75a1 1 0 0 1 1.42-1.42l.75.75A7.94 7.94 0 0 1 11 3.06V2z"
-          ></path>
-        </svg>
-        <h3 class="relative mb-2 text-lg font-semibold text-white">Uczy się Twojego stylu</h3>
-        <p class="relative text-sm leading-relaxed text-blue-100/60">
-          Polubione odpowiedzi kształtują kolejne wróżby. Im więcej lajkujesz, tym trafniej Cię czuje.
-        </p>
+          <div class="pointer-events-none absolute -top-8 -right-8 h-28 w-28 rounded-full bg-[#8b3a3a]/15 blur-2xl">
+          </div>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="relative mb-4 size-6 text-[#dcb877]"
+          >
+            <path
+              d="M11 2a1 1 0 0 1 1 1v1.06a7.94 7.94 0 0 1 4.87 2.02l.75-.75a1 1 0 1 1 1.42 1.42l-.75.75A7.94 7.94 0 0 1 20.94 11H22a1 1 0 1 1 0 2h-1.06a7.94 7.94 0 0 1-2.02 4.87l.75.75a1 1 0 1 1-1.42 1.42l-.75-.75A7.94 7.94 0 0 1 13 20.94V22a1 1 0 1 1-2 0v-1.06a7.94 7.94 0 0 1-4.87-2.02l-.75.75a1 1 0 0 1-1.42-1.42l.75-.75A7.94 7.94 0 0 1 3.06 13H2a1 1 0 1 1 0-2h1.06a7.94 7.94 0 0 1 2.02-4.87l-.75-.75a1 1 0 0 1 1.42-1.42l.75.75A7.94 7.94 0 0 1 11 3.06V2z"
+            ></path>
+          </svg>
+          <h3 class="font-display relative mb-2 text-xl font-medium text-[#f4e8cc]">Uczy się Twojego stylu</h3>
+          <p class="relative text-[15px] leading-relaxed text-[#e9ddc4]/55">
+            Polubione odpowiedzi kształtują kolejne wróżby. Im więcej lajkujesz, tym trafniej Cię czuje.
+          </p>
+        </div>
       </div>
 
       <div
-        class="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:col-start-2 sm:row-start-2"
-        style="background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px); background-size: 22px 22px;"
+        class="group relative overflow-hidden rounded-[2rem] border border-[#d9b877]/10 bg-white/[0.015] p-2 backdrop-blur-xl transition-colors duration-500 hover:border-[#d9b877]/25 sm:col-start-2 sm:row-start-2"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="relative mb-4 text-indigo-200"
+        <div
+          class="relative h-full overflow-hidden rounded-[calc(2rem-0.5rem)] bg-gradient-to-b from-white/[0.03] to-transparent p-6 shadow-[inset_0_1px_1px_rgba(244,232,204,0.06)]"
+          style="background-image: radial-gradient(circle, rgba(244,232,204,0.1) 1px, transparent 1px); background-size: 22px 22px;"
         >
-          <path d="M3 3v18h18"></path>
-          <path d="M7 16l4-6 4 3 5-7"></path>
-        </svg>
-        <h3 class="relative mb-2 text-lg font-semibold text-white">Historia sesji</h3>
-        <p class="relative text-sm leading-relaxed text-blue-100/60">
-          Wracaj do wcześniejszych wróżb, przeglądaj polubione odpowiedzi i porządkuj swoją historię.
-        </p>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="relative mb-4 size-6 text-[#dcb877]"
+          >
+            <path d="M3 3v18h18"></path>
+            <path d="M7 16l4-6 4 3 5-7"></path>
+          </svg>
+          <h3 class="font-display relative mb-2 text-xl font-medium text-[#f4e8cc]">Historia sesji</h3>
+          <p class="relative text-[15px] leading-relaxed text-[#e9ddc4]/55">
+            Wracaj do wcześniejszych wróżb, przeglądaj polubione odpowiedzi i porządkuj swoją historię.
+          </p>
+        </div>
       </div>
     </div>
   </div>
