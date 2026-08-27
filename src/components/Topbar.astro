@@ -121,6 +121,7 @@ const { user } = Astro.locals;
 
   button?.addEventListener("click", () => {
     const isHidden = menu?.classList.toggle("hidden");
+    menu?.classList.toggle("flex", !isHidden);
     button.setAttribute("aria-expanded", String(!isHidden));
     iconOpen?.classList.toggle("hidden", !isHidden);
     iconClose?.classList.toggle("hidden", isHidden);
