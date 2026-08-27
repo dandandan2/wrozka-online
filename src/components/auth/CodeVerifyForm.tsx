@@ -15,7 +15,7 @@ export default function CodeVerifyForm({ email, serverError }: Props) {
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     if (!code.trim()) {
-      setError("Code is required");
+      setError("Podaj kod");
       e.preventDefault();
     }
   }
@@ -27,7 +27,7 @@ export default function CodeVerifyForm({ email, serverError }: Props) {
       <FormField
         id="code"
         name="code"
-        label="Or enter the 6-digit code"
+        label="Lub wpisz 6-cyfrowy kod"
         value={code}
         onChange={(v) => {
           setCode(v);
@@ -42,8 +42,8 @@ export default function CodeVerifyForm({ email, serverError }: Props) {
 
       <ServerError message={serverError} />
 
-      <SubmitButton pendingText="Verifying..." icon={<KeyRound className="size-4" />}>
-        Verify code
+      <SubmitButton pendingText="Weryfikacja..." icon={<KeyRound className="size-4" />}>
+        Zweryfikuj kod
       </SubmitButton>
     </form>
   );

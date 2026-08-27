@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Topbar from "@/components/Topbar.astro";
 import AskForm from "@/components/dashboard/AskForm";
 import AnswerCard from "@/components/dashboard/AnswerCard";
 import { createClient } from "@/lib/supabase";
@@ -42,51 +43,46 @@ const latestResponse: FairyResponseRow | null =
     : null;
 ---
 
-<Layout title="Dashboard">
-  <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
-    <div class="w-full max-w-lg rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
-      <h1
-        class="mb-4 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-3xl font-bold text-transparent"
-      >
-        Dashboard
-      </h1>
-      <p class="text-center text-blue-100/80">
-        Welcome, <span class="font-semibold text-white">{user?.email}</span>
-      </p>
+<Layout title="Panel">
+  <div class="bg-cosmic flex min-h-screen flex-col p-4">
+    <Topbar />
+    <div class="mx-auto flex w-full max-w-lg flex-1 items-center justify-center">
+      <div class="w-full rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
+        <h1
+          class="mb-4 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-3xl font-bold text-transparent"
+        >
+          Panel
+        </h1>
+        <p class="text-center text-blue-100/80">
+          Witaj, <span class="font-semibold text-white">{user?.email}</span>
+        </p>
 
-      {
-        !hasCompleteProfile ? (
-          <div class="mt-6 rounded-xl border border-white/10 bg-white/5 p-6 text-center">
-            <p class="text-blue-100/80">Zanim zapytasz wróżkę, uzupełnij swój profil.</p>
-            <a
-              href="/dashboard/profile"
-              class="mt-4 inline-block rounded-lg bg-purple-600 px-4 py-2 font-medium text-white transition-colors hover:bg-purple-500"
-            >
-              Uzupełnij profil
-            </a>
-          </div>
-        ) : (
-          <div class="mt-6">
-            <AskForm serverError={error} client:load />
-            {latestResponse && (
-              <AnswerCard
-                id={latestResponse.id}
-                question={latestResponse.question}
-                answer={latestResponse.answer}
-                liked={latestResponse.liked}
-                client:load
-              />
-            )}
-          </div>
-        )
-      }
-
-      <div class="mt-6 flex justify-center gap-4 text-sm">
-        <a href="/dashboard/profile" class="text-blue-100/60 hover:underline"> Edytuj profil </a>
-        <a href="/dashboard/history" class="text-blue-100/60 hover:underline"> Historia </a>
-        <form method="POST" action="/api/auth/signout">
-          <button type="submit" class="text-blue-100/60 hover:underline"> Sign out </button>
-        </form>
+        {
+          !hasCompleteProfile ? (
+            <div class="mt-6 rounded-xl border border-white/10 bg-white/5 p-6 text-center">
+              <p class="text-blue-100/80">Zanim zapytasz wróżkę, uzupełnij swój profil.</p>
+              <a
+                href="/dashboard/profile"
+                class="mt-4 inline-block rounded-lg bg-purple-600 px-4 py-2 font-medium text-white transition-colors hover:bg-purple-500"
+              >
+                Uzupełnij profil
+              </a>
+            </div>
+          ) : (
+            <div class="mt-6">
+              <AskForm serverError={error} client:load />
+              {latestResponse && (
+                <AnswerCard
+                  id={latestResponse.id}
+                  question={latestResponse.question}
+                  answer={latestResponse.answer}
+                  liked={latestResponse.liked}
+                  client:load
+                />
+              )}
+            </div>
+          )
+        }
       </div>
     </div>
   </div>

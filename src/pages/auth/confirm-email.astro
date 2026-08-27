@@ -1,35 +1,39 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Topbar from "@/components/Topbar.astro";
 import CodeVerifyForm from "@/components/auth/CodeVerifyForm";
 
 const email = Astro.url.searchParams.get("email") ?? "";
 const error = Astro.url.searchParams.get("error");
 ---
 
-<Layout title="Check your email">
-  <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
-    <div
-      class="w-full max-w-sm rounded-2xl border border-white/10 bg-white/10 p-8 text-center text-white backdrop-blur-xl"
-    >
-      <div class="mb-4 text-5xl">📧</div>
-      <h1 class="mb-3 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
-        Check your email
-      </h1>
-      <p class="mb-6 text-blue-100/80">
-        We've sent a login link and a 6-digit code to <span class="font-semibold text-white">{email}</span>. Click the
-        link, or enter the code below.
-      </p>
+<Layout title="Sprawdź skrzynkę e-mail">
+  <div class="bg-cosmic flex min-h-screen flex-col p-4">
+    <Topbar />
+    <div class="flex flex-1 items-center justify-center">
+      <div
+        class="w-full max-w-sm rounded-2xl border border-white/10 bg-white/10 p-8 text-center text-white backdrop-blur-xl"
+      >
+        <div class="mb-4 text-5xl">📧</div>
+        <h1 class="mb-3 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
+          Sprawdź skrzynkę e-mail
+        </h1>
+        <p class="mb-6 text-blue-100/80">
+          Wysłaliśmy link logujący i 6-cyfrowy kod na adres <span class="font-semibold text-white">{email}</span>.
+          Kliknij link albo wpisz kod poniżej.
+        </p>
 
-      <div class="text-left">
-        <CodeVerifyForm email={email} serverError={error} client:load />
+        <div class="text-left">
+          <CodeVerifyForm email={email} serverError={error} client:load />
+        </div>
+
+        <form method="POST" action="/api/auth/request-link" class="mt-4">
+          <input type="hidden" name="email" value={email} />
+          <button type="submit" class="text-sm text-purple-300 hover:underline"> Nie dostałeś? Wyślij ponownie </button>
+        </form>
+
+        <a href="/auth/signin" class="mt-2 block text-sm text-blue-100/60 hover:underline">Wróć do logowania</a>
       </div>
-
-      <form method="POST" action="/api/auth/request-link" class="mt-4">
-        <input type="hidden" name="email" value={email} />
-        <button type="submit" class="text-sm text-purple-300 hover:underline"> Didn't get it? Resend </button>
-      </form>
-
-      <a href="/auth/signin" class="mt-2 block text-sm text-blue-100/60 hover:underline">Back to sign in</a>
     </div>
   </div>
 </Layout>

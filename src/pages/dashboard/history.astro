@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Topbar from "@/components/Topbar.astro";
 import HistoryItem from "@/components/dashboard/HistoryItem";
 import { ServerError } from "@/components/auth/ServerError";
 import { createClient } from "@/lib/supabase";
@@ -29,8 +30,11 @@ const history: HistoryRow[] =
 ---
 
 <Layout title="Historia">
-  <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
-    <div class="w-full max-w-lg rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
+  <div class="bg-cosmic flex min-h-screen flex-col p-4">
+    <Topbar />
+    <div
+      class="mx-auto w-full max-w-lg flex-1 rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl"
+    >
       <h1
         class="mb-4 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-2xl font-bold text-transparent"
       >
@@ -74,8 +78,11 @@ const history: HistoryRow[] =
         )
       }
 
-      <a href="/dashboard" class="mt-6 block text-center text-sm text-blue-100/60 hover:underline">
-        Back to dashboard
+      <a
+        href="/dashboard"
+        class="mt-6 block rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-center text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+      >
+        Wróć do panelu
       </a>
     </div>
   </div>

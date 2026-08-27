@@ -15,9 +15,9 @@ export default function AuthForm({ serverError }: Props) {
   function validate() {
     const next: typeof errors = {};
     if (!email.trim()) {
-      next.email = "Email is required";
+      next.email = "Podaj adres e-mail";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      next.email = "Enter a valid email address";
+      next.email = "Podaj poprawny adres e-mail";
     }
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -38,21 +38,21 @@ export default function AuthForm({ serverError }: Props) {
       <FormField
         id="email"
         type="email"
-        label="Email"
+        label="E-mail"
         value={email}
         onChange={(v) => {
           setEmail(v);
           clearError("email");
         }}
-        placeholder="you@example.com"
+        placeholder="ty@przyklad.pl"
         error={errors.email}
         icon={<Mail className="size-4" />}
       />
 
       <ServerError message={serverError} />
 
-      <SubmitButton pendingText="Sending link..." icon={<Sparkles className="size-4" />}>
-        Continue with email
+      <SubmitButton pendingText="Wysyłanie linku..." icon={<Sparkles className="size-4" />}>
+        Wyślij link logujący
       </SubmitButton>
     </form>
   );
