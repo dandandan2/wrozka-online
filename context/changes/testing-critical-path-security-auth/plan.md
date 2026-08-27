@@ -706,8 +706,8 @@ Not applicable — no schema or data migration is part of this phase.
 
 #### Automated
 
-- [x] 5.1 Full suite passes (or skips only the Phase 4 real test with a stated reason): `npm test`
-- [x] 5.2 `npm run lint` and `npm run astro check` pass repo-wide
+- [x] 5.1 Full suite passes (or skips only the Phase 4 real test with a stated reason): `npm test` — 2caa89d
+- [x] 5.2 `npm run lint` and `npm run astro check` pass repo-wide — 2caa89d
 
 #### Manual
 
