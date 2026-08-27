@@ -657,26 +657,26 @@ Not applicable — no schema or data migration is part of this phase.
 
 #### Automated
 
-- [x] 1.1 `npm test` runs and the smoke test passes
-- [x] 1.2 `npm run astro check` passes with the new files included
-- [x] 1.3 `npm run lint` passes on the new files
+- [x] 1.1 `npm test` runs and the smoke test passes — 22000e8
+- [x] 1.2 `npm run astro check` passes with the new files included — 22000e8
+- [x] 1.3 `npm run lint` passes on the new files — 22000e8
 
 #### Manual
 
-- [ ] 1.4 Reviewer confirms `.env.test.example`'s documented dummy values are sufficient to run the full suite (minus Phase 4's real test) with zero external setup
+- [x] 1.4 Reviewer confirms `.env.test.example`'s documented dummy values are sufficient to run the full suite (minus Phase 4's real test) with zero external setup
 
 ### Phase 2: Risk #1 — Data-Isolation Wiring Tests (Hermetic)
 
 #### Automated
 
-- [ ] 2.1 `api-fairy-ownership` passes: `ask.ts`/`like.ts`/`delete.ts` filter every query on `locals.user.id`, never a request-supplied id
-- [ ] 2.2 `api-profile-ownership` passes: `profile/update.ts` filters on `locals.user.id` and never calls insert/delete on `profiles`
-- [ ] 2.3 `supabase-key-role` passes: configured `SUPABASE_KEY` decodes to `role: "anon"`
-- [ ] 2.4 `npm run astro check` and `npm run lint` pass
+- [x] 2.1 `api-fairy-ownership` passes: `ask.ts`/`like.ts`/`delete.ts` filter every query on `locals.user.id`, never a request-supplied id
+- [x] 2.2 `api-profile-ownership` passes: `profile/update.ts` filters on `locals.user.id` and never calls insert/delete on `profiles`
+- [x] 2.3 `supabase-key-role` passes: configured `SUPABASE_KEY` decodes to `role: "anon"`
+- [x] 2.4 `npm run astro check` and `npm run lint` pass
 
 #### Manual
 
-- [ ] 2.5 Reviewer confirms the mock helper's assertions actually fail on a deliberately broken filter, then revert
+- [x] 2.5 Reviewer confirms the mock helper's assertions actually fail on a deliberately broken filter, then revert
 
 ### Phase 3: Risk #2 — Magic-Link/Kod Auth Flow Wiring Tests (Hermetic)
 
