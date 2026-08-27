@@ -336,8 +336,11 @@ assert on it.
 
 #### 2. API route handler wiring tests
 
-**File**: `tests/unit/api-fairy-ownership.test.ts` (new) and
-`tests/unit/api-profile-ownership.test.ts` (new)
+**File**: `tests/unit/api-fairy-ownership.test.ts` (new),
+`tests/unit/api-profile-ownership.test.ts` (new), and
+`tests/helpers/fake-api-context.ts` (new — shared fake `APIContext` builder,
+added retroactively to this file list per impl-review F3; reused by Phase 3
+and 4's auth-endpoint tests too)
 
 **Intent**: For `src/pages/api/fairy/ask.ts`, `like.ts`, `delete.ts`, and
 `src/pages/api/profile/update.ts`, call the exported handler directly with a

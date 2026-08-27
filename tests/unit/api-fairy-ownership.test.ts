@@ -15,7 +15,7 @@ const OTHER_RESOURCE_ID = "resource-owned-by-someone-else";
 
 describe("ask.ts ownership filtering", () => {
   it("filters the profile lookup, liked-answers lookup, and insert all by locals.user.id", async () => {
-    const { client, calls } = createMockQueryClient([
+    const { client, calls, consumedResponseCount } = createMockQueryClient([
       { data: { name: "Ala", birth_date: "1990-01-01", about_me: null }, error: null },
       { data: [], error: null },
       { data: { id: "new-response-id" }, error: null },
@@ -33,12 +33,15 @@ describe("ask.ts ownership filtering", () => {
 
     const insertCall = calls.find((call) => call.method === "insert");
     expect(insertCall?.args[0]).toMatchObject({ user_id: SESSION_USER_ID });
+
+    // Catches both a missing and an extra/unaccounted-for Supabase call.
+    expect(consumedResponseCount()).toBe(3);
   });
 });
 
 describe("like.ts ownership filtering", () => {
   it("filters both the select and the update by locals.user.id, never a request-supplied value alone", async () => {
-    const { client, calls } = createMockQueryClient([
+    const { client, calls, consumedResponseCount } = createMockQueryClient([
       { data: { liked: false }, error: null },
       { data: null, error: null },
     ]);
@@ -52,12 +55,13 @@ describe("like.ts ownership filtering", () => {
 
     expect(eqArgsFor(calls, "user_id")).toEqual([SESSION_USER_ID, SESSION_USER_ID]);
     expect(eqArgsFor(calls, "id")).toEqual([OTHER_RESOURCE_ID, OTHER_RESOURCE_ID]);
+    expect(consumedResponseCount()).toBe(2);
   });
 });
 
 describe("delete.ts ownership filtering", () => {
   it("filters the delete by locals.user.id, never a request-supplied value alone", async () => {
-    const { client, calls } = createMockQueryClient([{ data: null, error: null }]);
+    const { client, calls, consumedResponseCount } = createMockQueryClient([{ data: null, error: null }]);
     vi.mocked(createClient).mockReturnValue(client as never);
 
     const { context } = createFakeContext({
@@ -68,5 +72,6 @@ describe("delete.ts ownership filtering", () => {
 
     expect(eqArgsFor(calls, "user_id")).toEqual([SESSION_USER_ID]);
     expect(eqArgsFor(calls, "id")).toEqual([OTHER_RESOURCE_ID]);
+    expect(consumedResponseCount()).toBe(1);
   });
 });

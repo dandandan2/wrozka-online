@@ -25,8 +25,10 @@ const CHAIN_METHODS = ["select", "insert", "update", "delete", "eq", "order", "l
 export function createMockQueryClient(responses: MockResponse[] = []) {
   const calls: RecordedCall[] = [];
   const queue = [...responses];
+  let consumedCount = 0;
 
   function nextResponse(): MockResponse {
+    consumedCount += 1;
     if (queue.length > 1) {
       const shifted = queue.shift();
       if (shifted) {
@@ -62,7 +64,18 @@ export function createMockQueryClient(responses: MockResponse[] = []) {
     },
   };
 
-  return { client, calls };
+  return {
+    client,
+    calls,
+    /**
+     * Number of times a queued response was awaited. Assert this equals the
+     * number of responses passed to `createMockQueryClient` to catch both a
+     * handler making fewer Supabase calls than expected (unused responses)
+     * and more calls than expected (an unaccounted-for extra query silently
+     * receiving a repeated response instead of failing the test).
+     */
+    consumedResponseCount: () => consumedCount,
+  };
 }
 
 /** Returns, in call order, the second argument of every recorded `.eq(column, value)` call for `column`. */
