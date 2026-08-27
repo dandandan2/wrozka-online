@@ -694,9 +694,9 @@ Not applicable — no schema or data migration is part of this phase.
 
 #### Automated
 
-- [x] 4.1 `auth-rate-limit` passes: `request-link.ts` handles both simulated rate-limit error codes with a clean redirect and mapped message
-- [x] 4.2 `auth-errors` passes: all rate-limit error codes map to the expected user-facing message (already fully covered by Phase 3's file — no change needed)
-- [x] 4.3 `npm run astro check` and `npm run lint` pass
+- [x] 4.1 `auth-rate-limit` passes: `request-link.ts` handles both simulated rate-limit error codes with a clean redirect and mapped message — aed43cd
+- [x] 4.2 `auth-errors` passes: all rate-limit error codes map to the expected user-facing message (already fully covered by Phase 3's file — no change needed) — aed43cd
+- [x] 4.3 `npm run astro check` and `npm run lint` pass — aed43cd
 
 #### Manual
 
@@ -706,9 +706,9 @@ Not applicable — no schema or data migration is part of this phase.
 
 #### Automated
 
-- [ ] 5.1 Full suite passes (or skips only the Phase 4 real test with a stated reason): `npm test`
-- [ ] 5.2 `npm run lint` and `npm run astro check` pass repo-wide
+- [x] 5.1 Full suite passes (or skips only the Phase 4 real test with a stated reason): `npm test`
+- [x] 5.2 `npm run lint` and `npm run astro check` pass repo-wide
 
 #### Manual
 
-- [ ] 5.3 A reader unfamiliar with this phase can follow §6.1/§6.2/§6.4 of `test-plan.md` and understand from the §4/§8 note why some tests are hermetic-only in this environment
+- [x] 5.3 A reader unfamiliar with this phase can follow §6.1/§6.2/§6.4 of `test-plan.md` and understand from the §4/§8 note why some tests are hermetic-only in this environment
