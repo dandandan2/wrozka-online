@@ -259,11 +259,11 @@ Not applicable — no schema or data changes in this phase.
 
 #### Automated
 
-- [x] 4.1 New test file passes: `npx vitest run tests/unit/api-ask-safety-check.test.ts`
-- [x] 4.2 Full suite passes: `npm test`
-- [x] 4.3 Type checking passes: `npm run astro check`
-- [x] 4.4 Linting passes: `npm run lint`
+- [x] 4.1 New test file passes: `npx vitest run tests/unit/api-ask-safety-check.test.ts` — b41542f
+- [x] 4.2 Full suite passes: `npm test` — b41542f
+- [x] 4.3 Type checking passes: `npm run astro check` — b41542f
+- [x] 4.4 Linting passes: `npm run lint` — b41542f
 
 #### Manual
 
-- [x] 4.5 A reader unfamiliar with this phase can follow §6.5 and the corrected §4/§5 wording without additional context
+- [x] 4.5 A reader unfamiliar with this phase can follow §6.5 and the corrected §4/§5 wording without additional context — b41542f
