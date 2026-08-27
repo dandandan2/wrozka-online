@@ -2,46 +2,127 @@
 const { user } = Astro.locals;
 ---
 
-<div
-  class="mb-4 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80"
->
-  <a href="/" class="text-lg font-bold tracking-wide text-purple-200 hover:text-purple-100 sm:text-xl">
-    ✨ Wróżbita Online
-  </a>
+<div class="mb-4 rounded-xl border border-white/10 bg-white/5 text-sm text-white/80">
+  <div class="flex items-center justify-between px-4 py-3">
+    <a href="/" class="text-lg font-bold tracking-wide text-purple-200 hover:text-purple-100 sm:text-xl">
+      ✨ Wróżbita Online
+    </a>
+    {
+      user ? (
+        <>
+          <nav class="hidden items-center gap-2 sm:flex">
+            <a
+              href="/dashboard"
+              class="rounded-lg bg-purple-600 px-3 py-1.5 font-medium text-white transition-colors hover:bg-purple-500"
+            >
+              Zapytaj wróżkę
+            </a>
+            <a
+              href="/dashboard/profile"
+              class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            >
+              Twój profil
+            </a>
+            <a
+              href="/dashboard/history"
+              class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            >
+              Historia
+            </a>
+            <form method="POST" action="/api/auth/signout">
+              <button
+                type="submit"
+                class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                Wyloguj
+              </button>
+            </form>
+          </nav>
+
+          <button
+            type="button"
+            id="topbar-menu-button"
+            aria-expanded="false"
+            aria-controls="topbar-menu"
+            class="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/80 transition-colors hover:bg-white/10 sm:hidden"
+          >
+            <svg
+              id="topbar-menu-icon-open"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              class="size-5"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg
+              id="topbar-menu-icon-close"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              class="hidden size-5"
+            >
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+            <span class="sr-only">Menu</span>
+          </button>
+        </>
+      ) : (
+        <a href="/auth/signin" class="text-purple-300 transition-colors hover:text-purple-100 hover:underline">
+          Zaloguj się
+        </a>
+      )
+    }
+  </div>
+
   {
-    user ? (
-      <nav class="flex items-center gap-2">
+    user && (
+      <nav id="topbar-menu" class="hidden flex-col gap-2 border-t border-white/10 px-4 py-3 sm:hidden">
         <a
           href="/dashboard"
-          class="rounded-lg bg-purple-600 px-3 py-1.5 font-medium text-white transition-colors hover:bg-purple-500"
+          class="rounded-lg bg-purple-600 px-3 py-2 text-center font-medium text-white transition-colors hover:bg-purple-500"
         >
           Zapytaj wróżkę
         </a>
         <a
           href="/dashboard/profile"
-          class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          class="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-center text-white/80 transition-colors hover:bg-white/10 hover:text-white"
         >
           Twój profil
         </a>
         <a
           href="/dashboard/history"
-          class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          class="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-center text-white/80 transition-colors hover:bg-white/10 hover:text-white"
         >
           Historia
         </a>
         <form method="POST" action="/api/auth/signout">
           <button
             type="submit"
-            class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            class="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >
             Wyloguj
           </button>
         </form>
       </nav>
-    ) : (
-      <a href="/auth/signin" class="text-purple-300 transition-colors hover:text-purple-100 hover:underline">
-        Zaloguj się
-      </a>
     )
   }
 </div>
+
+<script>
+  const button = document.getElementById("topbar-menu-button");
+  const menu = document.getElementById("topbar-menu");
+  const iconOpen = document.getElementById("topbar-menu-icon-open");
+  const iconClose = document.getElementById("topbar-menu-icon-close");
+
+  button?.addEventListener("click", () => {
+    const isHidden = menu?.classList.toggle("hidden");
+    button.setAttribute("aria-expanded", String(!isHidden));
+    iconOpen?.classList.toggle("hidden", !isHidden);
+    iconClose?.classList.toggle("hidden", isHidden);
+  });
+</script>
