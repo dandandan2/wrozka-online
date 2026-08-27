@@ -1,10 +1,10 @@
 ---
 change_id: testing-fairy-loop-business-rules
 title: Fairy-loop business-rule integrity test coverage (rollout Phase 2)
-status: impl_reviewed
+status: archived
 created: 2026-08-27
 updated: 2026-08-27
-archived_at: null
+archived_at: 2026-08-27T20:04:45Z
 ---
 
 ## Notes
