@@ -293,10 +293,10 @@ Not applicable — no schema or data changes in this phase.
 
 #### Automated
 
-- [x] 4.1 Full suite passes: `npm test`
-- [x] 4.2 Linting passes: `npm run lint`
-- [x] 4.3 Type/Astro checking passes: `npm run astro check`
+- [x] 4.1 Full suite passes: `npm test` — 01be02b
+- [x] 4.2 Linting passes: `npm run lint` — 01be02b
+- [x] 4.3 Type/Astro checking passes: `npm run astro check` — 01be02b
 
 #### Manual
 
-- [x] 4.4 A reader unfamiliar with this phase can follow §6.1 and the risk-description correction without additional context
+- [x] 4.4 A reader unfamiliar with this phase can follow §6.1 and the risk-description correction without additional context — 01be02b
