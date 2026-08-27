@@ -669,10 +669,10 @@ Not applicable — no schema or data migration is part of this phase.
 
 #### Automated
 
-- [x] 2.1 `api-fairy-ownership` passes: `ask.ts`/`like.ts`/`delete.ts` filter every query on `locals.user.id`, never a request-supplied id
-- [x] 2.2 `api-profile-ownership` passes: `profile/update.ts` filters on `locals.user.id` and never calls insert/delete on `profiles`
-- [x] 2.3 `supabase-key-role` passes: configured `SUPABASE_KEY` decodes to `role: "anon"`
-- [x] 2.4 `npm run astro check` and `npm run lint` pass
+- [x] 2.1 `api-fairy-ownership` passes: `ask.ts`/`like.ts`/`delete.ts` filter every query on `locals.user.id`, never a request-supplied id — 7631106
+- [x] 2.2 `api-profile-ownership` passes: `profile/update.ts` filters on `locals.user.id` and never calls insert/delete on `profiles` — 7631106
+- [x] 2.3 `supabase-key-role` passes: configured `SUPABASE_KEY` decodes to `role: "anon"` — 7631106
+- [x] 2.4 `npm run astro check` and `npm run lint` pass — 7631106
 
 #### Manual
 
@@ -682,13 +682,13 @@ Not applicable — no schema or data migration is part of this phase.
 
 #### Automated
 
-- [ ] 3.1 `auth-request-link` / `auth-verify-code` / `auth-callback` pass: each endpoint calls the correct Supabase Auth SDK method with the correct arguments and redirects correctly on success/error
-- [ ] 3.2 `auth-errors` passes: every known error code maps to its intended message
-- [ ] 3.3 `npm run astro check` and `npm run lint` pass
+- [x] 3.1 `auth-request-link` / `auth-verify-code` / `auth-callback` pass: each endpoint calls the correct Supabase Auth SDK method with the correct arguments and redirects correctly on success/error
+- [x] 3.2 `auth-errors` passes: every known error code maps to its intended message
+- [x] 3.3 `npm run astro check` and `npm run lint` pass
 
 #### Manual
 
-- [ ] 3.4 Reviewer confirms these tests would fail on a deliberately wrong SDK argument, then revert
+- [x] 3.4 Reviewer confirms these tests would fail on a deliberately wrong SDK argument, then revert
 
 ### Phase 4: Risk #6 — Throttling / Resource Abuse (Hermetic)
 
