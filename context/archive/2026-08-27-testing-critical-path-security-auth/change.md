@@ -1,10 +1,10 @@
 ---
 change_id: testing-critical-path-security-auth
 title: Critical-path security & auth test coverage (rollout Phase 1)
-status: impl_reviewed
+status: archived
 created: 2026-08-27
 updated: 2026-08-27
-archived_at: null
+archived_at: 2026-08-27T21:17:39Z
 ---
 
 ## Notes
