@@ -682,9 +682,9 @@ Not applicable — no schema or data migration is part of this phase.
 
 #### Automated
 
-- [x] 3.1 `auth-request-link` / `auth-verify-code` / `auth-callback` pass: each endpoint calls the correct Supabase Auth SDK method with the correct arguments and redirects correctly on success/error
-- [x] 3.2 `auth-errors` passes: every known error code maps to its intended message
-- [x] 3.3 `npm run astro check` and `npm run lint` pass
+- [x] 3.1 `auth-request-link` / `auth-verify-code` / `auth-callback` pass: each endpoint calls the correct Supabase Auth SDK method with the correct arguments and redirects correctly on success/error — 9e6cbf7
+- [x] 3.2 `auth-errors` passes: every known error code maps to its intended message — 9e6cbf7
+- [x] 3.3 `npm run astro check` and `npm run lint` pass — 9e6cbf7
 
 #### Manual
 
@@ -694,13 +694,13 @@ Not applicable — no schema or data migration is part of this phase.
 
 #### Automated
 
-- [ ] 4.1 `auth-rate-limit` passes: `request-link.ts` handles both simulated rate-limit error codes with a clean redirect and mapped message
-- [ ] 4.2 `auth-errors` passes: all rate-limit error codes map to the expected user-facing message
-- [ ] 4.3 `npm run astro check` and `npm run lint` pass
+- [x] 4.1 `auth-rate-limit` passes: `request-link.ts` handles both simulated rate-limit error codes with a clean redirect and mapped message
+- [x] 4.2 `auth-errors` passes: all rate-limit error codes map to the expected user-facing message (already fully covered by Phase 3's file — no change needed)
+- [x] 4.3 `npm run astro check` and `npm run lint` pass
 
 #### Manual
 
-- [ ] 4.4 Reviewer confirms this test does not, and is not claimed to, prove a real rate limit exists anywhere
+- [x] 4.4 Reviewer confirms this test does not, and is not claimed to, prove a real rate limit exists anywhere
 
 ### Phase 5: Cookbook Update & Wrap-Up
 
