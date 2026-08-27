@@ -3,6 +3,11 @@ import { createFakeContext } from "../helpers/fake-api-context";
 import { createMockQueryClient } from "../helpers/mock-supabase-client";
 
 vi.mock("@/lib/supabase", () => ({ createClient: vi.fn() }));
+vi.mock("@/lib/ai/fairy", () => ({ generateFairyAnswer: vi.fn() }));
+
+const { createClient } = await import("@/lib/supabase");
+const { generateFairyAnswer } = await import("@/lib/ai/fairy");
+const { POST: askHandler } = await import("@/pages/api/fairy/ask");
 
 const UNSAFE_ANSWER = "Zażyj dwie tabletki przed snem, to pomoże.";
 const BENIGN_ANSWER = "Gwiazdy mówią, że czeka Cię wielka zmiana w życiu zawodowym.";
@@ -15,11 +20,7 @@ const LIKED_ANSWERS_RESPONSE = { data: [], error: null };
 
 describe("ask.ts safety-check integration", () => {
   it("discards a flagged answer, writes no fairy_responses row, and redirects cleanly", async () => {
-    vi.resetModules();
-    vi.doMock("@/lib/ai/fairy", () => ({ generateFairyAnswer: vi.fn(() => Promise.resolve(UNSAFE_ANSWER)) }));
-    const { createClient } = await import("@/lib/supabase");
-    const { POST: askHandler } = await import("@/pages/api/fairy/ask");
-
+    vi.mocked(generateFairyAnswer).mockResolvedValueOnce(UNSAFE_ANSWER);
     const { client, calls, consumedResponseCount } = createMockQueryClient([PROFILE_RESPONSE, LIKED_ANSWERS_RESPONSE]);
     vi.mocked(createClient).mockReturnValue(client as never);
 
@@ -35,11 +36,7 @@ describe("ask.ts safety-check integration", () => {
   });
 
   it("persists and redirects normally when the answer is benign", async () => {
-    vi.resetModules();
-    vi.doMock("@/lib/ai/fairy", () => ({ generateFairyAnswer: vi.fn(() => Promise.resolve(BENIGN_ANSWER)) }));
-    const { createClient } = await import("@/lib/supabase");
-    const { POST: askHandler } = await import("@/pages/api/fairy/ask");
-
+    vi.mocked(generateFairyAnswer).mockResolvedValueOnce(BENIGN_ANSWER);
     const { client, calls, consumedResponseCount } = createMockQueryClient([
       PROFILE_RESPONSE,
       LIKED_ANSWERS_RESPONSE,
