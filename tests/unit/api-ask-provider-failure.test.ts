@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { createFakeContext } from "../helpers/fake-api-context";
 import { createMockQueryClient } from "../helpers/mock-supabase-client";
 import { stubOpenRouterFetch } from "../helpers/mock-openrouter-fetch";
@@ -13,10 +13,6 @@ const GENERIC_ERROR_MESSAGE = "Wróżka nie mogła odpowiedzieć. Spróbuj ponow
 
 const PROFILE_RESPONSE = { data: { name: "Ala", birth_date: "1990-01-01", about_me: null }, error: null };
 const LIKED_ANSWERS_RESPONSE = { data: [], error: null };
-
-afterEach(() => {
-  vi.unstubAllGlobals();
-});
 
 describe("ask.ts AI-provider failure handling", () => {
   it("writes no fairy_responses row and redirects cleanly on a non-OK OpenRouter response", async () => {
