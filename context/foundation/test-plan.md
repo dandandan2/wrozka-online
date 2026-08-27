@@ -80,7 +80,7 @@ orchestrator updates Status as artifacts appear on disk.
 |---|---|---|---|---|---|---|
 | 1 | Critical-path security & auth | Prove data isolation and auth-flow correctness hold; bootstrap Vitest | #1, #2, #6 | unit + integration | complete | `context/changes/testing-critical-path-security-auth/` |
 | 2 | Fairy-loop business-rule integrity | Prove delete/style-pool consistency and AI-failure handling don't silently corrupt state | #4, #5, #7 | integration + unit | complete | `context/changes/testing-fairy-loop-business-rules/` |
-| 3 | AI-native safety review | Prove disclaimer/safety framing holds under adversarial-shaped questions | #3 | AI-native (LLM-judge) | not started | — |
+| 3 | AI-native safety review | Prove disclaimer/safety framing holds under adversarial-shaped questions | #3 | pattern-based (hermetic) | complete | `context/changes/testing-ai-native-safety-review/` |
 | 4 | Quality-gates wiring | Lock unit+integration into CI as a required gate alongside existing lint/build | cross-cutting | gates | not started | — |
 
 **Status vocabulary** (fixed): `not started` → `change opened` → `researched` → `planned` → `implementing` → `complete`.
@@ -96,7 +96,7 @@ date so future readers can see which lines need re-verification.
 | API mocking | MSW (or native `fetch` mock for the OpenRouter edge) | none yet — see Phase 2 | Mock only the external OpenRouter HTTP boundary; never mock internal `src/lib/` modules |
 | e2e | Playwright | none yet — see Phase 1 (only if a risk needs full deployed shape) | Reserve for auth/session flows crossing cookies + Cloudflare middleware |
 | accessibility | none planned | — | Out of scope for this rollout — not raised by PRD, interview, or hot-spots |
-| (optional) AI-native | LLM-as-judge script (checked: 2026-08-27) | n/a | When NOT to use: never for deterministic assertions (data isolation, delete-cascade, error handling) — only for judging freeform generated text against a safety rubric |
+| (optional) AI-native | Deterministic pattern-based safety checker (checked: 2026-08-27) | n/a | Phase 3 chose a hermetic keyword/regex checker over an LLM-as-judge script — no live LLM call runs anywhere in this test suite, by explicit decision. See §6.6 Phase 3 note. |
 
 **Environment constraint (learned during Phase 1 implementation, 2026-08-27):**
 This project's dev/CI environment has no Docker, so `supabase start` cannot
@@ -126,7 +126,7 @@ phase lands; before that, the gate is `planned`.
 | lint + typecheck | local + CI | required (already wired) | syntactic / type drift |
 | unit + integration | local + CI | required after §3 Phase 1 | logic and data-isolation regressions |
 | e2e on critical flows | CI on PR | required after §3 Phase 1 (auth flow only) | broken login/session path |
-| AI-native safety review | CI on PR (selective) | required after §3 Phase 3 | disclaimer/safety-framing regressions in generated content |
+| AI-native safety review | local + CI (part of the normal unit+integration gate) | required after §3 Phase 3 | concrete medical/financial/legal recommendations reaching the user in a generated fairy answer |
 | post-edit hook | local (agent loop) | out of scope this lesson | configured in Module 3 Lesson 3 |
 | pre-prod smoke | between merge + prod | optional | environment-specific failures (Cloudflare Workers) |
 
@@ -193,7 +193,20 @@ every `.eq(...)` call filtering `profiles`/`fairy_responses` uses
 
 ### 6.5 Adding an AI-native safety check
 
-- TBD — see §3 Phase 3 for the LLM-judge pattern on generated fairy responses.
+Phase 3 shipped a deterministic, pattern-based checker rather than an
+LLM-as-judge script — no test in this suite makes a live LLM call. Add new
+unsafe-content categories or fixtures directly to `src/lib/ai/safety-checker.ts`
+(keyword/regex patterns, one category array per concern) and
+`tests/unit/safety-checker.test.ts` (fixture table: unsafe examples per
+category plus benign topic-adjacent examples that must NOT be flagged, to
+guard against false positives). To test that a checker verdict actually
+changes handler behavior (not just the checker's own logic), mock
+`@/lib/ai/fairy`'s `generateFairyAnswer` to resolve with a canned flagged or
+benign string and assert on the handler's DB-write/redirect behavior — see
+`tests/unit/api-ask-safety-check.test.ts`. Note: JS's default `\b`/`\w` are
+ASCII-only and silently fail to match Polish words ending in diacritics
+(e.g. "weź", "złóż") — new patterns must use the Unicode-aware boundary
+helpers already defined at the top of `safety-checker.ts`, not bare `\b`.
 
 ### 6.6 Per-rollout-phase notes
 
@@ -206,6 +219,21 @@ sentinel-exclusion technique rather than a live delete→ask sequence — see
 `context/changes/testing-fairy-loop-business-rules/plan.md` Phase 2 for
 why), `tests/unit/api-profile-about-me-length.test.ts` (#7, boundary-tests
 exactly 500 vs. 501 characters). New helper: `tests/helpers/mock-openrouter-fetch.ts`.
+
+**Phase 3 (AI-native safety review, 2026-08-27):** research found Risk #3
+genuinely unmitigated — unlike Phase 2, this phase added real production
+code, not just tests. New module: `src/lib/ai/safety-checker.ts` (a
+deterministic pattern-based checker for concrete medical/financial/legal
+recommendations, wired into `src/pages/api/fairy/ask.ts` — a flagged answer
+is discarded and never reaches `fairy_responses` or the user). New test
+files: `tests/unit/safety-checker.test.ts` (fixture table, checker logic in
+isolation) and `tests/unit/api-ask-safety-check.test.ts` (integration:
+`ask.ts` actually acts on a flagged verdict). No live LLM call is made
+anywhere — the original "LLM-as-judge" idea in this plan's §4/§5 was
+replaced with a hermetic approach by explicit decision during planning.
+Known limitation, accepted by design: keyword/pattern matching has false
+negatives (a cleverly-phrased recommendation it misses) — this is
+defense-in-depth alongside the system prompt, not a complete guarantee.
 
 ## 7. What We Deliberately Don't Test
 

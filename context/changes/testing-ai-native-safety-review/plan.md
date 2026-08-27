@@ -246,24 +246,24 @@ Not applicable — no schema or data changes in this phase.
 
 #### Automated
 
-- [x] 3.1 New test file passes: `npx vitest run tests/unit/safety-checker.test.ts`
-- [x] 3.2 Full suite passes: `npm test`
-- [x] 3.3 Type checking passes: `npm run astro check`
-- [x] 3.4 Linting passes: `npm run lint`
+- [x] 3.1 New test file passes: `npx vitest run tests/unit/safety-checker.test.ts` — aa2cbf0
+- [x] 3.2 Full suite passes: `npm test` — aa2cbf0
+- [x] 3.3 Type checking passes: `npm run astro check` — aa2cbf0
+- [x] 3.4 Linting passes: `npm run lint` — aa2cbf0
 
 #### Manual
 
-- [x] 3.5 Confirm each unsafe fixture is a realistic concrete recommendation and each benign fixture is a realistic in-character fairy answer
+- [x] 3.5 Confirm each unsafe fixture is a realistic concrete recommendation and each benign fixture is a realistic in-character fairy answer — aa2cbf0
 
 ### Phase 4: ask.ts Integration Test + Docs Wrap-Up
 
 #### Automated
 
-- [ ] 4.1 New test file passes: `npx vitest run tests/unit/api-ask-safety-check.test.ts`
-- [ ] 4.2 Full suite passes: `npm test`
-- [ ] 4.3 Type checking passes: `npm run astro check`
-- [ ] 4.4 Linting passes: `npm run lint`
+- [x] 4.1 New test file passes: `npx vitest run tests/unit/api-ask-safety-check.test.ts`
+- [x] 4.2 Full suite passes: `npm test`
+- [x] 4.3 Type checking passes: `npm run astro check`
+- [x] 4.4 Linting passes: `npm run lint`
 
 #### Manual
 
-- [ ] 4.5 A reader unfamiliar with this phase can follow §6.5 and the corrected §4/§5 wording without additional context
+- [x] 4.5 A reader unfamiliar with this phase can follow §6.5 and the corrected §4/§5 wording without additional context
