@@ -254,27 +254,27 @@ Not applicable — no schema or data changes in this phase.
 
 #### Automated
 
-- [x] 1.1 New test file passes: `npx vitest run tests/unit/api-ask-provider-failure.test.ts`
-- [x] 1.2 Full suite passes: `npm test`
-- [x] 1.3 Type checking passes: `npm run astro check`
-- [x] 1.4 Linting passes: `npm run lint`
+- [x] 1.1 New test file passes: `npx vitest run tests/unit/api-ask-provider-failure.test.ts` — 8911804
+- [x] 1.2 Full suite passes: `npm test` — 8911804
+- [x] 1.3 Type checking passes: `npm run astro check` — 8911804
+- [x] 1.4 Linting passes: `npm run lint` — 8911804
 
 #### Manual
 
-- [x] 1.5 Confirm the four test cases are not vacuously true (would fail if ordering were reversed)
+- [x] 1.5 Confirm the four test cases are not vacuously true (would fail if ordering were reversed) — 8911804
 
 ### Phase 2: Risk #4 — Delete/Style-Pool Exclusion Wiring Test
 
 #### Automated
 
-- [ ] 2.1 New test file passes: `npx vitest run tests/unit/api-fairy-delete-style-pool.test.ts`
-- [ ] 2.2 Full suite passes: `npm test`
-- [ ] 2.3 Type checking passes: `npm run astro check`
-- [ ] 2.4 Linting passes: `npm run lint`
+- [x] 2.1 New test file passes: `npx vitest run tests/unit/api-fairy-delete-style-pool.test.ts`
+- [x] 2.2 Full suite passes: `npm test`
+- [x] 2.3 Type checking passes: `npm run astro check`
+- [x] 2.4 Linting passes: `npm run lint`
 
 #### Manual
 
-- [ ] 2.5 Confirm the test would fail if the `liked` filter or sentinel-exclusion were broken
+- [x] 2.5 Confirm the test would fail if the `liked` filter or sentinel-exclusion were broken
 
 ### Phase 3: Risk #7 — `about_me` Length Boundary Test
 
