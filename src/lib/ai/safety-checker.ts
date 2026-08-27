@@ -5,22 +5,49 @@ export interface FairyAnswerSafetyVerdict {
   category?: FairyAnswerSafetyCategory;
 }
 
+// JS's default \b/\w are ASCII-only, so a Polish word ending in a diacritic
+// (e.g. "weź", "złóż") sits right at a \b that never fires. These helpers
+// build word boundaries against \p{L}/\p{N} instead, so every pattern below
+// must use the "u" flag.
+const LEFT_BOUND = String.raw`(?<![\p{L}\p{N}_])`;
+const RIGHT_BOUND = String.raw`(?![\p{L}\p{N}_])`;
+
+function wordGroup(stems: string[]): string {
+  return `${LEFT_BOUND}(?:${stems.join("|")})\\p{L}*`;
+}
+
+function word(stem: string): string {
+  return `${LEFT_BOUND}${stem}\\p{L}*${RIGHT_BOUND}`;
+}
+
 // Concrete-recommendation patterns only — a bare topic mention (e.g. "zdrowie",
 // "pieniądze") must never match on its own, since the fairy's whole premise is
 // talking about life, money, and relationships in a magical register.
 const MEDICAL_PATTERNS: RegExp[] = [
-  /\b(weź|zażyj|przyjmij|bierz)\b[^.!?\n]{0,30}\b(\d+\s?(mg|ml|mcg|g)\b|tabletk\w*|dawk\w*)/i,
-  /\b(odstaw|przestań brać|zwiększ dawkę|zmniejsz dawkę|zmień dawkowanie)\b/i,
+  new RegExp(
+    `${wordGroup(["weź", "weźmi", "zaży", "przyjmij", "przyjmuj", "bierz"])}[^.!?\\n]{0,30}` +
+      `(?:${LEFT_BOUND}\\d+\\s?(?:mg|ml|mcg|g)${RIGHT_BOUND}|${word("tabletk")}|${word("dawk")})`,
+    "iu",
+  ),
+  new RegExp(
+    wordGroup(["odstaw", "przestań brać", "zwiększ dawk", "zmniejsz dawk", "zmień dawkowani"]) + RIGHT_BOUND,
+    "iu",
+  ),
 ];
 
 const FINANCIAL_PATTERNS: RegExp[] = [
-  /\b(kup|sprzedaj|zainwestuj)\b[^.!?\n]{0,30}\b(akcj\w*|obligacj\w*|kryptowalut\w*|fundusz\w*|bitcoin\w*|ethereum\w*)/i,
-  /\bzaci[ąa]gnij\b[^.!?\n]{0,20}\b(kredyt\w*|pożyczk\w*)/i,
+  new RegExp(
+    `${wordGroup(["kup", "sprzedaj", "zainwestuj"])}[^.!?\\n]{0,30}` +
+      wordGroup(["akcj", "obligacj", "kryptowalut", "fundusz", "bitcoin", "ethereum"]) +
+      RIGHT_BOUND,
+    "iu",
+  ),
+  new RegExp(`${word("zaciągnij")}[^.!?\\n]{0,20}${wordGroup(["kredyt", "pożyczk"])}${RIGHT_BOUND}`, "iu"),
 ];
 
 const LEGAL_PATTERNS: RegExp[] = [
-  /\b(podpisz|zerwij)\b[^.!?\n]{0,20}\bumow\w*/i,
-  /\bzłóż\b[^.!?\n]{0,20}\bpozew\b/i,
+  new RegExp(`${wordGroup(["podpisz", "zerwij"])}[^.!?\\n]{0,20}${word("umow")}`, "iu"),
+  new RegExp(`${word("złóż")}[^.!?\\n]{0,20}${word("pozew")}`, "iu"),
   /\bart\.\s?\d+/i,
   /§\s?\d+/,
 ];

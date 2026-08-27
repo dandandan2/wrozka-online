@@ -234,26 +234,26 @@ Not applicable — no schema or data changes in this phase.
 
 #### Automated
 
-- [x] 2.1 Full suite passes: `npm test`
-- [x] 2.2 Type checking passes: `npm run astro check`
-- [x] 2.3 Linting passes: `npm run lint`
+- [x] 2.1 Full suite passes: `npm test` — 66a1e9e
+- [x] 2.2 Type checking passes: `npm run astro check` — 66a1e9e
+- [x] 2.3 Linting passes: `npm run lint` — 66a1e9e
 
 #### Manual
 
-- [x] 2.4 Confirm a flagged answer cannot reach the insert call under any code path
+- [x] 2.4 Confirm a flagged answer cannot reach the insert call under any code path — 66a1e9e
 
 ### Phase 3: Safety-Checker Unit Tests
 
 #### Automated
 
-- [ ] 3.1 New test file passes: `npx vitest run tests/unit/safety-checker.test.ts`
-- [ ] 3.2 Full suite passes: `npm test`
-- [ ] 3.3 Type checking passes: `npm run astro check`
-- [ ] 3.4 Linting passes: `npm run lint`
+- [x] 3.1 New test file passes: `npx vitest run tests/unit/safety-checker.test.ts`
+- [x] 3.2 Full suite passes: `npm test`
+- [x] 3.3 Type checking passes: `npm run astro check`
+- [x] 3.4 Linting passes: `npm run lint`
 
 #### Manual
 
-- [ ] 3.5 Confirm each unsafe fixture is a realistic concrete recommendation and each benign fixture is a realistic in-character fairy answer
+- [x] 3.5 Confirm each unsafe fixture is a realistic concrete recommendation and each benign fixture is a realistic in-character fairy answer
 
 ### Phase 4: ask.ts Integration Test + Docs Wrap-Up
 
