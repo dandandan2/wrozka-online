@@ -30,3 +30,8 @@ pnpm-debug.log*
 
 # claude code local skills/config
 .claude/
+
+# playwright
+test-results/
+playwright-report/
+.playwright-cli/
