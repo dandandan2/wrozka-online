@@ -711,18 +711,18 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Automated
 
-- [x] 3.1 Build succeeds and all 22 SVGs land in `dist/tarot/` (actual path: `dist/client/tarot/` — server-mode Astro/Cloudflare build, not static output; plan's assumed path was slightly off)
+- [x] 3.1 Build succeeds and all 22 SVGs land in `dist/tarot/` (actual path: `dist/client/tarot/` — server-mode Astro/Cloudflare build, not static output; plan's assumed path was slightly off) — 39ecb8e
 
 #### Manual
 
-- [x] 3.2 Visually spot-check card illustrations for legibility/consistency
+- [x] 3.2 Visually spot-check card illustrations for legibility/consistency — 39ecb8e
 
 ### Phase 4: API Routes
 
 #### Automated
 
-- [ ] 4.1 Type checking passes
-- [ ] 4.2 Route-level tests pass
+- [x] 4.1 Type checking passes
+- [x] 4.2 Route-level tests pass
 
 #### Manual
 
