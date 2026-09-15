@@ -1,5 +1,5 @@
 import { OPENROUTER_API_KEY } from "astro:env/server";
-import { MAX_TOKENS, OPENROUTER_MODEL, REQUEST_TIMEOUT_MS } from "./fairy";
+import { MAX_TOKENS, OPENROUTER_MODEL, REQUEST_TIMEOUT_MS } from "./openrouter-config";
 import { describeProfile, describeStyleReference, type FairyProfile } from "./profile";
 import type { TarotCard, TarotOrientation } from "@/lib/tarot/cards";
 

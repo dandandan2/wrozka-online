@@ -36,6 +36,8 @@ interface HistoryEntry {
   orientation?: "upright" | "reversed";
 }
 
+const HISTORY_ROW_LIMIT = 100;
+
 const { user } = Astro.locals;
 const error = Astro.url.searchParams.get("error");
 
@@ -49,6 +51,7 @@ const fairyRows: FairyResponseRow[] =
           .select("id, question, answer, liked, created_at")
           .eq("user_id", user.id)
           .order("created_at", { ascending: false })
+          .limit(HISTORY_ROW_LIMIT)
       ).data ?? [])
     : [];
 
@@ -60,6 +63,7 @@ const tarotRows: TarotReadingRow[] =
           .select("id, question, card_key, orientation, answer, liked, created_at")
           .eq("user_id", user.id)
           .order("created_at", { ascending: false })
+          .limit(HISTORY_ROW_LIMIT)
       ).data ?? [])
     : [];
 

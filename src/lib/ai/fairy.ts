@@ -1,9 +1,6 @@
 import { OPENROUTER_API_KEY } from "astro:env/server";
 import { describeProfile, describeStyleReference, type FairyProfile } from "./profile";
-
-export const OPENROUTER_MODEL = "minimax/minimax-m3:free";
-export const MAX_TOKENS = 400;
-export const REQUEST_TIMEOUT_MS = 15_000;
+import { MAX_TOKENS, OPENROUTER_MODEL, REQUEST_TIMEOUT_MS } from "./openrouter-config";
 
 export type { FairyProfile };
 
