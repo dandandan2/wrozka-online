@@ -766,4 +766,4 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Automated
 
-- [x] 8.1 E2E suite passes (auth-guard extension only — happy-path draw spec deliberately not built; no real Supabase test credentials exist in this project's CI/dev environment, same constraint documented in `test-plan.md` §4 for the magic-link scenario. Exclusion recorded in `test-plan.md` §7.)
+- [x] 8.1 E2E suite passes (auth-guard extension only — happy-path draw spec deliberately not built; no real Supabase test credentials exist in this project's CI/dev environment, same constraint documented in `test-plan.md` §4 for the magic-link scenario. Exclusion recorded in `test-plan.md` §7.) — 909ffee
