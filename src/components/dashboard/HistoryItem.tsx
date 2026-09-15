@@ -4,13 +4,20 @@ import { cn } from "@/lib/utils";
 
 interface Props {
   id: string;
-  question: string;
+  type: "fairy" | "tarot";
+  question: string | null;
   answer: string;
   liked: boolean;
   createdAt: string;
+  cardName?: string;
+  orientation?: "upright" | "reversed";
 }
 
-export default function HistoryItem({ id, question, answer, liked, createdAt }: Props) {
+export default function HistoryItem({ id, type, question, answer, liked, createdAt, cardName, orientation }: Props) {
+  const likeAction = type === "fairy" ? "/api/fairy/like" : "/api/tarot/like";
+  const deleteAction = type === "fairy" ? "/api/fairy/delete" : "/api/tarot/delete";
+  const orientationLabel = orientation === "upright" ? "Prosto" : orientation === "reversed" ? "Odwrócona" : null;
+
   function handleDeleteSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     if (!window.confirm("Usunąć ten wpis na stałe? Tej operacji nie można cofnąć.")) {
       e.preventDefault();
@@ -19,20 +26,41 @@ export default function HistoryItem({ id, question, answer, liked, createdAt }: 
 
   return (
     <div className="space-y-3 rounded-[1.75rem] border border-[#d9b877]/12 bg-white/[0.025] p-5 text-left shadow-[inset_0_1px_1px_rgba(244,232,204,0.05)]">
-      <p className="text-xs text-[#e9ddc4]/35">
-        {new Date(createdAt).toLocaleString("pl-PL", { dateStyle: "medium", timeStyle: "short" })}
-      </p>
-      <div>
-        <p className="text-xs tracking-wide text-[#dcb877]/60 uppercase">Twoje pytanie</p>
-        <p className="mt-1 text-sm text-[#e9ddc4]/75">{question}</p>
+      <div className="flex items-center justify-between">
+        <p className="text-xs text-[#e9ddc4]/35">
+          {new Date(createdAt).toLocaleString("pl-PL", { dateStyle: "medium", timeStyle: "short" })}
+        </p>
+        <span className="rounded-full border border-[#d9b877]/15 bg-white/[0.03] px-2.5 py-1 text-[10px] tracking-wide text-[#dcb877]/70 uppercase">
+          {type === "fairy" ? "Wróżka" : "Tarot"}
+        </span>
       </div>
+
+      {type === "tarot" && cardName && (
+        <div>
+          <p className="text-xs tracking-wide text-[#dcb877]/60 uppercase">Wylosowana karta</p>
+          <p className="mt-1 text-sm text-[#f4e8cc]">
+            {cardName} {orientationLabel && <span className="text-[#e9ddc4]/60">({orientationLabel})</span>}
+          </p>
+        </div>
+      )}
+
+      {question && (
+        <div>
+          <p className="text-xs tracking-wide text-[#dcb877]/60 uppercase">
+            {type === "fairy" ? "Twoje pytanie" : "Twoje pytanie do kart"}
+          </p>
+          <p className="mt-1 text-sm text-[#e9ddc4]/75">{question}</p>
+        </div>
+      )}
       <div>
-        <p className="text-xs tracking-wide text-[#dcb877]/60 uppercase">Odpowiedź wróżki</p>
+        <p className="text-xs tracking-wide text-[#dcb877]/60 uppercase">
+          {type === "fairy" ? "Odpowiedź wróżki" : "Znaczenie karty"}
+        </p>
         <p className="mt-1 whitespace-pre-wrap text-[#f4e8cc]">{answer}</p>
       </div>
 
       <div className="flex items-center gap-2">
-        <form method="POST" action="/api/fairy/like">
+        <form method="POST" action={likeAction}>
           <input type="hidden" name="id" value={id} />
           <input type="hidden" name="redirect_to" value="/dashboard/history" />
           <button
@@ -49,7 +77,7 @@ export default function HistoryItem({ id, question, answer, liked, createdAt }: 
           </button>
         </form>
 
-        <form method="POST" action="/api/fairy/delete" onSubmit={handleDeleteSubmit}>
+        <form method="POST" action={deleteAction} onSubmit={handleDeleteSubmit}>
           <input type="hidden" name="id" value={id} />
           <button
             type="submit"

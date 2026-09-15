@@ -705,7 +705,7 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Manual
 
-- [x] 2.3 Manually invoke `generateTarotReading` and confirm output quality/safety (exercised via `/dashboard/tarot` in Phase 5, confirmed)
+- [x] 2.3 Manually invoke `generateTarotReading` and confirm output quality/safety (exercised via `/dashboard/tarot` in Phase 5, confirmed) — 67fe44b
 
 ### Phase 3: Card Illustrations
 
@@ -726,35 +726,35 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Manual
 
-- [x] 4.3 Confirm `POST /api/tarot/draw` inserts the expected row via the UI (confirmed in Phase 5)
-- [x] 4.4 Confirm unauthenticated POSTs redirect to `/auth/signin` (confirmed in Phase 5)
+- [x] 4.3 Confirm `POST /api/tarot/draw` inserts the expected row via the UI (confirmed in Phase 5) — 67fe44b
+- [x] 4.4 Confirm unauthenticated POSTs redirect to `/auth/signin` (confirmed in Phase 5) — 67fe44b
 
 ### Phase 5: Mode-Selector & Tarot UI
 
 #### Automated
 
-- [x] 5.1 Type checking passes
-- [x] 5.2 Linting passes
-- [x] 5.3 Full test suite passes
+- [x] 5.1 Type checking passes — 67fe44b
+- [x] 5.2 Linting passes — 67fe44b
+- [x] 5.3 Full test suite passes — 67fe44b
 
 #### Manual
 
-- [x] 5.4 `/dashboard` shows two mode cards for a complete profile
-- [x] 5.5 `/dashboard/fairy` reproduces the pre-existing ask-flow exactly
-- [x] 5.6 `/dashboard/tarot` works with and without a question
-- [x] 5.7 Nav shows all four destinations correctly on desktop and mobile
+- [x] 5.4 `/dashboard` shows two mode cards for a complete profile — 67fe44b
+- [x] 5.5 `/dashboard/fairy` reproduces the pre-existing ask-flow exactly — 67fe44b
+- [x] 5.6 `/dashboard/tarot` works with and without a question — 67fe44b
+- [x] 5.7 Nav shows all four destinations correctly on desktop and mobile — 67fe44b
 
 ### Phase 6: History Integration
 
 #### Automated
 
-- [ ] 6.1 Type checking passes
-- [ ] 6.2 Full test suite passes
+- [x] 6.1 Type checking passes
+- [x] 6.2 Full test suite passes
 
 #### Manual
 
-- [ ] 6.3 History shows interleaved, labeled fairy and tarot entries
-- [ ] 6.4 Like/delete work for tarot entries from the history page
+- [x] 6.3 History shows interleaved, labeled fairy and tarot entries
+- [x] 6.4 Like/delete work for tarot entries from the history page
 
 ### Phase 7: Docs Sync
 
