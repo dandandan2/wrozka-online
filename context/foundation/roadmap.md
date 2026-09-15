@@ -3,7 +3,7 @@ project: "Wróżbita Online"
 version: 1
 status: draft
 created: 2026-08-25
-updated: 2026-08-26
+updated: 2026-09-15
 prd_version: 1
 main_goal: market-feedback
 top_blocker: decisions
@@ -240,8 +240,6 @@ odtwarzają tego od nowa.
   darmowa na start, monetyzacja to temat na później.
 - **Wiele person/wróżek do wyboru** — Why parked: PRD §Non-Goals — MVP ma
   jedną, spójną postać wróżki.
-- **Dodatkowe metody wróżenia (tarot, karty, runy)** — Why parked: PRD
-  §Non-Goals — MVP opiera się wyłącznie na tekstowej odpowiedzi.
 - **Udostępnianie wróżb innym użytkownikom (social sharing)** — Why parked:
   PRD §Non-Goals — wróżby pozostają prywatne.
 - **Offline / natywna aplikacja mobilna** — Why parked: PRD §Non-Goals —

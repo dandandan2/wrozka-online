@@ -140,8 +140,6 @@ własnego profilu i własnej historii wróżb. Brak ról administracyjnych w MVP
   monetyzacja to temat na później.
 - Brak wielu person/wróżek do wyboru — MVP ma jedną, spójną postać wróżki,
   bez wyboru charakteru czy stylu innej postaci.
-- Brak dodatkowych metod wróżenia (np. tarot, karty, runy) — MVP opiera się
-  wyłącznie na tekstowej odpowiedzi generowanej na podstawie pytania.
 - Brak udostępniania wróżb innym użytkownikom (social sharing) — wróżby
   pozostają prywatne, bez publikowania czy udostępniania publicznie.
 - Brak gwarancji offline / natywnej aplikacji mobilnej — MVP działa wyłącznie

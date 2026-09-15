@@ -748,19 +748,19 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Automated
 
-- [x] 6.1 Type checking passes
-- [x] 6.2 Full test suite passes
+- [x] 6.1 Type checking passes — f4e93ab
+- [x] 6.2 Full test suite passes — f4e93ab
 
 #### Manual
 
-- [x] 6.3 History shows interleaved, labeled fairy and tarot entries
-- [x] 6.4 Like/delete work for tarot entries from the history page
+- [x] 6.3 History shows interleaved, labeled fairy and tarot entries — f4e93ab
+- [x] 6.4 Like/delete work for tarot entries from the history page — f4e93ab
 
 ### Phase 7: Docs Sync
 
 #### Manual
 
-- [ ] 7.1 PRD Non-Goals and roadmap Parked no longer exclude tarot
+- [x] 7.1 PRD Non-Goals and roadmap Parked no longer exclude tarot
 
 ### Phase 8: E2E Testing
 
