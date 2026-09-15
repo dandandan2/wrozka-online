@@ -17,5 +17,17 @@ test("unauthenticated visitor is redirected to sign-in from every /dashboard sub
   await page.waitForURL("**/auth/signin");
   await expect(page.getByRole("heading", { name: "Zaloguj się" })).toBeVisible();
 
+  // Added for the tarot-reading change: /dashboard/fairy and /dashboard/tarot are new
+  // subroutes (dashboard.astro became a mode chooser; the ask-flow relocated to
+  // /dashboard/fairy and the tarot flow lives at /dashboard/tarot) that must inherit
+  // src/middleware.ts's prefix-matched guard the same way the routes above already do.
+  await page.goto("/dashboard/fairy");
+  await page.waitForURL("**/auth/signin");
+  await expect(page.getByRole("heading", { name: "Zaloguj się" })).toBeVisible();
+
+  await page.goto("/dashboard/tarot");
+  await page.waitForURL("**/auth/signin");
+  await expect(page.getByRole("heading", { name: "Zaloguj się" })).toBeVisible();
+
   // No cleanup needed: this flow reads and redirects only, it never mutates state.
 });

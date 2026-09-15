@@ -760,10 +760,10 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Manual
 
-- [x] 7.1 PRD Non-Goals and roadmap Parked no longer exclude tarot
+- [x] 7.1 PRD Non-Goals and roadmap Parked no longer exclude tarot — 9757f63
 
 ### Phase 8: E2E Testing
 
 #### Automated
 
-- [ ] 8.1 E2E suite passes
+- [x] 8.1 E2E suite passes (auth-guard extension only — happy-path draw spec deliberately not built; no real Supabase test credentials exist in this project's CI/dev environment, same constraint documented in `test-plan.md` §4 for the magic-link scenario. Exclusion recorded in `test-plan.md` §7.)
