@@ -1,0 +1,106 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Topbar from "@/components/Topbar.astro";
+import TarotForm from "@/components/dashboard/TarotForm";
+import TarotResult from "@/components/dashboard/TarotResult";
+import { createClient } from "@/lib/supabase";
+import { MAJOR_ARCANA } from "@/lib/tarot/cards";
+
+interface ProfileRow {
+  name: string | null;
+  birth_date: string | null;
+}
+
+interface TarotReadingRow {
+  id: string;
+  question: string | null;
+  card_key: string;
+  orientation: "upright" | "reversed";
+  answer: string;
+  liked: boolean;
+}
+
+const { user } = Astro.locals;
+const error = Astro.url.searchParams.get("error");
+const readingId = Astro.url.searchParams.get("reading");
+
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+
+const profile: ProfileRow | null =
+  supabase && user
+    ? (await supabase.from("profiles").select("name, birth_date").eq("id", user.id).single()).data
+    : null;
+
+const hasCompleteProfile = Boolean(profile?.name && profile.birth_date);
+
+const latestReading: TarotReadingRow | null =
+  supabase && readingId && user
+    ? (
+        await supabase
+          .from("tarot_readings")
+          .select("id, question, card_key, orientation, answer, liked")
+          .eq("id", readingId)
+          .eq("user_id", user.id)
+          .single()
+      ).data
+    : null;
+
+const latestReadingCardName = latestReading
+  ? (MAJOR_ARCANA.find((card) => card.key === latestReading.card_key)?.name ?? latestReading.card_key)
+  : null;
+---
+
+<Layout title="Tarot">
+  <div class="bg-cosmic relative min-h-screen w-full overflow-hidden">
+    <div
+      class="pointer-events-none absolute top-0 -right-24 h-[300px] w-[300px] rounded-full bg-[#c9a668]/15 blur-[120px]"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute bottom-0 -left-24 h-[260px] w-[260px] rounded-full bg-[#8b3a3a]/10 blur-[110px]"
+    >
+    </div>
+
+    <div class="relative z-10 flex min-h-screen flex-col p-4">
+      <Topbar />
+      <div class="mx-auto w-full max-w-lg flex-1 py-10">
+        <div class="mb-8 text-center sm:text-left">
+          <h1 class="font-display text-gilded text-3xl font-medium">Wróżba z tarota</h1>
+          <p class="mt-1 text-[#e9ddc4]/60">
+            Witaj, <span class="font-semibold text-[#f4e8cc]">{user?.email}</span>
+          </p>
+        </div>
+
+        {
+          !hasCompleteProfile ? (
+            <div class="rounded-[2rem] border border-[#d9b877]/15 bg-white/[0.03] p-8 text-center shadow-[inset_0_1px_1px_rgba(244,232,204,0.06)] backdrop-blur-2xl">
+              <p class="text-[#e9ddc4]/75">Zanim wylosujesz kartę, uzupełnij swój profil.</p>
+              <a
+                href="/dashboard/profile"
+                class="mt-4 inline-block rounded-full bg-gradient-to-b from-[#e8cf9c] to-[#c9a668] px-5 py-2 font-medium text-[#1c1408] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:brightness-105 active:scale-[0.98]"
+              >
+                Uzupełnij profil
+              </a>
+            </div>
+          ) : (
+            <div class="rounded-[2rem] border border-[#d9b877]/15 bg-white/[0.03] p-8 shadow-[inset_0_1px_1px_rgba(244,232,204,0.06)] backdrop-blur-2xl">
+              <TarotForm serverError={error} client:load />
+              {latestReading && latestReadingCardName && (
+                <TarotResult
+                  id={latestReading.id}
+                  cardKey={latestReading.card_key}
+                  cardName={latestReadingCardName}
+                  orientation={latestReading.orientation}
+                  question={latestReading.question}
+                  answer={latestReading.answer}
+                  liked={latestReading.liked}
+                  client:load
+                />
+              )}
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</Layout>

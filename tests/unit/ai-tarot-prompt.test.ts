@@ -6,6 +6,10 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
+interface OpenRouterRequestBody {
+  messages: { role: string; content: string }[];
+}
+
 function stubFetchCapturingBody(answer = "mock reading") {
   const fetchMock = vi.fn((_url: string, _init: RequestInit) =>
     Promise.resolve(new Response(JSON.stringify({ choices: [{ message: { content: answer } }] }), { status: 200 })),
@@ -14,8 +18,17 @@ function stubFetchCapturingBody(answer = "mock reading") {
   return fetchMock;
 }
 
+function userMessageFrom(fetchMock: ReturnType<typeof stubFetchCapturingBody>): string {
+  const call = fetchMock.mock.calls[0];
+  const body = JSON.parse(call[1].body as string) as OpenRouterRequestBody;
+  const userMessage = body.messages.find((m) => m.role === "user");
+  if (!userMessage) throw new Error("expected a user message in the request body");
+  return userMessage.content;
+}
+
 const PROFILE = { name: "Ala", birthDate: "1990-01-01", aboutMe: "Lubię koty" };
-const CARD = MAJOR_ARCANA.find((card) => card.key === "the-fool")!;
+const CARD = MAJOR_ARCANA.find((card) => card.key === "the-fool");
+if (!CARD) throw new Error("expected 'the-fool' to be present in MAJOR_ARCANA");
 
 describe("generateTarotReading prompt construction", () => {
   it("includes the drawn card's name, orientation, and keywords in the request", async () => {
@@ -23,9 +36,7 @@ describe("generateTarotReading prompt construction", () => {
 
     await generateTarotReading(PROFILE, CARD, "reversed", null);
 
-    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
-    const userMessage = body.messages.find((m: { role: string }) => m.role === "user").content as string;
-
+    const userMessage = userMessageFrom(fetchMock);
     expect(userMessage).toContain(CARD.name);
     expect(userMessage).toContain("odwrócona");
     for (const keyword of CARD.keywords) {
@@ -38,9 +49,7 @@ describe("generateTarotReading prompt construction", () => {
 
     await generateTarotReading(PROFILE, CARD, "upright", null);
 
-    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
-    const userMessage = body.messages.find((m: { role: string }) => m.role === "user").content as string;
-
+    const userMessage = userMessageFrom(fetchMock);
     expect(userMessage).toContain(PROFILE.name);
     expect(userMessage).toContain(PROFILE.birthDate);
     expect(userMessage).toContain(PROFILE.aboutMe);
@@ -49,16 +58,12 @@ describe("generateTarotReading prompt construction", () => {
   it("includes the question when provided, and omits a question section when null", async () => {
     const withQuestion = stubFetchCapturingBody();
     await generateTarotReading(PROFILE, CARD, "upright", "Czy czeka mnie zmiana?");
-    const bodyWith = JSON.parse(withQuestion.mock.calls[0][1].body as string);
-    const contentWith = bodyWith.messages.find((m: { role: string }) => m.role === "user").content as string;
-    expect(contentWith).toContain("Czy czeka mnie zmiana?");
+    expect(userMessageFrom(withQuestion)).toContain("Czy czeka mnie zmiana?");
 
     vi.unstubAllGlobals();
     const withoutQuestion = stubFetchCapturingBody();
     await generateTarotReading(PROFILE, CARD, "upright", null);
-    const bodyWithout = JSON.parse(withoutQuestion.mock.calls[0][1].body as string);
-    const contentWithout = bodyWithout.messages.find((m: { role: string }) => m.role === "user").content as string;
-    expect(contentWithout).not.toContain("Pytanie użytkownika");
+    expect(userMessageFrom(withoutQuestion)).not.toContain("Pytanie użytkownika");
   });
 
   it("returns the generated content on a successful call", async () => {

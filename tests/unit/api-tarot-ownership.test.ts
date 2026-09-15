@@ -36,7 +36,11 @@ describe("draw.ts ownership filtering", () => {
     expect(eqArgsFor(calls, "user_id")).toEqual([SESSION_USER_ID]);
 
     const insertCall = calls.find((call) => call.method === "insert");
-    expect(insertCall?.args[0]).toMatchObject({ user_id: SESSION_USER_ID, card_key: "the-fool", orientation: "upright" });
+    expect(insertCall?.args[0]).toMatchObject({
+      user_id: SESSION_USER_ID,
+      card_key: "the-fool",
+      orientation: "upright",
+    });
 
     expect(consumedResponseCount()).toBe(3);
   });

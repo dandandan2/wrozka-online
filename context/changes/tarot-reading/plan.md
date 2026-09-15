@@ -705,7 +705,7 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Manual
 
-- [ ] 2.3 Manually invoke `generateTarotReading` and confirm output quality/safety
+- [x] 2.3 Manually invoke `generateTarotReading` and confirm output quality/safety (exercised via `/dashboard/tarot` in Phase 5, confirmed)
 
 ### Phase 3: Card Illustrations
 
@@ -721,28 +721,28 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Automated
 
-- [x] 4.1 Type checking passes
-- [x] 4.2 Route-level tests pass
+- [x] 4.1 Type checking passes — cbf5efd
+- [x] 4.2 Route-level tests pass — cbf5efd
 
 #### Manual
 
-- [ ] 4.3 Confirm `POST /api/tarot/draw` inserts the expected row via the UI
-- [ ] 4.4 Confirm unauthenticated POSTs redirect to `/auth/signin`
+- [x] 4.3 Confirm `POST /api/tarot/draw` inserts the expected row via the UI (confirmed in Phase 5)
+- [x] 4.4 Confirm unauthenticated POSTs redirect to `/auth/signin` (confirmed in Phase 5)
 
 ### Phase 5: Mode-Selector & Tarot UI
 
 #### Automated
 
-- [ ] 5.1 Type checking passes
-- [ ] 5.2 Linting passes
-- [ ] 5.3 Full test suite passes
+- [x] 5.1 Type checking passes
+- [x] 5.2 Linting passes
+- [x] 5.3 Full test suite passes
 
 #### Manual
 
-- [ ] 5.4 `/dashboard` shows two mode cards for a complete profile
-- [ ] 5.5 `/dashboard/fairy` reproduces the pre-existing ask-flow exactly
-- [ ] 5.6 `/dashboard/tarot` works with and without a question
-- [ ] 5.7 Nav shows all four destinations correctly on desktop and mobile
+- [x] 5.4 `/dashboard` shows two mode cards for a complete profile
+- [x] 5.5 `/dashboard/fairy` reproduces the pre-existing ask-flow exactly
+- [x] 5.6 `/dashboard/tarot` works with and without a question
+- [x] 5.7 Nav shows all four destinations correctly on desktop and mobile
 
 ### Phase 6: History Integration
 
