@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 480" role="img" aria-label="Sąd Ostateczny">
+  <defs>
+    <linearGradient id="bg-judgement" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c1408" />
+      <stop offset="100%" stop-color="#0d0a06" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="292" height="472" rx="18" fill="url(#bg-judgement)" stroke="#d9b877" stroke-opacity="0.4" stroke-width="2" />
+  <rect x="16" y="16" width="268" height="448" rx="12" fill="none" stroke="#d9b877" stroke-opacity="0.25" stroke-width="1" />
+  <text x="150" y="55" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#f4e8cc" opacity="0.85">XX</text>
+  <g stroke="#d9b877" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path d="M120 250 L120 160 L200 130 L200 190 Z" fill="none" />
+      <line x1="200" y1="150" x2="210" y2="140" />
+      <line x1="204" y1="140" x2="216" y2="128" />
+      <line x1="208" y1="130" x2="222" y2="116" />
+      <line x1="212" y1="120" x2="228" y2="104" />
+      <line x1="216" y1="110" x2="234" y2="92" />
+  </g>
+  <text x="150" y="430" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f4e8cc">Sąd Ostateczny</text>
+</svg>

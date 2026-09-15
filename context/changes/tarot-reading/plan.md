@@ -700,8 +700,8 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Automated
 
-- [x] 2.1 Type checking passes
-- [x] 2.2 Unit tests for `drawCard()` and prompt construction pass
+- [x] 2.1 Type checking passes — 0729f20
+- [x] 2.2 Unit tests for `drawCard()` and prompt construction pass — 0729f20
 
 #### Manual
 
@@ -711,11 +711,11 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Automated
 
-- [ ] 3.1 Build succeeds and all 22 SVGs land in `dist/tarot/`
+- [x] 3.1 Build succeeds and all 22 SVGs land in `dist/tarot/` (actual path: `dist/client/tarot/` — server-mode Astro/Cloudflare build, not static output; plan's assumed path was slightly off)
 
 #### Manual
 
-- [ ] 3.2 Visually spot-check card illustrations for legibility/consistency
+- [x] 3.2 Visually spot-check card illustrations for legibility/consistency
 
 ### Phase 4: API Routes
 
