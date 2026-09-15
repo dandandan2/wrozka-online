@@ -3,7 +3,7 @@ change_id: tarot-reading
 title: Let users choose between a fairy query and a new tarot reading feature
 status: implementing
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-15
 archived_at: null
 ---
 

@@ -688,20 +688,20 @@ backfill needed, safe to apply independently of any existing data.
 
 #### Automated
 
-- [x] 1.1 Migrations apply cleanly against local Supabase
-- [x] 1.2 Existing test suite still passes
+- [x] 1.1 Migrations apply cleanly against local Supabase — 7d337f8
+- [x] 1.2 Existing test suite still passes — 7d337f8
 
 #### Manual
 
-- [x] 1.3 Confirm `tarot_readings` exists with RLS enabled and four policies
-- [x] 1.4 Confirm cross-user row isolation via RLS
+- [x] 1.3 Confirm `tarot_readings` exists with RLS enabled and four policies — 7d337f8
+- [x] 1.4 Confirm cross-user row isolation via RLS — 7d337f8
 
 ### Phase 2: Card Domain Data & AI Integration
 
 #### Automated
 
-- [ ] 2.1 Type checking passes
-- [ ] 2.2 Unit tests for `drawCard()` and prompt construction pass
+- [x] 2.1 Type checking passes
+- [x] 2.2 Unit tests for `drawCard()` and prompt construction pass
 
 #### Manual
 
