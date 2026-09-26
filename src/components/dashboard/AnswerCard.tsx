@@ -27,6 +27,7 @@ export default function AnswerCard({ id, question, answer, liked }: Props) {
 
       <form method="POST" action="/api/fairy/like">
         <input type="hidden" name="id" value={id} />
+        <input type="hidden" name="redirect_to" value="/dashboard/fairy" />
         <button
           type="submit"
           className={cn(

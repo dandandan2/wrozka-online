@@ -9,7 +9,7 @@ export const POST: APIRoute = async (context) => {
 
   const supabase = createClient(context.request.headers, context.cookies);
   if (!supabase) {
-    return context.redirect(`/dashboard?error=${encodeURIComponent("Supabase is not configured")}`);
+    return context.redirect(`/dashboard/fairy?error=${encodeURIComponent("Supabase is not configured")}`);
   }
 
   const form = await context.request.formData();
@@ -18,13 +18,13 @@ export const POST: APIRoute = async (context) => {
   const fromHistory = redirectTo === "/dashboard/history";
 
   if (typeof id !== "string" || !id) {
-    return context.redirect(fromHistory ? "/dashboard/history" : "/dashboard");
+    return context.redirect(fromHistory ? "/dashboard/history" : "/dashboard/fairy");
   }
 
   const errorTarget = fromHistory
     ? `/dashboard/history?error=${encodeURIComponent("Nie udało się zaktualizować polubienia.")}`
-    : `/dashboard?response=${id}&error=${encodeURIComponent("Nie udało się zaktualizować polubienia.")}`;
-  const successTarget = fromHistory ? "/dashboard/history" : `/dashboard?response=${id}`;
+    : `/dashboard/fairy?response=${id}&error=${encodeURIComponent("Nie udało się zaktualizować polubienia.")}`;
+  const successTarget = fromHistory ? "/dashboard/history" : `/dashboard/fairy?response=${id}`;
 
   const { data: current, error: selectError } = await supabase
     .from("fairy_responses")

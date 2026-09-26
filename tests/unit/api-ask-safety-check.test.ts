@@ -15,11 +15,14 @@ const BENIGN_ANSWER = "Gwiazdy mówią, że czeka Cię wielka zmiana w życiu za
 const SESSION_USER_ID = "session-user-fff";
 const GENERIC_ERROR_MESSAGE = "Wróżka nie mogła odpowiedzieć. Spróbuj ponownie.";
 
+// The page that actually renders AskForm's serverError / the answer card.
+const ERROR_TARGET = `/dashboard/fairy?error=${encodeURIComponent(GENERIC_ERROR_MESSAGE)}`;
+
 const PROFILE_RESPONSE = { data: { name: "Ala", birth_date: "1990-01-01", about_me: null }, error: null };
 const LIKED_ANSWERS_RESPONSE = { data: [], error: null };
 
 describe("ask.ts safety-check integration", () => {
-  it("discards a flagged answer, writes no fairy_responses row, and redirects cleanly", async () => {
+  it("discards a flagged answer, writes no fairy_responses row, and redirects to the fairy page", async () => {
     vi.mocked(generateFairyAnswer).mockResolvedValueOnce(UNSAFE_ANSWER);
     const { client, calls, consumedResponseCount } = createMockQueryClient([PROFILE_RESPONSE, LIKED_ANSWERS_RESPONSE]);
     vi.mocked(createClient).mockReturnValue(client as never);
@@ -28,14 +31,15 @@ describe("ask.ts safety-check integration", () => {
       userId: SESSION_USER_ID,
       formData: { question: "Boli mnie głowa, co robić?" },
     });
-    await askHandler(context as never);
+    const response = await askHandler(context as never);
 
     expect(calls.some((call) => call.method === "insert")).toBe(false);
-    expect(redirects[0]).toContain(encodeURIComponent(GENERIC_ERROR_MESSAGE));
+    expect(response.headers.get("Location")).toBe(ERROR_TARGET);
+    expect(redirects).toEqual([ERROR_TARGET]);
     expect(consumedResponseCount()).toBe(2);
   });
 
-  it("persists and redirects normally when the answer is benign", async () => {
+  it("persists and redirects to the fairy page with the new response id when the answer is benign", async () => {
     vi.mocked(generateFairyAnswer).mockResolvedValueOnce(BENIGN_ANSWER);
     const { client, calls, consumedResponseCount } = createMockQueryClient([
       PROFILE_RESPONSE,
@@ -48,11 +52,12 @@ describe("ask.ts safety-check integration", () => {
       userId: SESSION_USER_ID,
       formData: { question: "Czy będę szczęśliwy?" },
     });
-    await askHandler(context as never);
+    const response = await askHandler(context as never);
 
     const insertCall = calls.find((call) => call.method === "insert");
     expect(insertCall?.args[0]).toMatchObject({ answer: BENIGN_ANSWER });
-    expect(redirects[0]).toContain("response=new-response-id");
+    expect(response.headers.get("Location")).toBe("/dashboard/fairy?response=new-response-id");
+    expect(redirects).toEqual(["/dashboard/fairy?response=new-response-id"]);
     expect(consumedResponseCount()).toBe(3);
   });
 });

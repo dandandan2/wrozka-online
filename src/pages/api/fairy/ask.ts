@@ -20,18 +20,18 @@ export const POST: APIRoute = async (context) => {
 
   const supabase = createClient(context.request.headers, context.cookies);
   if (!supabase) {
-    return context.redirect(`/dashboard?error=${encodeURIComponent("Supabase is not configured")}`);
+    return context.redirect(`/dashboard/fairy?error=${encodeURIComponent("Supabase is not configured")}`);
   }
 
   const form = await context.request.formData();
   const question = form.get("question");
 
   if (typeof question !== "string" || !question.trim()) {
-    return context.redirect(`/dashboard?error=${encodeURIComponent("Wpisz pytanie do wróżki.")}`);
+    return context.redirect(`/dashboard/fairy?error=${encodeURIComponent("Wpisz pytanie do wróżki.")}`);
   }
   if (question.length > QUESTION_MAX_LENGTH) {
     return context.redirect(
-      `/dashboard?error=${encodeURIComponent(`Pytanie może mieć maksymalnie ${QUESTION_MAX_LENGTH} znaków.`)}`,
+      `/dashboard/fairy?error=${encodeURIComponent(`Pytanie może mieć maksymalnie ${QUESTION_MAX_LENGTH} znaków.`)}`,
     );
   }
 
@@ -63,13 +63,13 @@ export const POST: APIRoute = async (context) => {
     );
   } catch (err) {
     console.error("generateFairyAnswer failed:", err);
-    return context.redirect(`/dashboard?error=${encodeURIComponent(FAIRY_FAILURE_MESSAGE)}`);
+    return context.redirect(`/dashboard/fairy?error=${encodeURIComponent(FAIRY_FAILURE_MESSAGE)}`);
   }
 
   const safety = checkFairyAnswerSafety(answer);
   if (!safety.safe) {
     console.error(`generateFairyAnswer flagged unsafe (${safety.category}), discarding answer`);
-    return context.redirect(`/dashboard?error=${encodeURIComponent(FAIRY_FAILURE_MESSAGE)}`);
+    return context.redirect(`/dashboard/fairy?error=${encodeURIComponent(FAIRY_FAILURE_MESSAGE)}`);
   }
 
   const { data: inserted, error: insertError } = await supabase
@@ -79,8 +79,8 @@ export const POST: APIRoute = async (context) => {
     .single();
 
   if (insertError) {
-    return context.redirect(`/dashboard?error=${encodeURIComponent(FAIRY_FAILURE_MESSAGE)}`);
+    return context.redirect(`/dashboard/fairy?error=${encodeURIComponent(FAIRY_FAILURE_MESSAGE)}`);
   }
 
-  return context.redirect(`/dashboard?response=${inserted.id}`);
+  return context.redirect(`/dashboard/fairy?response=${inserted.id}`);
 };

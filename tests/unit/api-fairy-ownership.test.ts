@@ -26,8 +26,9 @@ describe("ask.ts ownership filtering", () => {
       userId: SESSION_USER_ID,
       formData: { question: "Czy będę szczęśliwy?" },
     });
-    await askHandler(context as never);
+    const response = await askHandler(context as never);
 
+    expect(response.headers.get("Location")).toBe("/dashboard/fairy?response=new-response-id");
     expect(eqArgsFor(calls, "id")).toEqual([SESSION_USER_ID]);
     expect(eqArgsFor(calls, "user_id")).toEqual([SESSION_USER_ID]);
 
@@ -51,8 +52,9 @@ describe("like.ts ownership filtering", () => {
       userId: SESSION_USER_ID,
       formData: { id: OTHER_RESOURCE_ID },
     });
-    await likeHandler(context as never);
+    const response = await likeHandler(context as never);
 
+    expect(response.headers.get("Location")).toBe(`/dashboard/fairy?response=${OTHER_RESOURCE_ID}`);
     expect(eqArgsFor(calls, "user_id")).toEqual([SESSION_USER_ID, SESSION_USER_ID]);
     expect(eqArgsFor(calls, "id")).toEqual([OTHER_RESOURCE_ID, OTHER_RESOURCE_ID]);
     expect(consumedResponseCount()).toBe(2);
