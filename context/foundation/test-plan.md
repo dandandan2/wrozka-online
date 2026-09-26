@@ -18,9 +18,9 @@ Tests follow three non-negotiable principles for this project:
    regression.
 2. **User concerns are first-class evidence.** Risks anchored in "the team
    is worried about X" carry the same weight as PRD lines or hot-spot data.
-3. **Risks are scenarios, not code locations.** This plan documents *what
-   could fail* and *why we believe it's likely* — drawn from documents,
-   interview, and codebase *signal* (churn, structure, test base). It does
+3. **Risks are scenarios, not code locations.** This plan documents _what
+   could fail_ and _why we believe it's likely_ — drawn from documents,
+   interview, and codebase _signal_ (churn, structure, test base). It does
    NOT claim to know which line owns the failure. That knowledge is
    produced by `/10x-research` during each rollout phase. If the plan and
    research disagree about where the failure lives, research is the
@@ -34,19 +34,19 @@ routes, React components, lib) — 20 commits/30d. Excluded: `dist/`,
 
 The top failure scenarios this project must protect against, ordered by
 risk = impact × likelihood. Risks are failure scenarios in user / business
-terms, not test names. The Source column cites the *evidence that surfaced
-this risk* — never a specific file as "where the failure lives" (that is
+terms, not test names. The Source column cites the _evidence that surfaced
+this risk_ — never a specific file as "where the failure lives" (that is
 research's job, see §1 principle #3).
 
-| # | Risk (failure scenario) | Impact | Likelihood | Source (evidence — not anchor) |
-|---|---|---|---|---|
-| 1 | Zalogowany użytkownik odczytuje lub edytuje profil bądź historię innego użytkownika | High | Medium | PRD NFR (dane profilu/historii dostępne wyłącznie dla właściciela), PRD Access Control, interview Q1 ("worries most") |
-| 2 | Logowanie magic-link/kod zawodzi albo pozwala zalogować się jako inny użytkownik | High | Medium | interview Q3 (low-confidence area), hot-spot dir `src/pages/api/auth/` + `src/components/auth/` (13 commits/30d) |
-| 3 | Wróżka generuje treść czytaną jako realna porada medyczna/finansowa/prawna mimo disclaimeru | High | Medium | PRD FR-005 Socratic resolution (explicit business rule), hot-spot dir `src/lib/ai/` (5 commits/30d) |
-| 4 | Usunięcie wpisu z historii nie usuwa go z puli wzorców stylu (FR-009) | Medium | Medium | PRD FR-009 Socratic resolution (explicit business rule) |
-| 5 | Zewnętrzne wywołanie AI (OpenRouter) zawodzi/timeoutuje i użytkownik dostaje niejasny błąd albo powstaje niespójny wpis | Medium | Medium-High | hot-spot dir `src/lib/ai/` (5 commits/30d), roadmap S-01 Unknown (koszt/latencja pod limitem CPU Cloudflare Workers) |
-| 6 | Brak throttlingu na endpoint magic-link pozwala zalać cudzy e-mail linkami/kodami (resource abuse) | Medium | Medium | abuse lens (resource abuse), PRD FR-001, hot-spot dir `src/pages/api/auth/` (13 commits/30d) |
-| 7 | Pole "o sobie" nie ma wymuszonego serwerowo limitu długości (tylko UI), rozdymając kontekst przekazywany do AI | Medium | Medium | PRD FR-002 Socratic resolution (explicit NFR), roadmap S-01 Unknown |
+| #   | Risk (failure scenario)                                                                                                 | Impact | Likelihood  | Source (evidence — not anchor)                                                                                        |
+| --- | ----------------------------------------------------------------------------------------------------------------------- | ------ | ----------- | --------------------------------------------------------------------------------------------------------------------- |
+| 1   | Zalogowany użytkownik odczytuje lub edytuje profil bądź historię innego użytkownika                                     | High   | Medium      | PRD NFR (dane profilu/historii dostępne wyłącznie dla właściciela), PRD Access Control, interview Q1 ("worries most") |
+| 2   | Logowanie magic-link/kod zawodzi albo pozwala zalogować się jako inny użytkownik                                        | High   | Medium      | interview Q3 (low-confidence area), hot-spot dir `src/pages/api/auth/` + `src/components/auth/` (13 commits/30d)      |
+| 3   | Wróżka generuje treść czytaną jako realna porada medyczna/finansowa/prawna mimo disclaimeru                             | High   | Medium      | PRD FR-005 Socratic resolution (explicit business rule), hot-spot dir `src/lib/ai/` (5 commits/30d)                   |
+| 4   | Usunięcie wpisu z historii nie usuwa go z puli wzorców stylu (FR-009)                                                   | Medium | Medium      | PRD FR-009 Socratic resolution (explicit business rule)                                                               |
+| 5   | Zewnętrzne wywołanie AI (OpenRouter) zawodzi/timeoutuje i użytkownik dostaje niejasny błąd albo powstaje niespójny wpis | Medium | Medium-High | hot-spot dir `src/lib/ai/` (5 commits/30d), roadmap S-01 Unknown (koszt/latencja pod limitem CPU Cloudflare Workers)  |
+| 6   | Brak throttlingu na endpoint magic-link pozwala zalać cudzy e-mail linkami/kodami (resource abuse)                      | Medium | Medium      | abuse lens (resource abuse), PRD FR-001, hot-spot dir `src/pages/api/auth/` (13 commits/30d)                          |
+| 7   | Pole "o sobie" nie ma wymuszonego serwerowo limitu długości (tylko UI), rozdymając kontekst przekazywany do AI          | Medium | Medium      | PRD FR-002 Socratic resolution (explicit NFR), roadmap S-01 Unknown                                                   |
 
 **Correction (Phase 2 research, 2026-08-27):** Risks #4, #5, and #7 as
 worded above describe scenarios that `context/changes/testing-fairy-loop-business-rules/research.md`
@@ -60,15 +60,15 @@ the ground truth here — do not read "risk covered" on these three rows as
 
 ### Risk Response Guidance
 
-| Risk | What would prove protection | Must challenge | Context `/10x-research` must ground | Likely cheapest layer | Anti-pattern to avoid |
-|------|-----------------------------|----------------|--------------------------------------|-----------------------|-----------------------|
-| #1 | User A's request never returns or mutates User B's profile or fairy-response rows | "RLS policy exists" ≠ "every query path is scoped by user_id" | RLS policy definitions; which queries rely on RLS vs. explicit user-id filters | integration (DB with 2 authenticated sessions) | Testing only the happy-path single-user case |
-| #2 | A valid link/code issues a session for the right user; expired, reused, or foreign codes are rejected | "Magic link exists" ≠ "expiry/reuse/cross-account cases are handled" | Token/code lifecycle, expiry window, callback route behavior | integration (auth API routes) | Mocking Supabase auth entirely — misses real token validation |
-| #3 | Response to a medical/financial/legal-shaped question stays in-character and avoids concrete recommendations | "System prompt says X" ≠ "model reliably obeys X" | Actual model/provider in use, any moderation or post-filter step | AI-native (LLM-as-judge or pattern-based check) — classic assertion can't judge freeform text | Asserting on exact generated string (oracle problem) |
-| #4 | After delete, a subsequent ask() no longer includes that answer in the style-pattern context | "Delete removes DB row" ≠ "delete removes it from the liked-for-style query too" | Query that builds the liked-answers list; delete handler | integration (delete → ask → assert answer absent from AI call payload) | Asserting only that the DB row disappeared, not that the style pool excludes it |
-| #5 | On AI-provider failure/timeout, the user sees a clean error and no partial or corrupt fairy-response row is written | "try/catch exists" ≠ "no partial write happens on failure" | Error path in the ask handler; ordering of generate-then-insert | unit/integration (mock provider failure) | Only testing the happy path where the provider succeeds |
-| #6 | Repeated link/code requests to the same email are throttled or rejected past a threshold | "Feature works" ≠ "feature can't be abused at volume" | Whether any rate-limit exists today (research must confirm) | integration (hammer the request-link endpoint) | Skipping this because "it's a small app, nobody would abuse it" |
-| #7 | An oversized `about_me` submitted directly via API (bypassing the UI) is rejected or truncated server-side | "UI has maxLength" ≠ "server enforces it" | Actual server-side validation (or its absence) on profile update | integration (POST oversized field directly to the API) | Testing only via the UI form, never hitting the API directly |
+| Risk | What would prove protection                                                                                         | Must challenge                                                                   | Context `/10x-research` must ground                                            | Likely cheapest layer                                                                         | Anti-pattern to avoid                                                           |
+| ---- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| #1   | User A's request never returns or mutates User B's profile or fairy-response rows                                   | "RLS policy exists" ≠ "every query path is scoped by user_id"                    | RLS policy definitions; which queries rely on RLS vs. explicit user-id filters | integration (DB with 2 authenticated sessions)                                                | Testing only the happy-path single-user case                                    |
+| #2   | A valid link/code issues a session for the right user; expired, reused, or foreign codes are rejected               | "Magic link exists" ≠ "expiry/reuse/cross-account cases are handled"             | Token/code lifecycle, expiry window, callback route behavior                   | integration (auth API routes)                                                                 | Mocking Supabase auth entirely — misses real token validation                   |
+| #3   | Response to a medical/financial/legal-shaped question stays in-character and avoids concrete recommendations        | "System prompt says X" ≠ "model reliably obeys X"                                | Actual model/provider in use, any moderation or post-filter step               | AI-native (LLM-as-judge or pattern-based check) — classic assertion can't judge freeform text | Asserting on exact generated string (oracle problem)                            |
+| #4   | After delete, a subsequent ask() no longer includes that answer in the style-pattern context                        | "Delete removes DB row" ≠ "delete removes it from the liked-for-style query too" | Query that builds the liked-answers list; delete handler                       | integration (delete → ask → assert answer absent from AI call payload)                        | Asserting only that the DB row disappeared, not that the style pool excludes it |
+| #5   | On AI-provider failure/timeout, the user sees a clean error and no partial or corrupt fairy-response row is written | "try/catch exists" ≠ "no partial write happens on failure"                       | Error path in the ask handler; ordering of generate-then-insert                | unit/integration (mock provider failure)                                                      | Only testing the happy path where the provider succeeds                         |
+| #6   | Repeated link/code requests to the same email are throttled or rejected past a threshold                            | "Feature works" ≠ "feature can't be abused at volume"                            | Whether any rate-limit exists today (research must confirm)                    | integration (hammer the request-link endpoint)                                                | Skipping this because "it's a small app, nobody would abuse it"                 |
+| #7   | An oversized `about_me` submitted directly via API (bypassing the UI) is rejected or truncated server-side          | "UI has maxLength" ≠ "server enforces it"                                        | Actual server-side validation (or its absence) on profile update               | integration (POST oversized field directly to the API)                                        | Testing only via the UI form, never hitting the API directly                    |
 
 ## 3. Phased Rollout
 
@@ -76,12 +76,12 @@ Each row is a discrete rollout phase that will open its own change folder
 via `/10x-new`. Status moves left-to-right through the values below; the
 orchestrator updates Status as artifacts appear on disk.
 
-| # | Phase name | Goal (one line) | Risks covered | Test types | Status | Change folder |
-|---|---|---|---|---|---|---|
-| 1 | Critical-path security & auth | Prove data isolation and auth-flow correctness hold; bootstrap Vitest | #1, #2, #6 | unit + integration | complete | `context/changes/testing-critical-path-security-auth/` |
-| 2 | Fairy-loop business-rule integrity | Prove delete/style-pool consistency and AI-failure handling don't silently corrupt state | #4, #5, #7 | integration + unit | complete | `context/changes/testing-fairy-loop-business-rules/` |
-| 3 | AI-native safety review | Prove disclaimer/safety framing holds under adversarial-shaped questions | #3 | pattern-based (hermetic) | complete | `context/changes/testing-ai-native-safety-review/` |
-| 4 | Quality-gates wiring | Lock unit+integration into CI as a required gate alongside existing lint/build | cross-cutting | gates | complete | `context/changes/testing-quality-gates-wiring/` |
+| #   | Phase name                         | Goal (one line)                                                                          | Risks covered | Test types               | Status   | Change folder                                          |
+| --- | ---------------------------------- | ---------------------------------------------------------------------------------------- | ------------- | ------------------------ | -------- | ------------------------------------------------------ |
+| 1   | Critical-path security & auth      | Prove data isolation and auth-flow correctness hold; bootstrap Vitest                    | #1, #2, #6    | unit + integration       | complete | `context/changes/testing-critical-path-security-auth/` |
+| 2   | Fairy-loop business-rule integrity | Prove delete/style-pool consistency and AI-failure handling don't silently corrupt state | #4, #5, #7    | integration + unit       | complete | `context/changes/testing-fairy-loop-business-rules/`   |
+| 3   | AI-native safety review            | Prove disclaimer/safety framing holds under adversarial-shaped questions                 | #3            | pattern-based (hermetic) | complete | `context/changes/testing-ai-native-safety-review/`     |
+| 4   | Quality-gates wiring               | Lock unit+integration into CI as a required gate alongside existing lint/build           | cross-cutting | gates                    | complete | `context/changes/testing-quality-gates-wiring/`        |
 
 **Status vocabulary** (fixed): `not started` → `change opened` → `researched` → `planned` → `implementing` → `complete`.
 
@@ -90,13 +90,13 @@ orchestrator updates Status as artifacts appear on disk.
 The classic test base for this project. AI-native tools carry a `checked:`
 date so future readers can see which lines need re-verification.
 
-| Layer | Tool | Version | Notes |
-|---|---|---|---|
-| unit + integration | Vitest | none yet — see Phase 1 | Native to the Astro/Vite toolchain already in use; TS-first, no separate transform config needed |
-| API mocking | MSW (or native `fetch` mock for the OpenRouter edge) | none yet — see Phase 2 | Mock only the external OpenRouter HTTP boundary; never mock internal `src/lib/` modules |
-| e2e | Playwright | none yet — see Phase 1 (only if a risk needs full deployed shape) | Reserve for auth/session flows crossing cookies + Cloudflare middleware |
-| accessibility | none planned | — | Out of scope for this rollout — not raised by PRD, interview, or hot-spots |
-| (optional) AI-native | Deterministic pattern-based safety checker (checked: 2026-08-27) | n/a | Phase 3 chose a hermetic keyword/regex checker over an LLM-as-judge script — no live LLM call runs anywhere in this test suite, by explicit decision. See §6.6 Phase 3 note. |
+| Layer                | Tool                                                             | Version                                                           | Notes                                                                                                                                                                        |
+| -------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| unit + integration   | Vitest                                                           | none yet — see Phase 1                                            | Native to the Astro/Vite toolchain already in use; TS-first, no separate transform config needed                                                                             |
+| API mocking          | MSW (or native `fetch` mock for the OpenRouter edge)             | none yet — see Phase 2                                            | Mock only the external OpenRouter HTTP boundary; never mock internal `src/lib/` modules                                                                                      |
+| e2e                  | Playwright                                                       | none yet — see Phase 1 (only if a risk needs full deployed shape) | Reserve for auth/session flows crossing cookies + Cloudflare middleware                                                                                                      |
+| accessibility        | none planned                                                     | —                                                                 | Out of scope for this rollout — not raised by PRD, interview, or hot-spots                                                                                                   |
+| (optional) AI-native | Deterministic pattern-based safety checker (checked: 2026-08-27) | n/a                                                               | Phase 3 chose a hermetic keyword/regex checker over an LLM-as-judge script — no live LLM call runs anywhere in this test suite, by explicit decision. See §6.6 Phase 3 note. |
 
 **Environment constraint (learned during Phase 1 implementation, 2026-08-27):**
 This project's dev/CI environment has no Docker, so `supabase start` cannot
@@ -110,6 +110,7 @@ revision note and Open Risks for what a real-infra version of each test
 would look like once a Docker-capable environment is available.
 
 **Stack grounding tools (current session):**
+
 - Docs: none available in current session — not checked via a docs MCP (e.g. Context7); Vitest/Astro compatibility relies on known ecosystem convention; checked: 2026-08-27.
 - Search: none available in current session; checked: 2026-08-27.
 - Runtime/browser: `claude-in-chrome` MCP is present but is an interactive browser-automation tool, not a test-authoring framework — not used for this recommendation; checked: 2026-08-27.
@@ -121,14 +122,14 @@ The full set of gates that must pass before a change reaches production.
 "Required after §3 Phase N" means the gate is enforced once that rollout
 phase lands; before that, the gate is `planned`.
 
-| Gate | Where | Required? | Catches |
-|---|---|---|---|
-| lint + typecheck | local + CI | required — lint already wired; typecheck (`astro check`) added in §3 Phase 4 (2026-08-27) | syntactic / type drift |
-| unit + integration | local + CI | required and enforced in CI as of §3 Phase 4 (2026-08-27) — was documentation-only since Phase 1 | logic and data-isolation regressions |
-| e2e on critical flows | CI on PR | required after §3 Phase 1 (auth flow only) | broken login/session path |
-| AI-native safety review | local + CI (part of the normal unit+integration gate) | required after §3 Phase 3 | concrete medical/financial/legal recommendations reaching the user in a generated fairy answer |
-| post-edit hook | local (agent loop) | out of scope this lesson | configured in Module 3 Lesson 3 |
-| pre-prod smoke | between merge + prod | optional | environment-specific failures (Cloudflare Workers) |
+| Gate                    | Where                                                 | Required?                                                                                        | Catches                                                                                        |
+| ----------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| lint + typecheck        | local + CI                                            | required — lint already wired; typecheck (`astro check`) added in §3 Phase 4 (2026-08-27)        | syntactic / type drift                                                                         |
+| unit + integration      | local + CI                                            | required and enforced in CI as of §3 Phase 4 (2026-08-27) — was documentation-only since Phase 1 | logic and data-isolation regressions                                                           |
+| e2e on critical flows   | CI on PR                                              | required after §3 Phase 1 (auth flow only)                                                       | broken login/session path                                                                      |
+| AI-native safety review | local + CI (part of the normal unit+integration gate) | required after §3 Phase 3                                                                        | concrete medical/financial/legal recommendations reaching the user in a generated fairy answer |
+| post-edit hook          | local (agent loop)                                    | out of scope this lesson                                                                         | configured in Module 3 Lesson 3                                                                |
+| pre-prod smoke          | between merge + prod                                  | optional                                                                                         | environment-specific failures (Cloudflare Workers)                                             |
 
 ## 6. Cookbook Patterns
 

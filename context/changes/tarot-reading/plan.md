@@ -27,7 +27,7 @@ Cloudflare Workers deploy) has exactly one reading flow today:
 - `src/lib/ai/fairy.ts` (75 lines): fixed `SYSTEM_PROMPT` (persona +
   medical/financial/legal avoidance), `describeProfile()`,
   `describeStyleReference()`, `generateFairyAnswer(profile, question,
-  likedAnswers)` — a single non-streaming `fetch` to OpenRouter
+likedAnswers)` — a single non-streaming `fetch` to OpenRouter
   (`minimax/minimax-m3:free`, 400 max tokens, 15s timeout).
 - `src/lib/ai/safety-checker.ts`: `checkFairyAnswerSafety(answer)` —
   deterministic regex backstop for medical/financial/legal content. Fully
@@ -275,7 +275,7 @@ consistent with the project's current all-static `public/` convention.
 #### Automated Verification:
 
 - Build succeeds and copies all 22 files into `dist/tarot/`: `npm run
-  build` then confirm file count: `ls dist/tarot | wc -l` equals 22
+build` then confirm file count: `ls dist/tarot | wc -l` equals 22
 
 #### Manual Verification:
 
