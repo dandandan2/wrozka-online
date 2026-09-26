@@ -264,6 +264,15 @@ changes.
   re-evaluate if a visual regression reaches production and causes a
   reported issue. (Source: challenger pass — not explicitly raised in
   interview, low priority by impact×likelihood.)
+- **Happy-path E2E dla losowania karty tarota (`/dashboard/tarot`)** — jak
+  scenariusz magic-linka w `tests/e2e/seed.spec.ts`, wymaga realnej,
+  uwierzytelnionej sesji Supabase; ten projekt nie ma Dockera/lokalnego
+  Supabase ani danych testowych w CI (patrz §4 "Environment constraint").
+  Auth-guard dla `/dashboard/tarot` i `/dashboard/fairy` jest pokryty (patrz
+  `tests/e2e/dashboard-subroutes-require-authentication.spec.ts`); sam
+  happy-path draw→interpretacja zostaje niepokryty do czasu, gdy realne
+  dane testowe Supabase będą dostępne. (Source: `context/changes/tarot-reading/plan.md`
+  Phase 8, decyzja z 2026-09-15.)
 
 ## 8. Freshness Ledger
 

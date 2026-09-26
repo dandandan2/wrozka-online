@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 480" role="img" aria-label="Słońce">
+  <defs>
+    <linearGradient id="bg-the-sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c1408" />
+      <stop offset="100%" stop-color="#0d0a06" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="292" height="472" rx="18" fill="url(#bg-the-sun)" stroke="#d9b877" stroke-opacity="0.4" stroke-width="2" />
+  <rect x="16" y="16" width="268" height="448" rx="12" fill="none" stroke="#d9b877" stroke-opacity="0.25" stroke-width="1" />
+  <text x="150" y="55" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#f4e8cc" opacity="0.85">XIX</text>
+  <g stroke="#d9b877" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <circle cx="150" cy="200" r="45" fill="none" />
+      <line x1="210.0" y1="200.0" x2="235.0" y2="200.0" />
+      <line x1="202.0" y1="230.0" x2="223.6" y2="242.5" />
+      <line x1="180.0" y1="252.0" x2="192.5" y2="273.6" />
+      <line x1="150.0" y1="260.0" x2="150.0" y2="285.0" />
+      <line x1="120.0" y1="252.0" x2="107.5" y2="273.6" />
+      <line x1="98.0" y1="230.0" x2="76.4" y2="242.5" />
+      <line x1="90.0" y1="200.0" x2="65.0" y2="200.0" />
+      <line x1="98.0" y1="170.0" x2="76.4" y2="157.5" />
+      <line x1="120.0" y1="148.0" x2="107.5" y2="126.4" />
+      <line x1="150.0" y1="140.0" x2="150.0" y2="115.0" />
+      <line x1="180.0" y1="148.0" x2="192.5" y2="126.4" />
+      <line x1="202.0" y1="170.0" x2="223.6" y2="157.5" />
+  </g>
+  <text x="150" y="430" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f4e8cc">Słońce</text>
+</svg>

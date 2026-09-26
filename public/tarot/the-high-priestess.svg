@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 480" role="img" aria-label="Kapłanka">
+  <defs>
+    <linearGradient id="bg-the-high-priestess" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c1408" />
+      <stop offset="100%" stop-color="#0d0a06" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="292" height="472" rx="18" fill="url(#bg-the-high-priestess)" stroke="#d9b877" stroke-opacity="0.4" stroke-width="2" />
+  <rect x="16" y="16" width="268" height="448" rx="12" fill="none" stroke="#d9b877" stroke-opacity="0.25" stroke-width="1" />
+  <text x="150" y="55" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#f4e8cc" opacity="0.85">II</text>
+  <g stroke="#d9b877" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path d="M110 140 A 40 40 0 1 0 150 100 A 55 55 0 1 1 110 140 Z" fill="#d9b877" stroke="none" />
+      <line x1="150" y1="190" x2="150" y2="320" stroke-dasharray="4 10" />
+  </g>
+  <text x="150" y="430" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f4e8cc">Kapłanka</text>
+</svg>

@@ -4,8 +4,9 @@ import Topbar from "@/components/Topbar.astro";
 import HistoryItem from "@/components/dashboard/HistoryItem";
 import { ServerError } from "@/components/auth/ServerError";
 import { createClient } from "@/lib/supabase";
+import { MAJOR_ARCANA } from "@/lib/tarot/cards";
 
-interface HistoryRow {
+interface FairyResponseRow {
   id: string;
   question: string;
   answer: string;
@@ -13,11 +14,36 @@ interface HistoryRow {
   created_at: string;
 }
 
+interface TarotReadingRow {
+  id: string;
+  question: string | null;
+  card_key: string;
+  orientation: "upright" | "reversed";
+  answer: string;
+  liked: boolean;
+  created_at: string;
+}
+
+interface HistoryEntry {
+  id: string;
+  type: "fairy" | "tarot";
+  question: string | null;
+  answer: string;
+  liked: boolean;
+  createdAt: string;
+  cardKey?: string;
+  cardName?: string;
+  orientation?: "upright" | "reversed";
+}
+
+const HISTORY_ROW_LIMIT = 100;
+
 const { user } = Astro.locals;
 const error = Astro.url.searchParams.get("error");
 
 const supabase = createClient(Astro.request.headers, Astro.cookies);
-const history: HistoryRow[] =
+
+const fairyRows: FairyResponseRow[] =
   supabase && user
     ? ((
         await supabase
@@ -25,8 +51,47 @@ const history: HistoryRow[] =
           .select("id, question, answer, liked, created_at")
           .eq("user_id", user.id)
           .order("created_at", { ascending: false })
+          .limit(HISTORY_ROW_LIMIT)
       ).data ?? [])
     : [];
+
+const tarotRows: TarotReadingRow[] =
+  supabase && user
+    ? ((
+        await supabase
+          .from("tarot_readings")
+          .select("id, question, card_key, orientation, answer, liked, created_at")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: false })
+          .limit(HISTORY_ROW_LIMIT)
+      ).data ?? [])
+    : [];
+
+const history: HistoryEntry[] = [
+  ...fairyRows.map(
+    (row): HistoryEntry => ({
+      id: row.id,
+      type: "fairy",
+      question: row.question,
+      answer: row.answer,
+      liked: row.liked,
+      createdAt: row.created_at,
+    }),
+  ),
+  ...tarotRows.map(
+    (row): HistoryEntry => ({
+      id: row.id,
+      type: "tarot",
+      question: row.question,
+      answer: row.answer,
+      liked: row.liked,
+      createdAt: row.created_at,
+      cardKey: row.card_key,
+      cardName: MAJOR_ARCANA.find((card) => card.key === row.card_key)?.name ?? row.card_key,
+      orientation: row.orientation,
+    }),
+  ),
+].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 ---
 
 <Layout title="Historia">
@@ -75,10 +140,13 @@ const history: HistoryRow[] =
               {history.map((entry) => (
                 <HistoryItem
                   id={entry.id}
+                  type={entry.type}
                   question={entry.question}
                   answer={entry.answer}
                   liked={entry.liked}
-                  createdAt={entry.created_at}
+                  createdAt={entry.createdAt}
+                  cardName={entry.cardName}
+                  orientation={entry.orientation}
                   client:load
                 />
               ))}
