@@ -671,6 +671,44 @@ served statically — no build-time image processing to budget for.
 Two new, additive migrations (Phase 1) — no changes to existing tables, no
 backfill needed, safe to apply independently of any existing data.
 
+## Post-Epilogue Addenda
+
+Per `context/foundation/lessons.md` ("Post-epilogue fixes must update
+plan.md"), fixes landing after `ef22aa7` (epilogue) are recorded here.
+
+### A1 — Fairy redirect targets repointed at `/dashboard/fairy` (`25496bc`)
+
+Phase 6 moved the ask form to `/dashboard/fairy` and turned `dashboard.astro`
+into a mode chooser that no longer reads `?response`/`?error`, but
+`src/pages/api/fairy/ask.ts` and `like.ts` kept redirecting at `/dashboard`.
+Every fairy answer landed on the chooser (visible only in Historia) and every
+fairy error message was silently swallowed. Fixed by repointing both routes,
+sending `redirect_to` from `AnswerCard`, and pinning the `Location` header in
+`tests/unit/api-ask-*.test.ts` plus the new
+`tests/unit/api-fairy-redirect-targets.test.ts`. Found by the code review of
+PR #1 (finding F1).
+
+### A2 — Test-coverage follow-up (same review, findings F1/F3)
+
+Tests only; no production code changed. Closes the gaps the review named plus
+the tarot-side asymmetry the A1 fix left behind:
+
+- `tests/unit/tarot-card-keys-match-migration.test.ts` — parses the allowed-key
+  list out of the `tarot_readings_card_key_check` migration and compares it with
+  `MAJOR_ARCANA`. Review finding F3: the 22 keys are duplicated in SQL under only
+  a "must stay in sync" comment, so adding a card passed every gate and would
+  have failed in production on INSERT.
+- `tests/unit/api-tarot-redirect-targets.test.ts` — the tarot counterpart of the
+  fairy file from A1, pinning every `Location` of `draw`/`like`/`delete`,
+  including the over-length-question and missing-id branches no other test
+  reached.
+- `tests/unit/api-like-toggle.test.ts` — asserts both like handlers write the
+  negation of the stored `liked` value; the existing tests passed with the `!`
+  removed, which would have broken unlike and left rejected answers in the
+  AI style pool.
+- `tests/unit/api-fairy-redirect-targets.test.ts` — extended with `delete.ts`
+  targets and the two remaining `like.ts` branches.
+
 ## References
 
 - Existing fairy slice: `src/lib/ai/fairy.ts`, `src/pages/api/fairy/*.ts`,

@@ -8,6 +8,7 @@ vi.mock("@/lib/ai/fairy", () => ({ generateFairyAnswer: vi.fn(() => Promise.reso
 const { createClient } = await import("@/lib/supabase");
 const { POST: askHandler } = await import("@/pages/api/fairy/ask");
 const { POST: likeHandler } = await import("@/pages/api/fairy/like");
+const { POST: deleteHandler } = await import("@/pages/api/fairy/delete");
 
 const SESSION_USER_ID = "session-user-ddd";
 const RESPONSE_ID = "response-abc";
@@ -152,5 +153,72 @@ describe("like.ts redirect targets", () => {
     const response = await likeHandler(context as never);
 
     expect(response.headers.get("Location")).toBe(`/dashboard/history?error=${LIKE_ERROR}`);
+  });
+
+  it("keeps the response id on the fairy page when the row lookup fails", async () => {
+    const { client } = createMockQueryClient([{ data: null, error: { message: "not found" } }]);
+    vi.mocked(createClient).mockReturnValue(client as never);
+
+    const { context } = createFakeContext({
+      userId: SESSION_USER_ID,
+      formData: { id: RESPONSE_ID, redirect_to: "/dashboard/fairy" },
+    });
+    const response = await likeHandler(context as never);
+
+    expect(response.headers.get("Location")).toBe(`/dashboard/fairy?response=${RESPONSE_ID}&error=${LIKE_ERROR}`);
+  });
+
+  it("falls back to the history page when no id was submitted from there", async () => {
+    vi.mocked(createClient).mockReturnValue(createMockQueryClient().client as never);
+
+    const { context } = createFakeContext({
+      userId: SESSION_USER_ID,
+      formData: { redirect_to: "/dashboard/history" },
+    });
+    const response = await likeHandler(context as never);
+
+    expect(response.headers.get("Location")).toBe("/dashboard/history");
+  });
+});
+
+describe("delete.ts redirect targets", () => {
+  const DELETE_ERROR = encodeURIComponent("Nie udało się usunąć wpisu. Spróbuj ponownie.");
+
+  it("sends an unauthenticated request to sign-in", async () => {
+    const { context } = createFakeContext({ userId: null, formData: { id: RESPONSE_ID } });
+    const response = await deleteHandler(context as never);
+
+    expect(response.headers.get("Location")).toBe("/auth/signin");
+  });
+
+  it("returns to the history page when no id was submitted, without deleting anything", async () => {
+    const { client, calls } = createMockQueryClient();
+    vi.mocked(createClient).mockReturnValue(client as never);
+
+    const { context } = createFakeContext({ userId: SESSION_USER_ID, formData: {} });
+    const response = await deleteHandler(context as never);
+
+    expect(response.headers.get("Location")).toBe("/dashboard/history");
+    expect(calls.some((call) => call.method === "delete")).toBe(false);
+  });
+
+  it("returns to the history page on a successful delete", async () => {
+    const { client } = createMockQueryClient([{ data: null, error: null }]);
+    vi.mocked(createClient).mockReturnValue(client as never);
+
+    const { context } = createFakeContext({ userId: SESSION_USER_ID, formData: { id: RESPONSE_ID } });
+    const response = await deleteHandler(context as never);
+
+    expect(response.headers.get("Location")).toBe("/dashboard/history");
+  });
+
+  it("reports a failed delete on the history page", async () => {
+    const { client } = createMockQueryClient([{ data: null, error: { message: "delete failed" } }]);
+    vi.mocked(createClient).mockReturnValue(client as never);
+
+    const { context } = createFakeContext({ userId: SESSION_USER_ID, formData: { id: RESPONSE_ID } });
+    const response = await deleteHandler(context as never);
+
+    expect(response.headers.get("Location")).toBe(`/dashboard/history?error=${DELETE_ERROR}`);
   });
 });

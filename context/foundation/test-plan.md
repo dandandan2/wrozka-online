@@ -192,6 +192,29 @@ every `.eq(...)` call filtering `profiles`/`fairy_responses` uses
 `tests/unit/api-fairy-ownership.test.ts` and
 `tests/unit/api-profile-ownership.test.ts`.
 
+**Also pin every redirect target.** These handlers communicate exclusively
+through `context.redirect()`, so a stale path is a silently broken feature,
+not a visible error. Assert the exact `Location` header
+(`expect(response.headers.get("Location")).toBe(...)`) for _every_ branch,
+never just that the handler redirected somewhere — that weaker assertion is
+what let the fairy routes keep pointing at `/dashboard` for a full release
+after the ask form moved to `/dashboard/fairy` (PR #1 review, F1). One file
+per route family, covering auth, validation, not-found, provider-failure and
+success paths: `tests/unit/api-fairy-redirect-targets.test.ts` and
+`tests/unit/api-tarot-redirect-targets.test.ts`.
+
+### 6.4a Adding a test for a value duplicated outside TypeScript
+
+When a list or limit lives in both `src/` and a non-TypeScript artifact — a
+migration's `CHECK` constraint, a SQL enum — nothing keeps the copies aligned
+and the drift surfaces only in production, on the first request that violates
+the constraint. Add a test that parses the other artifact and compares it with
+the TypeScript source of truth as a set. See
+`tests/unit/tarot-card-keys-match-migration.test.ts` (`MAJOR_ARCANA` vs. the
+`tarot_readings_card_key_check` migration), including its guard against a
+vacuous pass: the test fails if it cannot find exactly one migration defining
+the constraint, rather than quietly asserting nothing.
+
 ### 6.5 Adding an AI-native safety check
 
 Phase 3 shipped a deterministic, pattern-based checker rather than an
